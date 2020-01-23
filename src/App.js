@@ -3,6 +3,7 @@ import './App.css';
 import Item from './Item.js';
 import ItemList from './ItemList.js';
 import ItemCount from './ItemCount.js';
+import AppFooter from './AppFooter.js';
 
 
 let item2 = <Item message="Programmed" />;
@@ -38,27 +39,6 @@ class App extends React.Component {
         <ItemCount count={allTheThings.length} />
         <hr />
         <AppFooter />
-      </div>
-    );
-  }
-}
-
-
-class AppJumbotron extends React.Component {
-  render (){
-    return (
-      <div className="jumbotron">
-        <h2>{this.props.title}</h2>
-      </div>
-    );
-  }
-}
-
-class AppFooter extends React.Component {
-  render (){
-    return (
-      <div className="text-muted">
-        <small>&copy; {new Date().getFullYear()}</small>
       </div>
     );
   }
