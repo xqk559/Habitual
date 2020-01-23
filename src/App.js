@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Item from './Item.js';
 import ItemList from './ItemList.js';
+import ItemCount from './ItemCount.js';
 
 
 let item2 = <Item message="Programmed" />;
@@ -42,17 +43,6 @@ class App extends React.Component {
   }
 }
 
-
-class ItemCount extends React.Component {
-  constructor (props){
-    super ();
-  }
-  render (){
-    return (
-      <h4>There are {this.props.count} items on your list</h4>
-    );
-  }
-}
 
 class AppJumbotron extends React.Component {
   render (){
