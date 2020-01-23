@@ -5,8 +5,8 @@ class Item extends React.Component {
       super ();
   
       this.state = {
-        checked: false,
-        quantityChecked: 0
+        checked: false
+        // quantityChecked: 0
       };
   
       this.handleClick = this.handleClick.bind(this);    
@@ -16,10 +16,10 @@ class Item extends React.Component {
         checked: !this.state.checked
       });
   
-      this.setState({
-        quantityChecked: this.state.quantityChecked + 1 
-      });  
-      console.log(this.state.quantityChecked);
+    //   this.setState({
+    //     quantityChecked: this.state.quantityChecked + 1 
+    //   });  
+    //   console.log(this.state.quantityChecked);
     }
     
   render (){
