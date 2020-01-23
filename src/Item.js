@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class Item extends React.Component {
     constructor (props){
@@ -19,7 +19,7 @@ class Item extends React.Component {
       this.setState({
         quantityChecked: this.state.quantityChecked + 1 
       });  
-  
+      console.log(this.state.quantityChecked);
     }
     
   render (){
@@ -35,12 +35,4 @@ class Item extends React.Component {
   }
 }
 
-
-let item2 = <Item message="Programmed" />;
-let item3 = <Item message="Went for a Walk" />;
-let item4 = <Item message="Ate Vitamins" />;
-
-let allTheThings = [item2, item3, item4];
-
-
-    export default Item ;
+export default Item ;

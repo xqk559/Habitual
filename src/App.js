@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Item from './Item.js';
 import ItemList from './ItemList.js';
@@ -27,7 +27,7 @@ class App extends React.Component {
           Habitual
         </div>
         <div className="rainbow-text-small">
-          You've done  many things today!
+          You've done so many things today!
         </div>
         <div className="bigmargin">
         <ItemList />
@@ -43,9 +43,5 @@ class App extends React.Component {
     );
   }
 }
-
-let target = document.getElementById('app');
-
-
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Item from './Item.js';
 
 
@@ -11,11 +11,18 @@ let allTheThings = [item2, item3, item4];
 class ItemList extends React.Component {
   constructor (props){
     super ();
+    this.state = {
+        completed : 100
+        }
   }
+
   render (){
     let items = allTheThings.map(thing => thing);
     return (
+        <div>
         <h4>{items}</h4>
+        <div>You've completed {this.state.completed} things!</div>
+        </div>
     );
   }
 }
