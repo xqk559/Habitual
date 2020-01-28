@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 class Item extends React.Component {
     constructor (props){
@@ -6,22 +6,22 @@ class Item extends React.Component {
   
       this.state = {
         checked: false
-        // quantityChecked: 0
       };
   
       this.handleClick = this.handleClick.bind(this);    
     }
+
+
     handleClick (e){
       this.setState({
-        checked: !this.state.checked
+        checked: !this.state.checked,
       });
-  
-    //   this.setState({
-    //     quantityChecked: this.state.quantityChecked + 1 
-    //   });  
-    //   console.log(this.state.quantityChecked);
+      this.props.checker();
+      this.props.adder();
     }
     
+
+
   render (){
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
@@ -30,6 +30,7 @@ class Item extends React.Component {
             <input type="checkbox" onClick={this.handleClick} />&nbsp;{text}
             <hr />
           </div>
+          <div className={".checkbox-is-open-" + this.state.checked}></div>
         </div>
     );
   }

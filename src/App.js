@@ -4,6 +4,7 @@ import Item from './Item.js';
 import ItemList from './ItemList.js';
 import ItemCount from './ItemCount.js';
 import AppFooter from './AppFooter.js';
+import Store from './Store';
 
 
 let item2 = <Item message="Programmed" />;
@@ -29,6 +30,9 @@ class App extends React.Component {
         <div className="rainbow-text-small">
           You've done so many things today!
         </div>
+        <div className="bigmargin">
+          <Store />
+          </div>
         <div className="bigmargin">
         <ItemList />
         <br></br>
