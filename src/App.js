@@ -5,6 +5,7 @@ import ItemList from './ItemList.js';
 import ItemCount from './ItemCount.js';
 import AppFooter from './AppFooter.js';
 import Store from './Store';
+import classes from './App.css';
 
 
 let item2 = <Item message="Programmed" />;
@@ -19,7 +20,6 @@ class App extends React.Component {
     super ();
   }
   render (){
-
     return (
       <div>
         <br />
@@ -30,16 +30,12 @@ class App extends React.Component {
         <div className="rainbow-text-small">
           You've done so many things today!
         </div>
+        <br />
+        <br />
         <div className="bigmargin">
-          <Store />
-          </div>
-        <div className="bigmargin">
-        <ItemList />
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+          <Store className="centered"/>
         </div>
+        <br />
         <ItemCount count={allTheThings.length} />
         <hr />
         <AppFooter />

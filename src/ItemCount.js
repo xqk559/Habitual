@@ -6,7 +6,7 @@ class ItemCount extends React.Component {
     }
     render (){
       return (
-        <h4>There are {this.props.count} items on your list</h4>
+        <div>There are {this.props.count} items on your list</div>
       );
     }
   }

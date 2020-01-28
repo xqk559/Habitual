@@ -16,7 +16,6 @@ class Item extends React.Component {
       this.setState({
         checked: !this.state.checked,
       });
-      this.props.checker();
       this.props.adder(this.state.checked);
       console.log(this.state.checked);
     }
