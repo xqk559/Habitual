@@ -11,11 +11,11 @@ class Store extends React.Component {
     }
 
     addTotal = (props) => {
-        this.props.checked ? this.setState({totalChecked: +1}) : this.setState({totalChecked: -1});
+        this.state.checked ? this.setState({totalChecked: this.state.totalChecked-1}) : this.setState({totalChecked: this.state.totalChecked+1});
     };
 
     checker = (props) => {
-        this.props.checked ? this.setState({checked: true}) : this.setState({checked: false});
+        this.setState({checked: !this.state.checked});
     };
 
 
