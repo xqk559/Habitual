@@ -17,7 +17,8 @@ class Item extends React.Component {
         checked: !this.state.checked,
       });
       this.props.checker();
-      this.props.adder();
+      this.props.adder(this.state.checked);
+      console.log(this.state.checked);
     }
     
 
@@ -28,6 +29,7 @@ class Item extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <input type="checkbox" onClick={this.handleClick} />&nbsp;{text}
+            <div>{this.state.test}</div>
             <hr />
           </div>
           <div className={".checkbox-is-open-" + this.state.checked}></div>

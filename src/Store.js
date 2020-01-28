@@ -6,24 +6,30 @@ class Store extends React.Component {
       super ();
       this.state = {
         totalChecked: 0,
-        checked: false
+        checked1: false
       };
     }
 
-    addTotal = (props) => {
-        this.state.checked ? this.setState({totalChecked: this.state.totalChecked-1}) : this.setState({totalChecked: this.state.totalChecked+1});
+    addTotal = (childChecked) => {
+      childChecked ? 
+          this.setState({totalChecked: this.state.totalChecked-1}) :
+          this.setState({totalChecked: this.state.totalChecked+1});
     };
 
     checker = (props) => {
-        this.setState({checked: !this.state.checked});
+        this.setState({checked1: !this.state.checked1});
+        console.log(this.state.checked1);
+
     };
 
 
     render (){
       return (
         <div>
-        <Item message="New Item " checked={this.state.checked} checker={this.checker} adder={this.addTotal}/>
-        <div>{this.state.totalChecked}</div>  
+          <Item message="New Item "  checker={this.checker} adder={this.addTotal}/>
+          <Item message="New Item "  checker={this.checker} adder={this.addTotal}/>
+          <Item message="New Item "  checker={this.checker} adder={this.addTotal}/>
+          <div>{this.state.totalChecked}</div>  
         </div>
       );
     }
