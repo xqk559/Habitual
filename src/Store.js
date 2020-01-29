@@ -2,6 +2,7 @@ import React from 'react';
 import Item from './Item';
 import ItemAdder from './ItemAdder';
 import './App.css';
+import NewItem from './NewItem';
 
 class Store extends React.Component {
     constructor (props){
@@ -24,7 +25,8 @@ class Store extends React.Component {
       }
       const capitalized = capitalizer(inputVal)
       this.setState({newItem: capitalized});
-      };
+      
+    };
     
     hider() {
         var x = document.getElementById("myDIV");
@@ -33,7 +35,7 @@ class Store extends React.Component {
         } else {
           x.style.display = "none";
         }
-      }
+    };
 
     render (){
       return (
@@ -49,10 +51,12 @@ class Store extends React.Component {
           <div>
           <Item message={this.state.newItem} adder={this.addTotal}/>
           </div>
+          <NewItem />
           <div className="hidden" id="myDIV">
           <Item message="Ate Vitamins" adder={this.addTotal}/>
           <Item message="Went for a Walk" adder={this.addTotal}/>
           <Item message="Programming" adder={this.addTotal}/>
+          <Item message="Did Chores" adder={this.addTotal}/>
           <Item message="Ate Vegan" adder={this.addTotal}/>
           <Item message="Ate Vegetarian" adder={this.addTotal}/>
           <Item message="Excercised" adder={this.addTotal}/>
