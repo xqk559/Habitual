@@ -6,7 +6,8 @@ class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
-        totalChecked: 0
+        totalChecked: 0,
+        newItem: ""
       };
     }
 
@@ -18,9 +19,12 @@ class Store extends React.Component {
 
     addItem = (inputVal) => {
       console.log(inputVal);
-      return(
-        <div>{inputVal}</div>
-      ) 
+      const capitalizer = (s) => {
+        return s.charAt(0).toUpperCase() + s.slice(1)
+      }
+      const capitalize = capitalizer(inputVal)
+      console.log(capitalize);
+      this.setState({newItem: capitalize});
       };
 
     render (){
@@ -30,6 +34,7 @@ class Store extends React.Component {
             <ItemAdder add={this.addItem}/>
           <br />
           <br />
+          <Item message={this.state.newItem} adder={this.addTotal}/>
           <Item message="Ate Vitamins" adder={this.addTotal}/>
           <Item message="Went for a Walk" adder={this.addTotal}/>
           <Item message="Programming" adder={this.addTotal}/>
