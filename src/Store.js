@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './Item';
+import ItemAdder from './ItemAdder';
 
 class Store extends React.Component {
     constructor (props){
@@ -23,6 +24,7 @@ class Store extends React.Component {
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things!</h4>
+            <ItemAdder />
           <br />
           <br />
           <Item message="Ate Vitamins" adder={this.addTotal}/>

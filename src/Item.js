@@ -33,16 +33,8 @@ class Item extends React.Component {
         console.log(this.state.walk);
       }
     
-    
+      //ADD MORE ELSE IF OR MAKE DYNAMIC
     }
-    
-    // itemToggler () {
-    //   if (this.props.message = "Ate Vitamins") {
-    //     this.setState({vitamin: !vitamin});
-    //     console.log(this.state.vitamin);
-    //   } 
-    // }
-
 
   render (){
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
