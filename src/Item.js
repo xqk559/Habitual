@@ -1,25 +1,31 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 class Item extends React.Component {
     constructor (props){
       super ();
-  
       this.state = {
-        checked: false
+        checked: false,
+        vitamin: false
       };
   
       this.handleClick = this.handleClick.bind(this);    
     }
 
-
     handleClick (e){
-      this.setState({
-        checked: !this.state.checked,
-      });
+      this.setState({checked: !this.state.checked});
       this.props.adder(this.state.checked);
-      console.log(this.state.checked);
+      if (this.props.message === "Ate Vitamins") {
+        this.setState({vitamin: !this.state.vitamin});
+        console.log(this.state.vitamin);
+      } 
     }
     
+    // itemToggler () {
+    //   if (this.props.message = "Ate Vitamins") {
+    //     this.setState({vitamin: !vitamin});
+    //     console.log(this.state.vitamin);
+    //   } 
+    // }
 
 
   render (){

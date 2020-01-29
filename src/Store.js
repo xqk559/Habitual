@@ -1,12 +1,22 @@
 import React from 'react';
 import Item from './Item';
-import classes from './App.css';
 
 class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
-        totalChecked: 0
+        totalChecked: 0,
+        vitamin: false,
+        walk: false,
+        program: false,
+        vegan: false,
+        vegetarian: false,
+        excercised: false,
+        drink: false,
+        smoke: false,
+        weight: false,
+        music: false,
+        art: false
       };
     }
 
@@ -16,13 +26,17 @@ class Store extends React.Component {
           this.setState({totalChecked: this.state.totalChecked+1});
     };
 
+    // itemToggle = () => {
+    //   return ;
+    // }
+
     render (){
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things!</h4>
           <br />
           <br />
-          <Item message="Eat Vitamins" adder={this.addTotal}/>
+          <Item message="Ate Vitamins" adder={this.addTotal}/>
           <Item message="Go for a Walk" adder={this.addTotal}/>
           <Item message="Programming" adder={this.addTotal}/>
           <Item message="Ate Vegan" adder={this.addTotal}/>

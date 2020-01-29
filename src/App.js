@@ -1,19 +1,10 @@
 import React from 'react';
 import './App.css';
-import Item from './Item.js';
-import ItemList from './ItemList.js';
 import ItemCount from './ItemCount.js';
 import AppFooter from './AppFooter.js';
 import Store from './Store';
-import classes from './App.css';
 
-
-let item2 = <Item message="Programmed" />;
-let item3 = <Item message="Went for a Walk" />;
-let item4 = <Item message="Ate Vitamins" />;
-
-let allTheThings = [item2, item3, item4];
-
+let allTheThings = [];
 
 class App extends React.Component {
   constructor (props){
