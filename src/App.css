@@ -35,7 +35,9 @@
   }
 }
 
-
+.hidden {
+  display: none;
+}
 
 .jumbotron {
   background-color: #333;

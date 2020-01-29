@@ -1,6 +1,7 @@
 import React from 'react';
 import Item from './Item';
 import ItemAdder from './ItemAdder';
+import './App.css';
 
 class Store extends React.Component {
     constructor (props){
@@ -18,23 +19,37 @@ class Store extends React.Component {
     };
 
     addItem = (inputVal) => {
-      console.log(inputVal);
       const capitalizer = (s) => {
         return s.charAt(0).toUpperCase() + s.slice(1)
       }
-      const capitalize = capitalizer(inputVal)
-      console.log(capitalize);
-      this.setState({newItem: capitalize});
+      const capitalized = capitalizer(inputVal)
+      this.setState({newItem: capitalized});
       };
+    
+    hider() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
 
     render (){
       return (
         <div>
-          <h4>You've completed {this.state.totalChecked} things!</h4>
-            <ItemAdder add={this.addItem}/>
+          <h4>You've completed {this.state.totalChecked} things! &nbsp;
+            <button>Submit Completed Day</button>
+          </h4>
+          <ItemAdder add={this.addItem}/>
+          <br />
+          <button onClick={this.hider}>Defaults</button>
           <br />
           <br />
+          <div>
           <Item message={this.state.newItem} adder={this.addTotal}/>
+          </div>
+          <div className="hidden" id="myDIV">
           <Item message="Ate Vitamins" adder={this.addTotal}/>
           <Item message="Went for a Walk" adder={this.addTotal}/>
           <Item message="Programming" adder={this.addTotal}/>
@@ -46,6 +61,7 @@ class Store extends React.Component {
           <Item message="Lost Weight" adder={this.addTotal}/>
           <Item message="Played Music" adder={this.addTotal}/>
           <Item message="Created Art" adder={this.addTotal}/>
+          </div>
           <br />  
         </div>
       );
