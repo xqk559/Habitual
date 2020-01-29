@@ -16,15 +16,18 @@ class Store extends React.Component {
           this.setState({totalChecked: this.state.totalChecked+1});
     };
 
-    // itemToggle = () => {
-    //   return ;
-    // }
+    addItem = (inputVal) => {
+      console.log(inputVal);
+      return(
+        <div>{inputVal}</div>
+      ) 
+      };
 
     render (){
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things!</h4>
-            <ItemAdder />
+            <ItemAdder add={this.addItem}/>
           <br />
           <br />
           <Item message="Ate Vitamins" adder={this.addTotal}/>

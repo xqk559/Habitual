@@ -42,10 +42,8 @@ class Item extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <input type="checkbox" onClick={this.handleClick} />&nbsp;{text}
-            <div>{this.state.test}</div>
             <hr />
           </div>
-          <div className={".checkbox-is-open-" + this.state.checked}></div>
         </div>
     );
   }
