@@ -5,18 +5,7 @@ class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
-        totalChecked: 0,
-        vitamin: false,
-        walk: false,
-        program: false,
-        vegan: false,
-        vegetarian: false,
-        excercised: false,
-        drink: false,
-        smoke: false,
-        weight: false,
-        music: false,
-        art: false
+        totalChecked: 0
       };
     }
 
@@ -37,7 +26,7 @@ class Store extends React.Component {
           <br />
           <br />
           <Item message="Ate Vitamins" adder={this.addTotal}/>
-          <Item message="Go for a Walk" adder={this.addTotal}/>
+          <Item message="Went for a Walk" adder={this.addTotal}/>
           <Item message="Programming" adder={this.addTotal}/>
           <Item message="Ate Vegan" adder={this.addTotal}/>
           <Item message="Ate Vegetarian" adder={this.addTotal}/>

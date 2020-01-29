@@ -5,7 +5,17 @@ class Item extends React.Component {
       super ();
       this.state = {
         checked: false,
-        vitamin: false
+        vitamin: false,
+        walk: false,
+        program: false,
+        vegan: false,
+        vegetarian: false,
+        excercised: false,
+        drink: false,
+        smoke: false,
+        weight: false,
+        music: false,
+        art: false
       };
   
       this.handleClick = this.handleClick.bind(this);    
@@ -18,6 +28,12 @@ class Item extends React.Component {
         this.setState({vitamin: !this.state.vitamin});
         console.log(this.state.vitamin);
       } 
+      else if (this.props.message === "Went for a Walk") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+    
+    
     }
     
     // itemToggler () {
