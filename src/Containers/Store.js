@@ -3,13 +3,15 @@ import Item from './Item';
 import ItemAdder from '../Components/ItemAdder';
 import '../App.css';
 import NewItem from '../Components/NewItem';
+import Lister from '../Containers/Lister';
 
 class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
         totalChecked: 0,
-        newItem: ""
+        newItem: "",
+        toggler: 1
       };
     }
 
@@ -24,8 +26,8 @@ class Store extends React.Component {
         return s.charAt(0).toUpperCase() + s.slice(1)
       }
       const capitalized = capitalizer(inputVal)
-      this.setState({newItem: capitalized});
-      
+      this.setState({newItem: capitalized})
+      this.setState({toggler: this.state.toggler + 1})
     };
     
     hider() {
@@ -37,7 +39,23 @@ class Store extends React.Component {
         }
     };
 
+    
+
     render (){
+
+
+      let allItems = ["PISS"];
+
+      const pusher = () => {
+        allItems.push("FUCK");
+        this.setState({toggler: this.state.toggler + 1});
+        console.log(allItems);
+      };
+
+      // if (this.state.toggler > 1) {pusher}; 
+
+
+
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things! &nbsp;
@@ -45,10 +63,19 @@ class Store extends React.Component {
           </h4>
           <ItemAdder add={this.addItem}/>
           <br />
+          <button onClick={pusher}>PUSHER MAN</button>
           <button onClick={this.hider}>Defaults</button>
           <br />
           <br />
           <div>
+            <Lister />
+            {/* {allItems.map((val, index) => {
+              return (
+                <li key={index}>
+                  {val}
+                </li>
+              )
+            })} */}
           <Item message={this.state.newItem} adder={this.addTotal}/>
           </div>
           <NewItem />
