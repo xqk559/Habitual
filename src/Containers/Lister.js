@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import Item from './Item';
+import '../App.css';
   
 export default class Lister extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      totalChecked: 0,
       inputValue: '',
-      items: [],
+      items: []
     }
   }
+
+  addTotal = (childChecked) => {
+    childChecked ? 
+        this.setState({totalChecked: this.state.totalChecked-1}) :
+        this.setState({totalChecked: this.state.totalChecked+1});
+  };
 
   onInputChange(e) {
     this.setState({
@@ -17,7 +26,7 @@ export default class Lister extends Component {
 
   addItem() {
     let items = this.state.items;
-    items.push(this.state.inputValue);
+    items.push(<Item message={this.state.inputValue} adder={this.addTotal}/>);
     this.setState({
       items
     });
@@ -30,7 +39,8 @@ export default class Lister extends Component {
         {
           items.map((val, index) => {
             return (
-              <li key={index}>
+              <li key={index}
+                  className="none">
                 { val }
               </li>
             );

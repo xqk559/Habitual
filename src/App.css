@@ -19,6 +19,10 @@
   margin-left: 80px;
 }
 
+.none {
+  list-style-type: none;
+}
+
 .bigmargin {
   margin-left: 180px;
 }
