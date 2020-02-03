@@ -14,20 +14,19 @@ class Store extends React.Component {
       };
     }
 
-    addTotal = (childChecked) => {
-      childChecked ? 
-          this.setState({totalChecked: this.state.totalChecked-1}) :
-          this.setState({totalChecked: this.state.totalChecked+1});
-    };
+    // addTotal = (childChecked) => {
+    //   childChecked ? 
+    //       this.setState({totalChecked: this.state.totalChecked-1}) :
+    //       this.setState({totalChecked: this.state.totalChecked+1});
+    // };
 
-    addItem = (inputVal) => {
-      const capitalizer = (s) => {
-        return s.charAt(0).toUpperCase() + s.slice(1)
-      }
-      const capitalized = capitalizer(inputVal)
-      this.setState({newItem: capitalized})
-      this.setState({toggler: this.state.toggler + 1})
-    };
+    // addItem = (inputVal) => {
+    //   const capitalizer = (s) => {
+    //     return s.charAt(0).toUpperCase() + s.slice(1)
+    //   }
+    //   const capitalized = capitalizer(inputVal)
+    //   this.setState({newItem: capitalized})
+    // };
     
     hider() {
         var x = document.getElementById("myDIV");
@@ -38,9 +37,9 @@ class Store extends React.Component {
         }
     };
 
-    totaler = (argument) => {
-      this.setState({totalChecked: argument})
-    };
+    // totaler = (argument) => {
+    //   this.setState({totalChecked: argument})
+    // };
 
     render (){
 
@@ -53,7 +52,7 @@ class Store extends React.Component {
           <br />
           <br />
           <div>
-            <Lister adder={this.addTotal}/>
+            <Lister              />
           </div>
           <br />
           <div className="hidden" id="myDIV">

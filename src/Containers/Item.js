@@ -22,8 +22,9 @@ class Item extends React.Component {
     }
 
     handleClick (e){
-      this.setState({checked: !this.state.checked});
-      this.props.adder(this.state.checked);
+      this.setState({checked: !this.state.checked})
+      this.props.adder(this.state.checked)
+      console.log(this.state.checked);
       if (this.props.message === "Ate Vitamins") {
         this.setState({vitamin: !this.state.vitamin});
         console.log(this.state.vitamin);
