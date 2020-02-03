@@ -52,7 +52,7 @@ class Store extends React.Component {
           <br />
           <br />
           <div>
-            <Lister              />
+            <Lister  />
           </div>
           <br />
           <div className="hidden" id="myDIV">

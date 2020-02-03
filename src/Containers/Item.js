@@ -2,7 +2,7 @@ import React from 'react';
 
 class Item extends React.Component {
     constructor (props){
-      super ();
+      super (props);
       this.state = {
         checked: false,
         vitamin: false,
@@ -22,17 +22,21 @@ class Item extends React.Component {
     }
 
     handleClick (e){
-      this.setState({checked: !this.state.checked})
-      this.props.adder(this.state.checked)
-      console.log(this.state.checked);
-      if (this.props.message === "Ate Vitamins") {
-        this.setState({vitamin: !this.state.vitamin});
-        console.log(this.state.vitamin);
-      } 
-      else if (this.props.message === "Went for a Walk") {
-        this.setState({walk: !this.state.walk});
-        console.log(this.state.walk);
-      }
+
+      this.setState({checked: !this.state.checked}, () => console.log(this.state.checked));
+      
+      // this.props.adder(this.state.checked);
+
+      // console.log(this.state.checked);
+
+      // if (this.props.message === "Ate Vitamins") {
+      //   this.setState({vitamin: !this.state.vitamin});
+      //   console.log(this.state.vitamin);
+      // } 
+      // else if (this.props.message === "Went for a Walk") {
+      //   this.setState({walk: !this.state.walk});
+      //   console.log(this.state.walk);
+      // }
     
       //ADD MORE ELSE IF OR MAKE DYNAMIC
     }
