@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import ItemCount from './ItemCount.js';
+import ItemCount from './Components/ItemCount';
 import AppFooter from './AppFooter.js';
-import Store from './Store';
+import Store from './Containers/Store';
 
 let allTheThings = [];
 

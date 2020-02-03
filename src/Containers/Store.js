@@ -1,8 +1,8 @@
 import React from 'react';
 import Item from './Item';
-import ItemAdder from './ItemAdder';
-import './App.css';
-import NewItem from './NewItem';
+import ItemAdder from '../Components/ItemAdder';
+import '../App.css';
+import NewItem from '../Components/NewItem';
 
 class Store extends React.Component {
     constructor (props){
@@ -52,6 +52,7 @@ class Store extends React.Component {
           <Item message={this.state.newItem} adder={this.addTotal}/>
           </div>
           <NewItem />
+          <br />
           <div className="hidden" id="myDIV">
           <Item message="Ate Vitamins" adder={this.addTotal}/>
           <Item message="Went for a Walk" adder={this.addTotal}/>
@@ -65,6 +66,7 @@ class Store extends React.Component {
           <Item message="Lost Weight" adder={this.addTotal}/>
           <Item message="Played Music" adder={this.addTotal}/>
           <Item message="Created Art" adder={this.addTotal}/>
+          <Item message="Meditated" adder={this.addTotal}/>
           </div>
           <br />  
         </div>
