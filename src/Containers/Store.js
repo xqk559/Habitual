@@ -61,12 +61,12 @@ class Store extends React.Component {
     }; 
 
     defaultHandler = ( defaultState ) => {
-      this.setState({vitamin: defaultState})
+      this.setState({vitamin: !defaultState})
       console.log("Vitamin is " + JSON.stringify(this.state.vitamin))
     };
 
     walkHandler = ( defaultState ) => {
-      this.setState({walk: defaultState})
+      this.setState({walk: !defaultState})
       console.log("Walk is " + JSON.stringify(this.state.walk))
     };
 
