@@ -14,11 +14,11 @@ class Store extends React.Component {
       };
     }
 
-    // addTotal = (childChecked) => {
-    //   childChecked ? 
-    //       this.setState({totalChecked: this.state.totalChecked-1}) :
-    //       this.setState({totalChecked: this.state.totalChecked+1});
-    // };
+    addTotal = (childChecked) => {
+      childChecked ? 
+          this.setState({totalChecked: this.state.totalChecked-1}) :
+          this.setState({totalChecked: this.state.totalChecked+1});
+    };
 
     // addItem = (inputVal) => {
     //   const capitalizer = (s) => {

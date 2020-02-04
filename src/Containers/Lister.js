@@ -14,8 +14,8 @@ export default class Lister extends Component {
 
   addTotal = (childChecked) => {
     childChecked ? 
-        this.setState({totalChecked: this.state.totalChecked-1}) :
-        this.setState({totalChecked: this.state.totalChecked+1});
+        this.setState({totalChecked: this.state.totalChecked - 1}) :
+        this.setState({totalChecked: this.state.totalChecked + 1});
         console.log(this.state.totalChecked);
   };
 
