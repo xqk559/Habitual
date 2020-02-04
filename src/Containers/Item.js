@@ -10,7 +10,7 @@ class Item extends React.Component {
         program: false,
         vegan: false,
         vegetarian: false,
-        excercised: false,
+        exercised: false,
         drink: false,
         smoke: false,
         weight: false,
@@ -29,14 +29,59 @@ class Item extends React.Component {
 
       // console.log(this.state.checked);
 
-      // if (this.props.message === "Ate Vitamins") {
-      //   this.setState({vitamin: !this.state.vitamin});
-      //   console.log(this.state.vitamin);
-      // } 
-      // else if (this.props.message === "Went for a Walk") {
-      //   this.setState({walk: !this.state.walk});
-      //   console.log(this.state.walk);
-      // }
+      if (this.props.message === "Ate Vitamins") {
+        this.setState({vitamin: !this.state.vitamin});
+        this.props.status(this.state.vitamin);
+        console.log(this.state.vitamin);
+      } 
+      else if (this.props.message === "Went for a Walk") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Programming") {
+        this.setState({walk: !this.state.program});
+        console.log(this.state.program);
+      }
+      else if (this.props.message === "Did Chores") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Ate Vegan") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Ate Vegetarian") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Exercised") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Didn't Drink") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Didn't Smoke") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Lost Weight") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Played Music") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Created Art") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
+      else if (this.props.message === "Meditated") {
+        this.setState({walk: !this.state.walk});
+        console.log(this.state.walk);
+      }
     
       //ADD MORE ELSE IF OR MAKE DYNAMIC
     }

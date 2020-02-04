@@ -12,7 +12,6 @@ class Store extends React.Component {
       this.state = {
         totalChecked: 0,
         newItem: "",
-        defaults:{
           vitamin: false,
           walk: false,
           program: false,
@@ -23,7 +22,8 @@ class Store extends React.Component {
           smoke: false,
           weight: false,
           music: false,
-          art: false}
+          art: false,
+          meditate: false
       };
     }
 
@@ -55,9 +55,20 @@ class Store extends React.Component {
     // };
 
     submitHandler = () => {
-      const test = {today: this.state.defaults};
+      const test = {Vitamin: this.state.vitamin, 
+                    Walk: this.state.walk}
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', test);
     }; 
+
+    defaultHandler = ( defaultState ) => {
+      this.setState({defaults: !defaultState})
+      console.log("Vitamins is " + JSON.stringify(this.state.defaults))
+    };
+
+    walkHandler = ( defaultState ) => {
+      this.setState({defaults:{vitamin: !defaultState}})
+      console.log("Walk is " + JSON.stringify(this.state.defaults))
+    };
 
     render (){
 
@@ -74,13 +85,13 @@ class Store extends React.Component {
           </div>
           <br />
           <div className="hidden" id="myDIV">
-          <Item message="Ate Vitamins" adder={this.addTotal}/>
-          <Item message="Went for a Walk" adder={this.addTotal}/>
+          <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler}/>
+          <Item message="Went for a Walk" adder={this.addTotal} status={this.walkHandler}/>
           <Item message="Programming" adder={this.addTotal}/>
           <Item message="Did Chores" adder={this.addTotal}/>
           <Item message="Ate Vegan" adder={this.addTotal}/>
           <Item message="Ate Vegetarian" adder={this.addTotal}/>
-          <Item message="Excercised" adder={this.addTotal}/>
+          <Item message="Exercised" adder={this.addTotal}/>
           <Item message="Didn't Drink" adder={this.addTotal}/>
           <Item message="Didn't Smoke" adder={this.addTotal}/>
           <Item message="Lost Weight" adder={this.addTotal}/>
