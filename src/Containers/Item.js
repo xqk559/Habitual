@@ -15,7 +15,9 @@ class Item extends React.Component {
         smoke: false,
         weight: false,
         music: false,
-        art: false
+        art: false,
+        chore: false,
+        meditate: false
       };
   
       this.handleClick = this.handleClick.bind(this);    
@@ -40,47 +42,47 @@ class Item extends React.Component {
       }
       else if (this.props.message === "Programming") {
         this.setState({walk: !this.state.program});
-        this.props.status(this.state.vitamin);
+        this.props.status(this.state.program);
       }
       else if (this.props.message === "Did Chores") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.chore});
+        this.props.status(this.state.chore);
       }
       else if (this.props.message === "Ate Vegan") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.vegan});
+        this.props.status(this.state.vegan);
       }
       else if (this.props.message === "Ate Vegetarian") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.vegetarian});
+        this.props.status(this.state.vegetarian);
       }
       else if (this.props.message === "Exercised") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.exercised});
+        this.props.status(this.state.exercised);
       }
       else if (this.props.message === "Didn't Drink") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.drink});
+        this.props.status(this.state.drink);
       }
       else if (this.props.message === "Didn't Smoke") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.smoke});
+        this.props.status(this.state.smoke);
       }
       else if (this.props.message === "Lost Weight") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.weight});
+        this.props.status(this.state.weight);
       }
       else if (this.props.message === "Played Music") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.music});
+        this.props.status(this.state.music);
       }
       else if (this.props.message === "Created Art") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.art});
+        this.props.status(this.state.art);
       }
       else if (this.props.message === "Meditated") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.vitamin);
+        this.setState({walk: !this.state.meditate});
+        this.props.status(this.state.meditate);
       }
     }
 
