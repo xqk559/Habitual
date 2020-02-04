@@ -4,6 +4,7 @@ import ItemAdder from '../Components/ItemAdder';
 import '../App.css';
 import NewItem from '../Components/NewItem';
 import Lister from '../Containers/Lister';
+import axios from 'axios';
 
 class Store extends React.Component {
     constructor (props){
@@ -41,12 +42,18 @@ class Store extends React.Component {
     //   this.setState({totalChecked: argument})
     // };
 
+    submitHandler() {
+      const test = {sample: "text"};
+      axios.post('https://habitual-f64a5.firebaseio.com/history.json', test);
+      console.log("piss");
+    }; 
+
     render (){
 
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things! &nbsp;
-            <button>Submit Completed Day</button>
+            <button onClick={this.submitHandler}>Submit Completed Day</button>
           </h4>
           <button onClick={this.hider}>Defaults</button>
           <br />
