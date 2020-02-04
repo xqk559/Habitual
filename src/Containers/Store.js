@@ -11,7 +11,19 @@ class Store extends React.Component {
       super ();
       this.state = {
         totalChecked: 0,
-        newItem: ""
+        newItem: "",
+        defaults:{
+          vitamin: false,
+          walk: false,
+          program: false,
+          vegan: false,
+          vegetarian: false,
+          excercised: false,
+          drink: false,
+          smoke: false,
+          weight: false,
+          music: false,
+          art: false}
       };
     }
 
@@ -42,10 +54,9 @@ class Store extends React.Component {
     //   this.setState({totalChecked: argument})
     // };
 
-    submitHandler() {
-      const test = {sample: "text"};
+    submitHandler = () => {
+      const test = {today: this.state.defaults};
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', test);
-      console.log("piss");
     }; 
 
     render (){
