@@ -12,6 +12,7 @@ class Store extends React.Component {
       this.state = {
         totalChecked: 0,
         newItem: "",
+        submitted: true,
           vitamin: false,
           walk: false,
           program: false,
@@ -51,11 +52,26 @@ class Store extends React.Component {
         }
     };
 
+    submitHider() {
+      var x = document.getElementById("submitter").disabled=this.state.submitted;
+  };
+
+    undoHider() {
+      var x = document.getElementById("undo").disabled=false;
+  };
+
     // totaler = (argument) => {
     //   this.setState({totalChecked: argument})
     // };
 
+    undoHandler = () => {
+      this.setState({submitted: !this.state.submitted});
+    }
+
     submitHandler = () => {
+      this.setState({submitted: !this.state.submitted});
+      this.submitHider();
+      this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
       const test = {Vitamin: this.state.vitamin, 
@@ -134,7 +150,17 @@ class Store extends React.Component {
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things! &nbsp;
-            <button onClick={this.submitHandler}>Submit Completed Day</button>
+            <button onClick={this.submitHandler}
+                    id= "submitter"
+                    className="buttonMargin">
+              Submit Completed Day
+            </button>
+            
+            <button id="undo"
+                    disabled="true"
+                    onClick={this.undoHandler}>
+              Undo
+            </button>
           </h4>
           <button onClick={this.hider}>Defaults</button>
           <br />

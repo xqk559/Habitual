@@ -4,6 +4,7 @@ class Item extends React.Component {
     constructor (props){
       super (props);
       this.state = {
+        // newValue: null,
         checked: false,
         vitamin: false,
         walk: false,
