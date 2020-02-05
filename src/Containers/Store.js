@@ -4,6 +4,9 @@ import '../App.css';
 import Lister from '../Containers/Lister';
 import axios from 'axios';
 
+let dt = new Date();
+let utcDate = dt.toUTCString();
+
 class Store extends React.Component {
     constructor (props){
       super ();
@@ -11,6 +14,7 @@ class Store extends React.Component {
         totalChecked: 0,
         newItem: "",
         submitted: true,
+        date: utcDate,
           vitamin: false,
           walk: false,
           program: false,
@@ -65,7 +69,7 @@ class Store extends React.Component {
     undoHandler = () => {
       this.setState({submitted: !this.state.submitted});
       this.submitHider()
-      console.log(this.state.submitted);
+      axios.delete('https://habitual-f64a5.firebaseio.com/history.json');
     }
 
     submitHandler = () => {
@@ -74,7 +78,7 @@ class Store extends React.Component {
       this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
-      const test = {Vitamin: this.state.vitamin, 
+      const test = {Day:{Vitamin: this.state.vitamin, 
                     Walk: this.state.walk,
                     Program: this.state.program,
                     Chore: this.state.chore,
@@ -88,7 +92,7 @@ class Store extends React.Component {
                     Art: this.state.art,
                     Meditate: this.state.meditate,
                     ADate: utcDate,
-                    Completed: this.state.totalChecked}
+                    Completed: this.state.totalChecked}}
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', test);
     }; 
 
