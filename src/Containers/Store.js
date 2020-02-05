@@ -7,6 +7,9 @@ import axios from 'axios';
 let dt = new Date();
 let utcDate = dt.toUTCString();
 
+let axiosDefaults = require('axios/lib/defaults');
+axiosDefaults.baseURL = 'https://habitual-f64a5.firebaseio.com';
+
 class Store extends React.Component {
     constructor (props){
       super ();
@@ -15,6 +18,8 @@ class Store extends React.Component {
         newItem: "",
         submitted: true,
         date: utcDate,
+        history: 1,
+        iterator: 1,
           vitamin: false,
           walk: false,
           program: false,
@@ -69,11 +74,14 @@ class Store extends React.Component {
     undoHandler = () => {
       this.setState({submitted: !this.state.submitted});
       this.submitHider()
-      axios.delete('https://habitual-f64a5.firebaseio.com/history.json');
+      const lastPost = this.state.history - 1;
+      axios.delete('https://habitual-f64a5.firebaseio.com/history'+lastPost+'.json');
     }
 
     submitHandler = () => {
-      this.setState({submitted: !this.state.submitted});
+      this.setState({submitted: !this.state.submitted, 
+                     history: this.state.history + 1},
+                     () => console.log());
       this.submitHider();
       this.undoHider();
       let dt = new Date();
@@ -92,8 +100,14 @@ class Store extends React.Component {
                     Art: this.state.art,
                     Meditate: this.state.meditate,
                     ADate: utcDate,
-                    Completed: this.state.totalChecked}}
-      axios.post('https://habitual-f64a5.firebaseio.com/history.json', test);
+                    Completed: this.state.totalChecked}};
+      let i = 1 ;
+      axios.post('https://habitual-f64a5.firebaseio.com/history'+this.state.history+'.json', test);
+      axios.post('https://habitual-f64a5.firebaseio.com/iterator.json', i);
+      axios.get('https://habitual-f64a5.firebaseio.com/iterator.json')
+        .then((response)=> console.log(response.data));
+          //.then(()=>console.log(j));
+        //.then((response)=>this.setState({iterator: this.state.iterator + response}));
     }; 
 
     defaultHandler = ( defaultState ) => {
