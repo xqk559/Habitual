@@ -1,8 +1,6 @@
 import React from 'react';
 import Item from './Item';
-import ItemAdder from '../Components/ItemAdder';
 import '../App.css';
-import NewItem from '../Components/NewItem';
 import Lister from '../Containers/Lister';
 import axios from 'axios';
 
@@ -57,7 +55,7 @@ class Store extends React.Component {
   };
 
     undoHider() {
-      var x = document.getElementById("undo").disabled=false;
+      var x = document.getElementById("undo").disabled=!this.state.submitted;
   };
 
     // totaler = (argument) => {
@@ -66,6 +64,8 @@ class Store extends React.Component {
 
     undoHandler = () => {
       this.setState({submitted: !this.state.submitted});
+      this.submitHider()
+      console.log(this.state.submitted);
     }
 
     submitHandler = () => {
@@ -77,7 +77,7 @@ class Store extends React.Component {
       const test = {Vitamin: this.state.vitamin, 
                     Walk: this.state.walk,
                     Program: this.state.program,
-                    Chore: this.state.hore,
+                    Chore: this.state.chore,
                     Vegan: this.state.vegan,
                     Vegetarian: this.state.vegetarian,
                     Exercised: this.state.excercised,
@@ -94,7 +94,6 @@ class Store extends React.Component {
 
     defaultHandler = ( defaultState ) => {
       this.setState({vitamin: !defaultState})
-      console.log("Vitamin is " + JSON.stringify(this.state.vitamin))
     };
 
     walkHandler = ( defaultState ) => {
@@ -157,7 +156,7 @@ class Store extends React.Component {
             </button>
             
             <button id="undo"
-                    disabled="true"
+                    disabled={this.state.submitted}
                     onClick={this.undoHandler}>
               Undo
             </button>
