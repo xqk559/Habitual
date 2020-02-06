@@ -12,8 +12,12 @@ export default class Lister extends Component {
     }
   }
 
+  booler = (argument) => {
+    return console.log(argument);
+  }
+
   addTotal = (childChecked) =>  {
-    console.log(childChecked);
+    //console.log(childChecked);
     this.setState({},()=>{
       if (childChecked) { 
         this.setState({totalChecked: this.state.totalChecked + 1},()=>this.props.addTotal(this.state.totalChecked));
@@ -36,7 +40,9 @@ export default class Lister extends Component {
 
   addItem() {
     let items = this.state.items;
-    items.push(<Item message={this.state.inputValue} adder={this.addTotal}/>);
+    items.push(<Item message={this.state.inputValue} 
+                     adder={this.addTotal}
+                     booler={this.booler}/>);
     this.setState({items},()=>this.props.namer(this.state.inputValue));
   }
  

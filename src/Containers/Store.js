@@ -121,7 +121,7 @@ class Store extends React.Component {
                     Meditate: this.state.meditate,
                     ADate: utcDate,
                     Completed: this.state.totalChecked};
-      const post = Object.assign({},this.state.dynamicNames) ;
+      const post = Object.assign({},this.state.swappedNamesKeys) ;
       const fullPost = Object.assign(post, test);
       console.log(fullPost);
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost)
