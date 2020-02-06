@@ -41,14 +41,6 @@ class Store extends React.Component {
           this.setState({totalChecked: this.state.totalChecked+1});
     };
 
-    // addItem = (inputVal) => {
-    //   const capitalizer = (s) => {
-    //     return s.charAt(0).toUpperCase() + s.slice(1)
-    //   }
-    //   const capitalized = capitalizer(inputVal)
-    //   this.setState({newItem: capitalized})
-    // };
-    
     hider() {
         var x = document.getElementById("myDIV");
         if (x.style.display === "none") {
@@ -66,10 +58,6 @@ class Store extends React.Component {
       var x = document.getElementById("undo").disabled=!this.state.submitted;
   };
 
-    // totaler = (argument) => {
-    //   this.setState({totalChecked: argument})
-    // };
-
     undoHandler = () => {
       this.setState({submitted: !this.state.submitted});
       this.submitHider();
@@ -78,12 +66,10 @@ class Store extends React.Component {
       let leng;
       let last;
       axios.get('https://habitual-f64a5.firebaseio.com/history.json')
-        //.then((response)=>console.log(response.data))
           .then((response)=> d = response.data)
             .then(()=> keys = Object.keys(d))
               .then(()=> leng = keys.length)
                 .then(()=> last = keys[leng-1])
-                //.then(()=>console.log(last))
                   .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json'));
     }
 
@@ -166,7 +152,6 @@ class Store extends React.Component {
     };
 
     render (){
-
       return (
         <div>
           <h4>You've completed {this.state.totalChecked} things! &nbsp;

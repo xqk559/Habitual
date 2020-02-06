@@ -19,15 +19,13 @@ export default class Lister extends Component {
         console.log(this.state.totalChecked);
   };
 
-//   addTotal = (childChecked) => {
-//       return childChecked;
-//       console.log(childChecked);
-//   };
-
-
   onInputChange(e) {
+    const capitalizer = (s) => {
+          return s.charAt(0).toUpperCase() + s.slice(1)
+        }
+        const capitalized = capitalizer(e.target.value)
     this.setState({
-      inputValue: e.target.value,
+      inputValue: capitalized,
     });
   }
 
