@@ -102,12 +102,17 @@ class Store extends React.Component {
                     ADate: utcDate,
                     Completed: this.state.totalChecked}};
       let i = 1 ;
+      let d;
+      let keys;
+      let leng;
       axios.post('https://habitual-f64a5.firebaseio.com/history'+this.state.history+'.json', test);
       axios.post('https://habitual-f64a5.firebaseio.com/iterator.json', i);
       axios.get('https://habitual-f64a5.firebaseio.com/iterator.json')
-        .then((response)=> console.log(response.data));
-          //.then(()=>console.log(j));
-        //.then((response)=>this.setState({iterator: this.state.iterator + response}));
+        .then((response)=> d = response.data)
+          .then(()=> keys = Object.keys(d))
+            .then(()=> leng = keys.length)
+              .then(()=>console.log(keys[leng-1]));
+        
     }; 
 
     defaultHandler = ( defaultState ) => {
