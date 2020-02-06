@@ -14,6 +14,7 @@ class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
+        bool: false,
         dynamicNames: [],
         swappedNamesKeys: {},
         totalChecked: 0,
@@ -40,7 +41,7 @@ class Store extends React.Component {
     }
 
     booler = (argument) => {
-      return console.log(argument);
+      this.setState({bool: argument},()=>console.log(this.state.bool));
     }
 
     dynamicNamer = (passedName) => {
@@ -52,11 +53,16 @@ class Store extends React.Component {
         if(newName.hasOwnProperty(prop)) {
             var value = newName[prop];
           newObj[value] = prop;
-          newObj[passedName] = false;
+
+
+
+          newObj[passedName] = this.state.bool;
+
+
+          
         }
       }
-
-      this.setState({swappedNamesKeys: newObj},()=>console.log(this.state.swappedNamesKeys));
+      this.setState({swappedNamesKeys: newObj});
     }
 
     callbackTotalAdder = (dynamic) => {
