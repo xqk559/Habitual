@@ -12,8 +12,8 @@ export default class Lister extends Component {
     }
   }
 
-  booler = (argument) => {
-    return console.log(argument);
+  booler = (bool) => {
+    this.props.booleroo(bool);
   }
 
   addTotal = (childChecked) =>  {

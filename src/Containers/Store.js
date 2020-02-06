@@ -39,6 +39,10 @@ class Store extends React.Component {
       };
     }
 
+    booler = (argument) => {
+      return console.log(argument);
+    }
+
     dynamicNamer = (passedName) => {
       let name = this.state.dynamicNames;
       let pushed = name.push(passedName);
@@ -48,8 +52,10 @@ class Store extends React.Component {
         if(newName.hasOwnProperty(prop)) {
             var value = newName[prop];
           newObj[value] = prop;
+          newObj[passedName] = false;
         }
       }
+
       this.setState({swappedNamesKeys: newObj},()=>console.log(this.state.swappedNamesKeys));
     }
 
@@ -199,7 +205,9 @@ class Store extends React.Component {
           <br />
           <br />
           <div>
-            <Lister addTotal={this.callbackTotalAdder} namer={this.dynamicNamer}/>
+            <Lister addTotal={this.callbackTotalAdder} 
+                    namer={this.dynamicNamer}
+                    booleroo={this.booler}/>
           </div>
           <br />
           <div className="hidden" id="myDIV">
