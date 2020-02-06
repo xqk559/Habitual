@@ -15,6 +15,8 @@ class Store extends React.Component {
       super ();
       this.state = {
         totalChecked: 0,
+        dynamicTotal: 0,
+        trueTotal: 0,
         newItem: "",
         submitted: true,
         date: utcDate,
@@ -35,14 +37,17 @@ class Store extends React.Component {
       };
     }
 
-    callbackTotalAdder = (dynamicTotal) => {
-      this.setState({totalChecked: dynamicTotal})
+    callbackTotalAdder = (dynamic) => {
+      this.setState({},()=>{
+        this.setState({dynamicTotal: dynamic},()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}))
+      })
+      // this.setState({dynamicTotal: dynamicTotal})
     }
 
     addTotal = (childChecked) => {
       !childChecked ? 
-          this.setState({totalChecked: this.state.totalChecked-1}) :
-          this.setState({totalChecked: this.state.totalChecked+1});
+          this.setState({totalChecked: this.state.totalChecked-1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal})) :
+          this.setState({totalChecked: this.state.totalChecked+1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
     };
 
     hider() {
@@ -158,7 +163,7 @@ class Store extends React.Component {
     render (){
       return (
         <div>
-          <h4>You've completed {this.state.totalChecked} things! &nbsp;
+          <h4>You've completed {this.state.trueTotal} things! &nbsp;
             <button onClick={this.submitHandler}
                     id= "submitter"
                     className="buttonMargin">
