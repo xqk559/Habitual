@@ -12,12 +12,24 @@ export default class Lister extends Component {
     }
   }
 
-  addTotal = (childChecked) => {
-    childChecked ? 
-        this.setState({totalChecked: this.state.totalChecked - 1}) :
-        this.setState({totalChecked: this.state.totalChecked + 1});
-        console.log(this.state.totalChecked);
-  };
+  addTotal = (childChecked) =>  {
+    console.log(childChecked);
+    this.setState({},()=>{
+      if (childChecked) { 
+        this.setState({totalChecked: this.state.totalChecked + 1},()=>this.props.addTotal(this.state.totalChecked));
+        } 
+        else {
+        this.setState({totalChecked: this.state.totalChecked - 1},()=>this.props.addTotal(this.state.totalChecked));
+        };
+    })
+    // if (childChecked) { 
+    //     this.setState({totalChecked: this.state.totalChecked + 1},()=>console.log("plus one"));
+    //     } 
+    //     else {
+    //     this.setState({totalChecked: this.state.totalChecked - 1},()=>console.log("minus one"));
+    //     };
+        // console.log(this.state.totalChecked);
+    };
 
   onInputChange(e) {
     const capitalizer = (s) => {

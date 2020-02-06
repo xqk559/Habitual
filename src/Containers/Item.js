@@ -26,9 +26,9 @@ class Item extends React.Component {
 
     handleClick (e){
 
-      this.setState({checked: !this.state.checked}, () => console.log("Checked: " + this.state.checked));
+      this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
       
-      this.setState(() => this.props.adder(this.state.checked));
+     // this.setState(() => this.props.adder(this.state.checked));
 
       // console.log(this.state.checked);
 

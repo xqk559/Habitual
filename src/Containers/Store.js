@@ -35,8 +35,12 @@ class Store extends React.Component {
       };
     }
 
+    callbackTotalAdder = (dynamicTotal) => {
+      this.setState({totalChecked: dynamicTotal})
+    }
+
     addTotal = (childChecked) => {
-      childChecked ? 
+      !childChecked ? 
           this.setState({totalChecked: this.state.totalChecked-1}) :
           this.setState({totalChecked: this.state.totalChecked+1});
     };
@@ -171,7 +175,7 @@ class Store extends React.Component {
           <br />
           <br />
           <div>
-            <Lister  />
+            <Lister addTotal={this.callbackTotalAdder} />
           </div>
           <br />
           <div className="hidden" id="myDIV">
