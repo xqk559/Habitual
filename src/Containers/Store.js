@@ -19,7 +19,6 @@ class Store extends React.Component {
         submitted: true,
         date: utcDate,
         history: 1,
-        iterator: 1,
           vitamin: false,
           walk: false,
           program: false,
@@ -73,9 +72,19 @@ class Store extends React.Component {
 
     undoHandler = () => {
       this.setState({submitted: !this.state.submitted});
-      this.submitHider()
-      const lastPost = this.state.history - 1;
-      axios.delete('https://habitual-f64a5.firebaseio.com/history'+lastPost+'.json');
+      this.submitHider();
+      let d;
+      let keys;
+      let leng;
+      let last;
+      axios.get('https://habitual-f64a5.firebaseio.com/history.json')
+        //.then((response)=>console.log(response.data))
+          .then((response)=> d = response.data)
+            .then(()=> keys = Object.keys(d))
+              .then(()=> leng = keys.length)
+                .then(()=> last = keys[leng-1])
+                //.then(()=>console.log(last))
+                  .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json'));
     }
 
     submitHandler = () => {
@@ -86,7 +95,7 @@ class Store extends React.Component {
       this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
-      const test = {Day:{Vitamin: this.state.vitamin, 
+      const test = {Vitamin: this.state.vitamin, 
                     Walk: this.state.walk,
                     Program: this.state.program,
                     Chore: this.state.chore,
@@ -100,19 +109,8 @@ class Store extends React.Component {
                     Art: this.state.art,
                     Meditate: this.state.meditate,
                     ADate: utcDate,
-                    Completed: this.state.totalChecked}};
-      let i = 1 ;
-      let d;
-      let keys;
-      let leng;
-      axios.post('https://habitual-f64a5.firebaseio.com/history'+this.state.history+'.json', test);
-      axios.post('https://habitual-f64a5.firebaseio.com/iterator.json', i);
-      axios.get('https://habitual-f64a5.firebaseio.com/iterator.json')
-        .then((response)=> d = response.data)
-          .then(()=> keys = Object.keys(d))
-            .then(()=> leng = keys.length)
-              .then(()=>console.log(keys[leng-1]));
-        
+                    Completed: this.state.totalChecked};
+      axios.post('https://habitual-f64a5.firebaseio.com/history.json', test)
     }; 
 
     defaultHandler = ( defaultState ) => {
