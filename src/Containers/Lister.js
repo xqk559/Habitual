@@ -22,13 +22,6 @@ export default class Lister extends Component {
         this.setState({totalChecked: this.state.totalChecked - 1},()=>this.props.addTotal(this.state.totalChecked));
         };
     })
-    // if (childChecked) { 
-    //     this.setState({totalChecked: this.state.totalChecked + 1},()=>console.log("plus one"));
-    //     } 
-    //     else {
-    //     this.setState({totalChecked: this.state.totalChecked - 1},()=>console.log("minus one"));
-    //     };
-        // console.log(this.state.totalChecked);
     };
 
   onInputChange(e) {
@@ -43,10 +36,8 @@ export default class Lister extends Component {
 
   addItem() {
     let items = this.state.items;
-    items.push(<Item message={this.state.inputValue} adder={this.addTotal}      />);
-    this.setState({
-      items
-    });
+    items.push(<Item message={this.state.inputValue} adder={this.addTotal}/>);
+    this.setState({items},()=>this.props.namer(this.state.inputValue));
   }
  
   listItems() {
@@ -66,6 +57,8 @@ export default class Lister extends Component {
       </ul>
     );
   }
+
+
 
   render() {
     return (

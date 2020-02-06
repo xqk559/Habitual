@@ -14,6 +14,8 @@ class Store extends React.Component {
     constructor (props){
       super ();
       this.state = {
+        dynamicNames: [],
+        swappedNamesKeys: {},
         totalChecked: 0,
         dynamicTotal: 0,
         trueTotal: 0,
@@ -37,11 +39,24 @@ class Store extends React.Component {
       };
     }
 
+    dynamicNamer = (passedName) => {
+      let name = this.state.dynamicNames;
+      let pushed = name.push(passedName);
+      let newName = this.state.dynamicNames;
+      let newObj = {};
+      for (var prop in newName) {
+        if(newName.hasOwnProperty(prop)) {
+            var value = newName[prop];
+          newObj[value] = prop;
+        }
+      }
+      this.setState({swappedNamesKeys: newObj},()=>console.log(this.state.swappedNamesKeys));
+    }
+
     callbackTotalAdder = (dynamic) => {
       this.setState({},()=>{
         this.setState({dynamicTotal: dynamic},()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}))
       })
-      // this.setState({dynamicTotal: dynamicTotal})
     }
 
     addTotal = (childChecked) => {
@@ -90,6 +105,7 @@ class Store extends React.Component {
       this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
+      const names = this.state.dynamicNames;
       const test = {Vitamin: this.state.vitamin, 
                     Walk: this.state.walk,
                     Program: this.state.program,
@@ -105,7 +121,10 @@ class Store extends React.Component {
                     Meditate: this.state.meditate,
                     ADate: utcDate,
                     Completed: this.state.totalChecked};
-      axios.post('https://habitual-f64a5.firebaseio.com/history.json', test)
+      const post = Object.assign({},this.state.dynamicNames) ;
+      const fullPost = Object.assign(post, test);
+      console.log(fullPost);
+      axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost)
     }; 
 
     defaultHandler = ( defaultState ) => {
@@ -180,7 +199,7 @@ class Store extends React.Component {
           <br />
           <br />
           <div>
-            <Lister addTotal={this.callbackTotalAdder} />
+            <Lister addTotal={this.callbackTotalAdder} namer={this.dynamicNamer}/>
           </div>
           <br />
           <div className="hidden" id="myDIV">
