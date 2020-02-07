@@ -54,16 +54,11 @@ class Store extends React.Component {
             var value = newName[prop];
           newObj[value] = prop;
 
-
-
           newObj[passedName] = this.state.bool;
 
-
-          
-        }
       }
       this.setState({swappedNamesKeys: newObj});
-    }
+    }}
 
     callbackTotalAdder = (dynamic) => {
       this.setState({},()=>{
@@ -193,28 +188,36 @@ class Store extends React.Component {
 
     render (){
       return (
-        <div>
-          <h4>You've completed {this.state.trueTotal} things! &nbsp;
+        <div className="centered">
+          <div>You've completed {this.state.trueTotal} things! &nbsp;
             <button onClick={this.submitHandler}
                     id= "submitter"
-                    className="buttonMargin">
+                    type="button" 
+                    class="btn btn-outline-primary btn-sm">
               Submit Completed Day
             </button>
-            
+            &nbsp;
             <button id="undo"
                     disabled={this.state.submitted}
-                    onClick={this.undoHandler}>
+                    onClick={this.undoHandler}
+                    type="button" 
+                    class="btn btn-outline-danger btn-sm">
               Undo
             </button>
-          </h4>
-          <button onClick={this.hider}>Defaults</button>
+          </div>
+          <br />
+          <button onClick={this.hider}
+                  type="button" 
+                  class="btn btn-outline-secondary btn-sm"> 
+          Defaults
+          </button>
           <br />
           <br />
-          <div>
+          <p className="none">
             <Lister addTotal={this.callbackTotalAdder} 
                     namer={this.dynamicNamer}
                     booleroo={this.booler}/>
-          </div>
+          </p>
           <br />
           <div className="hidden" id="myDIV">
           <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler}/>

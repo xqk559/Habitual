@@ -12,7 +12,7 @@ class App extends React.Component {
   }
   render (){
     return (
-      <div>
+      <div className="phone">
         <br />
         <br />
         <div className="rainbow-text">
@@ -23,7 +23,7 @@ class App extends React.Component {
         </div>
         <br />
         <br />
-        <div className="bigmargin">
+        <div >
           <Store className="centered"/>
         </div>
         <br />

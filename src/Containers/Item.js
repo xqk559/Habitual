@@ -90,7 +90,7 @@ class Item extends React.Component {
   render (){
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
-        <div className="row">
+        <div className="item">
           <div className="col-md-12">
             <input type="checkbox" onClick={this.handleClick} />&nbsp;{text}
             <hr />
