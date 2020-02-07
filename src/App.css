@@ -3,11 +3,17 @@
 }
 
 .bigmargin {
-  margin-left: 130px;
+  margin-left: 100px;
 }
 
 .bold {
   font-weight: bold; 
+  margin-left: -20px;
+}
+
+.bold2 {
+  font-weight: bold; 
+  margin-left: 10px;
 }
 
 .buttonMargin {
@@ -17,13 +23,22 @@
 .centered {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
 .hidden {
   display: none;
-  margin-left: 150px;
+  margin-left: 28%;
 }
 
 .jumbotron {
@@ -36,7 +51,7 @@
 }
 
 .margin {
-  margin-left: 80px;
+  margin-left: 20%;
 }
 
 .none {
@@ -87,6 +102,10 @@
 
 .selector-for-some-widget {
   box-sizing: content-box;
+}
+
+.smallMargin {
+  margin-left: 80px;
 }
 
 @media only screen and (max-width: 600px) {
