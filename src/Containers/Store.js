@@ -15,7 +15,7 @@ class Store extends React.Component {
       super ();
       this.state = {
         bool: false,
-        dynamicNames: [],
+        dynamicNames: {},
         swappedNamesKeys: {},
         totalChecked: 0,
         dynamicTotal: 0,
@@ -45,20 +45,21 @@ class Store extends React.Component {
     }
 
     dynamicNamer = (passedName) => {
-      let name = this.state.dynamicNames;
-      let pushed = name.push(passedName);
-      let newName = this.state.dynamicNames;
-      let newObj = {};
-      for (var prop in newName) {
-        if(newName.hasOwnProperty(prop)) {
-            var value = newName[prop];
-          newObj[value] = prop;
+      this.state.dynamicNames[passedName] = this.state.bool;
+      // let name = this.state.dynamicNames;
+      // let pushed = name.push(passedName);
+      // let newName = this.state.dynamicNames;
+      // let newObj = {};
+      // for (let prop in newName) {
+      //   if(newName.hasOwnProperty(prop)) {
+      //       let value = newName[prop];
+      //     newObj[value] = prop;
 
-          newObj[passedName] = this.state.bool;
+      //     newObj[passedName] = this.state.bool;
 
-      }
-      this.setState({swappedNamesKeys: newObj});
-    }}
+      // }
+      // this.setState({swappedNamesKeys: newObj});
+    }
 
     callbackTotalAdder = (dynamic) => {
       this.setState({},()=>{
@@ -119,7 +120,7 @@ class Store extends React.Component {
                     Chore: this.state.chore,
                     Vegan: this.state.vegan,
                     Vegetarian: this.state.vegetarian,
-                    Exercised: this.state.excercised,
+                    Exercised: this.state.exercised,
                     Drink: this.state.drink,
                     Smoke: this.state.smoke,
                     Weight: this.state.weight,
@@ -128,7 +129,7 @@ class Store extends React.Component {
                     Meditate: this.state.meditate,
                     ADate: utcDate,
                     Completed: this.state.totalChecked};
-      const post = Object.assign({},this.state.swappedNamesKeys) ;
+      const post = Object.assign({},this.state.dynamicNames) ;
       const fullPost = Object.assign(post, test);
       console.log(fullPost);
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost)
