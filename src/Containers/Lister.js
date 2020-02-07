@@ -68,7 +68,7 @@ export default class Lister extends Component {
 
   render() {
     return (
-      <div className="initial">
+      <div className="margin">
         <input type="text" onChange={ (e) => this.onInputChange(e) } />
         &nbsp;&nbsp;&nbsp;
         <button onClick={ () => this.addItem() }
@@ -76,6 +76,10 @@ export default class Lister extends Component {
                 class="btn btn-outline-dark btn-sm">
           Add item
         </button>
+        <br />
+        <br />
+        <div className="bold">&nbsp;&nbsp;To Do:</div>
+        <br />
         { this.listItems() }
       </div>
     );

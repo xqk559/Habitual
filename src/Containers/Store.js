@@ -186,55 +186,64 @@ class Store extends React.Component {
       this.setState({meditate: !defaultState})
     };
 
+    fakeBooler = () => {
+
+    }
+
     render (){
       return (
-        <div className="centered">
-          <div>You've completed {this.state.trueTotal} things! &nbsp;
-            <button onClick={this.submitHandler}
-                    id= "submitter"
+        <div>
+          <div className="centered">
+            <div>You've completed {this.state.trueTotal} things! &nbsp;
+              <button onClick={this.submitHandler}
+                      id= "submitter"
+                      type="button" 
+                      class="btn btn-outline-primary btn-sm">
+                Submit Completed Day
+              </button>
+              &nbsp;
+              <button id="undo"
+                      disabled={this.state.submitted}
+                      onClick={this.undoHandler}
+                      type="button" 
+                      class="btn btn-outline-danger btn-sm">
+                Undo
+              </button>
+            </div>
+            <br />
+            <button onClick={this.hider}
                     type="button" 
-                    class="btn btn-outline-primary btn-sm">
-              Submit Completed Day
+                    class="btn btn-outline-secondary btn-sm"> 
+            Defaults
             </button>
-            &nbsp;
-            <button id="undo"
-                    disabled={this.state.submitted}
-                    onClick={this.undoHandler}
-                    type="button" 
-                    class="btn btn-outline-danger btn-sm">
-              Undo
-            </button>
-          </div>
-          <br />
-          <button onClick={this.hider}
-                  type="button" 
-                  class="btn btn-outline-secondary btn-sm"> 
-          Defaults
-          </button>
-          <br />
-          <br />
-          <p className="none">
-            <Lister addTotal={this.callbackTotalAdder} 
-                    namer={this.dynamicNamer}
-                    booleroo={this.booler}/>
-          </p>
-          <br />
-          <div className="hidden" id="myDIV">
-          <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler}/>
-          <Item message="Went for a Walk" adder={this.addTotal} status={this.walkHandler}/>
-          <Item message="Programming" adder={this.addTotal} status={this.programHandler}/>
-          <Item message="Did Chores" adder={this.addTotal} status={this.choreHandler}/>
-          <Item message="Ate Vegan" adder={this.addTotal} status={this.veganHandler}/>
-          <Item message="Ate Vegetarian" adder={this.addTotal} status={this.vegetarianHandler}/>
-          <Item message="Exercised" adder={this.addTotal} status={this.exercisedHandler}/>
-          <Item message="Didn't Drink" adder={this.addTotal} status={this.drinkHandler}/>
-          <Item message="Didn't Smoke" adder={this.addTotal} status={this.smokeHandler}/>
-          <Item message="Lost Weight" adder={this.addTotal} status={this.weightHandler}/>
-          <Item message="Played Music" adder={this.addTotal} status={this.musicHandler}/>
-          <Item message="Created Art" adder={this.addTotal} status={this.artHandler}/>
-          <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler}/>
-          </div>
-          <br />  
+            <br />
+            <br />
+            </div>
+            <p className="none">
+              <Lister addTotal={this.callbackTotalAdder} 
+                      namer={this.dynamicNamer}
+                      booleroo={this.booler}/>
+            </p>
+            <br />
+            <div className="hidden" id="myDIV">
+              <div className="bold">Defaults:</div>
+              <br/>
+            <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler} booler={this.fakeBooler}/>
+            <Item message="Went for a Walk" adder={this.addTotal} status={this.walkHandler} booler={this.fakeBooler}/>
+            <Item message="Programming" adder={this.addTotal} status={this.programHandler} booler={this.fakeBooler}/>
+            <Item message="Did Chores" adder={this.addTotal} status={this.choreHandler} booler={this.fakeBooler}/>
+            <Item message="Ate Vegan" adder={this.addTotal} status={this.veganHandler} booler={this.fakeBooler}/>
+            <Item message="Ate Vegetarian" adder={this.addTotal} status={this.vegetarianHandler} booler={this.fakeBooler}/>
+            <Item message="Exercised" adder={this.addTotal} status={this.exercisedHandler} booler={this.fakeBooler}/>
+            <Item message="Didn't Drink" adder={this.addTotal} status={this.drinkHandler} booler={this.fakeBooler}/>
+            <Item message="Didn't Smoke" adder={this.addTotal} status={this.smokeHandler} booler={this.fakeBooler}/>
+            <Item message="Lost Weight" adder={this.addTotal} status={this.weightHandler} booler={this.fakeBooler}/>
+            <Item message="Played Music" adder={this.addTotal} status={this.musicHandler} booler={this.fakeBooler}/>
+            <Item message="Created Art" adder={this.addTotal} status={this.artHandler} booler={this.fakeBooler}/>
+            <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/>
+            </div>
+            <br />  
+          
         </div>
       );
     }

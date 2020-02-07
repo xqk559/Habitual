@@ -24,12 +24,14 @@ class App extends React.Component {
         <br />
         <br />
         <div >
-          <Store className="centered"/>
+          <Store/>
         </div>
         <br />
-        <ItemCount count={allTheThings.length} />
-        <hr />
-        <AppFooter />
+        <div className="centered">
+          <ItemCount count={allTheThings.length} />
+          <hr />
+          <AppFooter />
+        </div>
       </div>
     );
   }
