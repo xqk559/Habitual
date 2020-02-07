@@ -45,6 +45,12 @@ export default class Lister extends Component {
                      booler={this.booler}/>);
     this.setState({items},()=>this.props.namer(this.state.inputValue));
   }
+
+  removeItem() {
+    let items = this.state.items;
+    items.pop();
+    this.setState({items},()=>console.log("pop"));
+  }
  
   listItems() {
     let items = this.state.items;
@@ -74,7 +80,13 @@ export default class Lister extends Component {
         <button onClick={ () => this.addItem() }
                 type="button" 
                 class="btn btn-outline-dark btn-sm">
-          Add item
+          Add Item
+        </button>
+        &nbsp;
+        <button onClick={ () => this.removeItem() }
+                type="button" 
+                class="btn btn-outline-danger btn-sm">
+          Remove Last Item
         </button>
         <br />
         <br />
