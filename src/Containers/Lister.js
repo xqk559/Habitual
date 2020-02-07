@@ -49,7 +49,7 @@ export default class Lister extends Component {
   removeItem() {
     let items = this.state.items;
     items.pop();
-    this.setState({items},()=>console.log("pop"));
+    this.setState({items},()=>console.log());
   }
  
   listItems() {
