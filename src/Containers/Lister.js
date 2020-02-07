@@ -17,7 +17,6 @@ export default class Lister extends Component {
   }
 
   addTotal = (childChecked) =>  {
-    //console.log(childChecked);
     this.setState({},()=>{
       if (childChecked) { 
         this.setState({totalChecked: this.state.totalChecked + 1},()=>this.props.addTotal(this.state.totalChecked));
@@ -26,7 +25,7 @@ export default class Lister extends Component {
         this.setState({totalChecked: this.state.totalChecked - 1},()=>this.props.addTotal(this.state.totalChecked));
         };
     })
-    };
+  };
 
   onInputChange(e) {
     const capitalizer = (s) => {

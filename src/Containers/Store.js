@@ -40,8 +40,8 @@ class Store extends React.Component {
       };
     }
 
-    booler = (argument) => {
-      this.setState({bool: argument},()=>console.log(this.state.bool));
+    booler = (checked) => {
+      this.setState({bool: checked},()=>console.log());
     }
 
     dynamicNamer = (passedName) => {
@@ -214,7 +214,7 @@ class Store extends React.Component {
             <button onClick={this.hider}
                     type="button" 
                     class="btn btn-outline-secondary btn-sm"> 
-            Defaults
+              Defaults
             </button>
             <br />
             <br />
@@ -243,7 +243,6 @@ class Store extends React.Component {
             <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/>
             </div>
             <br />  
-          
         </div>
       );
     }

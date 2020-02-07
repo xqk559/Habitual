@@ -28,9 +28,6 @@ class Item extends React.Component {
 
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
       this.setState({}, () => this.props.booler(this.state.checked));
-     // this.setState(() => this.props.adder(this.state.checked));
-
-      // console.log(this.state.checked);
 
       if (this.props.message === "Ate Vitamins") {
         this.setState({vitamin: !this.state.vitamin}, () => console.log("Vitamin: " + this.state.vitamin));
