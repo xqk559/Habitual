@@ -18,72 +18,38 @@ class Item extends React.Component {
         music: false,
         art: false,
         chore: false,
-        meditate: false
+        meditate: false,
       };
   
       this.handleClick = this.handleClick.bind(this);    
     }
 
-    handleClick (e){
-
+    handleClick (e)
+    {
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
       this.setState({}, () => this.props.booler(this.state.checked));
-
-      if (this.props.message === "Ate Vitamins") {
-        this.setState({vitamin: !this.state.vitamin}, () => console.log("Vitamin: " + this.state.vitamin));
-        this.props.status(this.state.vitamin);
-        console.log(this.state.vitamin);
-      } 
-      else if (this.props.message === "Went for a Walk") {
-        this.setState({walk: !this.state.walk});
-        this.props.status(this.state.walk);
-      }
-      else if (this.props.message === "Programming") {
-        this.setState({walk: !this.state.program});
-        this.props.status(this.state.program);
-      }
-      else if (this.props.message === "Did Chores") {
-        this.setState({walk: !this.state.chore});
-        this.props.status(this.state.chore);
-      }
-      else if (this.props.message === "Ate Vegan") {
-        this.setState({walk: !this.state.vegan});
-        this.props.status(this.state.vegan);
-      }
-      else if (this.props.message === "Ate Vegetarian") {
-        this.setState({walk: !this.state.vegetarian});
-        this.props.status(this.state.vegetarian);
-      }
-      else if (this.props.message === "Exercised") {
-        this.setState({walk: !this.state.exercised});
-        this.props.status(this.state.exercised);
-      }
-      else if (this.props.message === "Didn't Drink") {
-        this.setState({walk: !this.state.drink});
-        this.props.status(this.state.drink);
-      }
-      else if (this.props.message === "Didn't Smoke") {
-        this.setState({walk: !this.state.smoke});
-        this.props.status(this.state.smoke);
-      }
-      else if (this.props.message === "Lost Weight") {
-        this.setState({walk: !this.state.weight});
-        this.props.status(this.state.weight);
-      }
-      else if (this.props.message === "Played Music") {
-        this.setState({walk: !this.state.music});
-        this.props.status(this.state.music);
-      }
-      else if (this.props.message === "Created Art") {
-        this.setState({walk: !this.state.art});
-        this.props.status(this.state.art);
-      }
-      else if (this.props.message === "Meditated") {
-        this.setState({walk: !this.state.meditate});
-        this.props.status(this.state.meditate);
-      }
-    }
-
+      const strings = 
+      {
+        "Vitamins":        'vitamin',
+        "Went for a Walk": 'walk',
+        "Programming":     'program',
+        "Did Chores":      'chore',
+        "Ate Vegan":       'vegan',
+        "Ate Vegetarian":  'vegetarian',
+        "Exercised":       'exercised',
+        "Didn't Drink":    'drink',
+        "Didn't Smoke":    'smoke',
+        "Lost Weight":     'weight',
+        "Played Music":    'music',
+        "Created Art":     'art',
+        "Meditated":       'meditate',
+      };
+      if (this.props.status) 
+        {
+          this.setState({walk: !this.state[strings[this.props.message]]});
+          this.props.status(this.state[strings[this.props.message]]);
+        }
+    }   
   render (){
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (

@@ -16,14 +16,12 @@ class Store extends React.Component {
       this.state = {
         bool: false,
         dynamicNames: {},
-        swappedNamesKeys: {},
         totalChecked: 0,
         dynamicTotal: 0,
         trueTotal: 0,
         newItem: "",
         submitted: true,
         date: utcDate,
-        history: 1,
           vitamin: false,
           walk: false,
           program: false,
@@ -36,7 +34,7 @@ class Store extends React.Component {
           music: false,
           art: false,
           meditate: false,
-          chore: false
+          chore: false,
       };
     }
 
@@ -46,19 +44,6 @@ class Store extends React.Component {
 
     dynamicNamer = (passedName) => {
       this.state.dynamicNames[passedName] = this.state.bool;
-      // let name = this.state.dynamicNames;
-      // let pushed = name.push(passedName);
-      // let newName = this.state.dynamicNames;
-      // let newObj = {};
-      // for (let prop in newName) {
-      //   if(newName.hasOwnProperty(prop)) {
-      //       let value = newName[prop];
-      //     newObj[value] = prop;
-
-      //     newObj[passedName] = this.state.bool;
-
-      // }
-      // this.setState({swappedNamesKeys: newObj});
     }
 
     callbackTotalAdder = (dynamic) => {
@@ -68,13 +53,13 @@ class Store extends React.Component {
     }
 
     addTotal = (childChecked) => {
-      !childChecked ? 
+      !childChecked ?
           this.setState({totalChecked: this.state.totalChecked-1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal})) :
           this.setState({totalChecked: this.state.totalChecked+1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
     };
 
-    hider() {
-        var x = document.getElementById("myDIV");
+    defaultHider() {
+        let x = document.getElementById("myDIV");
         if (x.style.display === "none") {
           x.style.display = "block";
         } else {
@@ -83,11 +68,11 @@ class Store extends React.Component {
     };
 
     submitHider() {
-      var x = document.getElementById("submitter").disabled=this.state.submitted;
+      document.getElementById("submitter").disabled=this.state.submitted;
   };
 
     undoHider() {
-      var x = document.getElementById("undo").disabled=!this.state.submitted;
+      document.getElementById("undo").disabled=!this.state.submitted;
   };
 
     undoHandler = () => {
@@ -106,15 +91,15 @@ class Store extends React.Component {
     }
 
     submitHandler = () => {
-      this.setState({submitted: !this.state.submitted, 
-                     history: this.state.history + 1},
+      this.setState({submitted: !this.state.submitted},
                      () => console.log());
       this.submitHider();
       this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
       const names = this.state.dynamicNames;
-      const test = {Vitamin: this.state.vitamin, 
+      const test = {
+                    Vitamin: this.state.vitamin,
                     Walk: this.state.walk,
                     Program: this.state.program,
                     Chore: this.state.chore,
@@ -128,12 +113,13 @@ class Store extends React.Component {
                     Art: this.state.art,
                     Meditate: this.state.meditate,
                     ADate: utcDate,
-                    Completed: this.state.totalChecked};
+                    Completed: this.state.trueTotal,
+                   };
       const post = Object.assign({},this.state.dynamicNames) ;
       const fullPost = Object.assign(post, test);
       console.log(fullPost);
-      axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost)
-    }; 
+      axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
+    };
 
     defaultHandler = ( defaultState ) => {
       this.setState({vitamin: !defaultState})
@@ -146,7 +132,7 @@ class Store extends React.Component {
     programHandler = ( defaultState ) => {
       this.setState({program: !defaultState})
     };
-    
+
     choreHandler = ( defaultState ) => {
       this.setState({chore: !defaultState})
     };
@@ -198,7 +184,7 @@ class Store extends React.Component {
             <div>You've completed {this.state.trueTotal} things! &nbsp;
               <button onClick={this.submitHandler}
                       id= "submitter"
-                      type="button" 
+                      type="button"
                       class="btn btn-outline-primary btn-sm">
                 Submit Completed Day
               </button>
@@ -206,22 +192,22 @@ class Store extends React.Component {
               <button id="undo"
                       disabled={this.state.submitted}
                       onClick={this.undoHandler}
-                      type="button" 
+                      type="button"
                       class="btn btn-outline-danger btn-sm">
                 Undo
               </button>
             </div>
             <br />
-            <button onClick={this.hider}
-                    type="button" 
-                    class="btn btn-outline-secondary btn-sm"> 
+            <button onClick={this.defaultHider}
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm">
               Defaults
             </button>
             <br />
             <br />
             </div>
             <p className="none">
-              <Lister addTotal={this.callbackTotalAdder} 
+              <Lister addTotal={this.callbackTotalAdder}
                       namer={this.dynamicNamer}
                       booleroo={this.booler}/>
             </p>
@@ -243,7 +229,7 @@ class Store extends React.Component {
             <Item message="Created Art" adder={this.addTotal} status={this.artHandler} booler={this.fakeBooler}/>
             <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/>
             </div>
-            <br />  
+            <br />
         </div>
       );
     }
