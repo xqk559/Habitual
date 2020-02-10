@@ -39,10 +39,11 @@ class Store extends React.Component {
     }
 
     booler = (checked) => {
-      this.setState({bool: checked},()=>console.log());
+      this.setState({bool: checked},()=>console.log(this.state.bool));
     }
 
     dynamicNamer = (passedName) => {
+      this.booler();
       this.state.dynamicNames[passedName] = this.state.bool;
     }
 
@@ -206,11 +207,11 @@ class Store extends React.Component {
             <br />
             <br />
             </div>
-            <p className="none">
+            <div className="none">
               <Lister addTotal={this.callbackTotalAdder}
                       namer={this.dynamicNamer}
                       booleroo={this.booler}/>
-            </p>
+            </div>
             <br />
             <div className="hidden" id="myDIV">
               <div className="bold">Defaults:</div>
