@@ -40,7 +40,6 @@ export default class Lister extends Component {
 
   messager = (messager) => {
     this.setState({message: messager},()=>this.props.namer(this.state.message));
-    //console.log(messager);
   }
 
   addItem() {
