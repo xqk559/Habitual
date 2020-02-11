@@ -79,13 +79,13 @@ export default class Lister extends Component {
         &nbsp;&nbsp;&nbsp;
         <button onClick={ () => this.addItem() }
                 type="button" 
-                class="btn btn-outline-dark btn-sm">
+                className="btn btn-outline-dark btn-sm">
           Add Item
         </button>
         &nbsp;
         <button onClick={ () => this.removeItem() }
                 type="button" 
-                class="btn btn-outline-danger btn-sm">
+                className="btn btn-outline-danger btn-sm">
           Remove Last Item
         </button>
         </div>

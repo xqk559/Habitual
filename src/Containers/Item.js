@@ -3,7 +3,8 @@ import React from 'react';
 class Item extends React.Component {
     constructor (props){
       super (props);
-      this.state = {
+      this.state = 
+      {
         // newValue: null,
         checked: false,
         vitamin: false,
@@ -51,6 +52,8 @@ class Item extends React.Component {
         }
     }   
   render (){
+    // this.props.booler(this.state.checked);
+    //console.log(this.state.checked);
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
         <div>

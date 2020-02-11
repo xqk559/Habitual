@@ -39,16 +39,18 @@ class Store extends React.Component {
     }
 
     booler = (checked) => {
+      console.log(checked);
       this.setState({bool: checked},()=>console.log(this.state.bool));
     }
 
     dynamicNamer = (passedName) => {
-      this.booler();
-      this.state.dynamicNames[passedName] = this.state.bool;
+      this.setState({},()=>this.booler());
+      this.setState({},()=>this.state.dynamicNames[passedName] = this.state.bool);
     }
 
     callbackTotalAdder = (dynamic) => {
-      this.setState({},()=>{
+      this.setState({},()=>
+      {
         this.setState({dynamicTotal: dynamic},()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}))
       })
     }
@@ -98,7 +100,6 @@ class Store extends React.Component {
       this.undoHider();
       let dt = new Date();
       let utcDate = dt.toUTCString();
-      const names = this.state.dynamicNames;
       const test = {
                     Vitamin: this.state.vitamin,
                     Walk: this.state.walk,
@@ -186,7 +187,7 @@ class Store extends React.Component {
               <button onClick={this.submitHandler}
                       id= "submitter"
                       type="button"
-                      class="btn btn-outline-primary btn-sm">
+                      className="btn btn-outline-primary btn-sm">
                 Submit Completed Day
               </button>
               &nbsp;
@@ -194,14 +195,14 @@ class Store extends React.Component {
                       disabled={this.state.submitted}
                       onClick={this.undoHandler}
                       type="button"
-                      class="btn btn-outline-danger btn-sm">
+                      className="btn btn-outline-danger btn-sm">
                 Undo
               </button>
             </div>
             <br />
             <button onClick={this.defaultHider}
                     type="button"
-                    class="btn btn-outline-secondary btn-sm">
+                    className="btn btn-outline-secondary btn-sm">
               Defaults
             </button>
             <br />
