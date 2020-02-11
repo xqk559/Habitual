@@ -1,5 +1,4 @@
 import React from 'react';
-import Item from './Item';
 import '../App.css';
 import Lister from '../Containers/Lister';
 import axios from 'axios';
