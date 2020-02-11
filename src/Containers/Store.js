@@ -44,8 +44,11 @@ class Store extends React.Component {
     }
 
     dynamicNamer = (passedName) => {
-      this.setState({},()=>this.booler());
-      this.setState({},()=>this.state.dynamicNames[passedName] = this.state.bool);
+      this.booler();
+      this.setState({dynamicNames:{...this.state.dynamicNames,[passedName]: this.state.bool}},()=>console.log(this.state.bool));
+      // let spreadObject = {...this.state.dynamicNames,[passedName]:this.state.bool}
+      // this.setState({spreadObject})
+      //this.setState({},()=>this.state.dynamicNames[passedName] = this.state.bool);
     }
 
     callbackTotalAdder = (dynamic) => {

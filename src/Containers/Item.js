@@ -52,8 +52,8 @@ class Item extends React.Component {
         }
     }   
   render (){
-    // this.props.booler(this.state.checked);
-    //console.log(this.state.checked);
+    this.props.booler(this.state.checked);
+    console.log(this.state.checked);
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
         <div>
