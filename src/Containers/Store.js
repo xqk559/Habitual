@@ -44,7 +44,7 @@ class Store extends React.Component {
     }
 
     dynamicNamer = (passedName) => {
-      this.booler();
+      //this.booler();
       this.setState({dynamicNames:{...this.state.dynamicNames,[passedName]: this.state.bool}},()=>console.log(this.state.bool));
       // let spreadObject = {...this.state.dynamicNames,[passedName]:this.state.bool}
       // this.setState({spreadObject})
@@ -220,7 +220,7 @@ class Store extends React.Component {
             <div className="hidden" id="myDIV">
               <div className="bold">Defaults:</div>
               <br/>
-            <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler} booler={this.fakeBooler}/>
+            {/* <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler} booler={this.fakeBooler}/>
             <Item message="Went for a Walk" adder={this.addTotal} status={this.walkHandler} booler={this.fakeBooler}/>
             <Item message="Programming" adder={this.addTotal} status={this.programHandler} booler={this.fakeBooler}/>
             <Item message="Did Chores" adder={this.addTotal} status={this.choreHandler} booler={this.fakeBooler}/>
@@ -232,7 +232,7 @@ class Store extends React.Component {
             <Item message="Lost Weight" adder={this.addTotal} status={this.weightHandler} booler={this.fakeBooler}/>
             <Item message="Played Music" adder={this.addTotal} status={this.musicHandler} booler={this.fakeBooler}/>
             <Item message="Created Art" adder={this.addTotal} status={this.artHandler} booler={this.fakeBooler}/>
-            <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/>
+            <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/> */}
             </div>
             <br />
         </div>

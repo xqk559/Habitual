@@ -8,7 +8,8 @@ export default class Lister extends Component {
     this.state = {
       totalChecked: 0,
       inputValue: '',
-      items: []
+      items: [],
+      message: 'message',
     }
   }
 
@@ -37,12 +38,18 @@ export default class Lister extends Component {
     });
   }
 
+  messager = (messager) => {
+    this.setState({message: messager},()=>this.props.namer(this.state.message));
+    //console.log(messager);
+  }
+
   addItem() {
     let items = this.state.items;
     items.push(<Item message={this.state.inputValue} 
                      adder={this.addTotal}
-                     booler={this.booler}/>);
-    this.setState({items},()=>this.props.namer(this.state.inputValue));
+                     booler={this.booler}
+                     messager={this.messager}/>);
+    this.setState({items});
   }
 
   removeItem() {

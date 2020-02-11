@@ -6,6 +6,7 @@ class Item extends React.Component {
       this.state = 
       {
         // newValue: null,
+        message: this.props.message,
         checked: false,
         vitamin: false,
         walk: false,
@@ -27,6 +28,7 @@ class Item extends React.Component {
 
     handleClick (e)
     {
+      this.props.messager(this.state.message);
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
       this.setState({}, () => this.props.booler(this.state.checked));
       const strings = 
@@ -53,7 +55,9 @@ class Item extends React.Component {
     }   
   render (){
     this.props.booler(this.state.checked);
-    console.log(this.state.checked);
+    this.props.messager(this.state.message);
+    //console.log(this.state.checked);
+    //console.log(this.state.message);
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
         <div>
