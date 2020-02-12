@@ -11,9 +11,25 @@ export default class Lister extends Component {
       inputValue: '',
       items: [],
       message: 'message',
-      defaults: {object: 69},
+      defaults: {},
       axiosdefaults: {},
     }
+  }
+
+  componentWillMount() {
+    let d;
+    let keys;
+    let leng;
+    let last;
+    let lastDefault;
+    axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+        .then((response)=> d = response.data)
+          .then(()=> keys = Object.keys(d))
+            .then(()=> leng = keys.length)
+              .then(()=> last = keys[leng-1])
+                .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
+                  .then((response)=>lastDefault = response.data)
+                    .then(()=>this.setState({defaults: lastDefault},()=>console.log(this.state.defaults)));
   }
 
   booler = (bool) => {
@@ -78,6 +94,24 @@ export default class Lister extends Component {
     );
   }
 
+  listDefaults() {
+    let items = this.state.defaults;
+    return (
+      <ul>
+        {
+          items.map((val, index) => {
+            return (
+              <li key={index}
+                  className="none">
+                { val }
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
+  }
+
   defaultHandler = () => {
     let defaults = this.state.items;
 
@@ -99,20 +133,20 @@ export default class Lister extends Component {
 
 
   render() {
-    let d;
-    let keys;
-    let leng;
-    let last;
-    let lastDefault;
-    let defaultArray;
-    axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
-        .then((response)=> d = response.data)
-          .then(()=> keys = Object.keys(d))
-            .then(()=> leng = keys.length)
-              .then(()=> last = keys[leng-1])
-                .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-                  .then((response)=>lastDefault = response.data)
-                    .then(()=>this.setState({defaults: lastDefault}));
+    // let d;
+    // let keys;
+    // let leng;
+    // let last;
+    // let lastDefault;
+    // let defaultArray;
+    // axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+    //     .then((response)=> d = response.data)
+    //       .then(()=> keys = Object.keys(d))
+    //         .then(()=> leng = keys.length)
+    //           .then(()=> last = keys[leng-1])
+    //             .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
+    //               .then((response)=>lastDefault = response.data)
+    //                 .then(()=>this.setState({defaults: lastDefault},()=>console.log(this.state.defaults)));
                     // .then(()=>defaultArray = Object.keys(lastDefault).map(function(key){return [Number(key), lastDefault[key]]}))
                     //   .then(()=>console.log(defaultArray))
                     //     .then(()=>this.state.axiosdefaults = defaultArray)
@@ -152,6 +186,8 @@ export default class Lister extends Component {
             Defaults:
           </div>
           <br/>
+          {this.listItems(this.state.defaults)}
+          {console.log(this.state.defaults)}
             {/* {this.state.axiosdefaults ? this.state.axiosdefaults.map((thing)=><li>{thing}</li>) : <div>"Loading"</div>} */}
         </div>
       </div>
