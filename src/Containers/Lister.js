@@ -11,17 +11,18 @@ export default class Lister extends Component {
       inputValue: '',
       items: [],
       message: 'message',
-      defaults: {},
+      defaults: [],
       axiosdefaults: {},
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let d;
     let keys;
     let leng;
     let last;
     let lastDefault;
+    let array;
     axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
         .then((response)=> d = response.data)
           .then(()=> keys = Object.keys(d))
@@ -29,7 +30,8 @@ export default class Lister extends Component {
               .then(()=> last = keys[leng-1])
                 .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
                   .then((response)=>lastDefault = response.data)
-                    .then(()=>this.setState({defaults: lastDefault},()=>console.log(this.state.defaults)));
+                    .then(()=>array = Array.from(lastDefault))
+                      .then(()=>this.setState({defaults: array},()=>console.log(this.state.defaults)));
   }
 
   booler = (bool) => {
@@ -95,6 +97,7 @@ export default class Lister extends Component {
   }
 
   listDefaults() {
+    
     let items = this.state.defaults;
     return (
       <ul>
@@ -103,7 +106,7 @@ export default class Lister extends Component {
             return (
               <li key={index}
                   className="none">
-                { val }
+                { val.props.message }
               </li>
             );
           })
@@ -114,7 +117,6 @@ export default class Lister extends Component {
 
   defaultHandler = () => {
     let defaults = this.state.items;
-
     let d;
     let keys;
     let leng;
@@ -186,8 +188,9 @@ export default class Lister extends Component {
             Defaults:
           </div>
           <br/>
-          {this.listItems(this.state.defaults)}
+          {this.listDefaults()}
           {console.log(this.state.defaults)}
+          {console.log(this.state.items)}
             {/* {this.state.axiosdefaults ? this.state.axiosdefaults.map((thing)=><li>{thing}</li>) : <div>"Loading"</div>} */}
         </div>
       </div>
