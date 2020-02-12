@@ -102,16 +102,6 @@ export default class Lister extends Component {
 
   listDefaults() {
     let items = this.state.defaults;
-    // let items = [];
-    // let i;
-    // for (i = 0; i < this.state.defaults.length; i++) 
-    // {
-    // items.push(<Item message={this.props.message} 
-    //   adder={this.addTotal}
-    //   booler={this.booler}
-    //   messager={this.messager}/>);
-    // }
-    //console.log(items);
     return (
       <ul>
         {
@@ -137,9 +127,6 @@ export default class Lister extends Component {
     let keys;
     let leng;
     let last;
-    // axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults);
-    // axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults);
-    // axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults);
     axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
         .then((response)=> d = response.data)
           .then(()=> keys = Object.keys(d))
@@ -151,24 +138,6 @@ export default class Lister extends Component {
 
 
   render() {
-    // let d;
-    // let keys;
-    // let leng;
-    // let last;
-    // let lastDefault;
-    // let defaultArray;
-    // axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
-    //     .then((response)=> d = response.data)
-    //       .then(()=> keys = Object.keys(d))
-    //         .then(()=> leng = keys.length)
-    //           .then(()=> last = keys[leng-1])
-    //             .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-    //               .then((response)=>lastDefault = response.data)
-    //                 .then(()=>this.setState({defaults: lastDefault},()=>console.log(this.state.defaults)));
-                    // .then(()=>defaultArray = Object.keys(lastDefault).map(function(key){return [Number(key), lastDefault[key]]}))
-                    //   .then(()=>console.log(defaultArray))
-                    //     .then(()=>this.state.axiosdefaults = defaultArray)
-                    //       .then(()=>console.log(this.state.axiosdefaults));
     return (
       <div>
         <div className="centered2">
@@ -207,7 +176,6 @@ export default class Lister extends Component {
           {this.listDefaults()}
           {console.log(this.state.defaults)}
           {console.log(this.state.items)}
-            {/* {this.state.axiosdefaults ? this.state.axiosdefaults.map((thing)=><li>{thing}</li>) : <div>"Loading"</div>} */}
         </div>
       </div>
     );
