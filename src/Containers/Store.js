@@ -43,7 +43,7 @@ class Store extends React.Component {
     }
 
     dynamicNamer = (passedName) => {
-      this.setState({dynamicNames:{...this.state.dynamicNames,[passedName]: this.state.bool}},()=>console.log());
+      this.setState({dynamicNames:{...this.state.dynamicNames,[passedName]: this.state.bool}},()=>console.log(this.state.bool));
     }
 
     callbackTotalAdder = (dynamic) => {
@@ -117,7 +117,7 @@ class Store extends React.Component {
                    };
       const post = Object.assign({},this.state.dynamicNames) ;
       const fullPost = Object.assign(post, test);
-      console.log(fullPost);
+      //console.log(fullPost);
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
     };
 

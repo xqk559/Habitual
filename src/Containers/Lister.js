@@ -38,6 +38,10 @@ export default class Lister extends Component {
     this.props.booleroo(bool);
   }
 
+  reverseBooler = (bool) => {
+    this.props.booleroo(!bool);
+  }
+
   addTotal = (childChecked) =>  {
     this.setState({},()=>{
       if (childChecked) { 
@@ -111,7 +115,7 @@ export default class Lister extends Component {
                   className="none">
                 { <Item message={val.props.message} 
                         adder={this.addTotal}
-                        booler={this.booler}
+                        booler={this.reverseBooler}
                         messager={this.messager}/> }
               </li>
             );

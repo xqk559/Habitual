@@ -37,6 +37,7 @@ class Item extends React.Component {
       this.props.messager(this.state.message);
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
       this.setState({}, () => this.props.booler(this.state.checked));
+      console.log(this.state.checked);
       const strings = 
       {
         "Vitamins":        'vitamin',
