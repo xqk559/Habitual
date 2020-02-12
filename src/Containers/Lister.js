@@ -79,8 +79,7 @@ export default class Lister extends Component {
   }
 
   defaultHandler = () => {
-    this.setState({defaults: this.listItems()});
-    let defaults = this.state.defaults;
+    let defaults = this.state.items;
 
     let d;
     let keys;
@@ -95,26 +94,27 @@ export default class Lister extends Component {
             .then(()=> leng = keys.length)
               .then(()=> last = keys[leng-1])
                 .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-                  .then(axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults));
+                  .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults));
   }
 
 
   render() {
-    // let d;
-    // let keys;
-    // let leng;
-    // let last;
-    // let lastDefault;
-    // let defaultArray;
-    // axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
-    //     .then((response)=> d = response.data)
-    //       .then(()=> keys = Object.keys(d))
-    //         .then(()=> leng = keys.length)
-    //           .then(()=> last = keys[leng-1])
-    //             .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-    //               .then((response)=>lastDefault = response.data)
-    //                 .then(()=>defaultArray = Object.keys(lastDefault).map(function(key){return [Number(key), lastDefault[key]]}))
-    //                   .then(()=>console.log(defaultArray))
+    let d;
+    let keys;
+    let leng;
+    let last;
+    let lastDefault;
+    let defaultArray;
+    axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+        .then((response)=> d = response.data)
+          .then(()=> keys = Object.keys(d))
+            .then(()=> leng = keys.length)
+              .then(()=> last = keys[leng-1])
+                .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
+                  .then((response)=>lastDefault = response.data)
+                    .then(()=>this.setState({defaults: lastDefault}));
+                    // .then(()=>defaultArray = Object.keys(lastDefault).map(function(key){return [Number(key), lastDefault[key]]}))
+                    //   .then(()=>console.log(defaultArray))
                     //     .then(()=>this.state.axiosdefaults = defaultArray)
                     //       .then(()=>console.log(this.state.axiosdefaults));
     return (
