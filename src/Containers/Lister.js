@@ -12,7 +12,7 @@ export default class Lister extends Component {
       items: [],
       message: 'message',
       defaults: [],
-      axiosdefaults: {},
+      axiosdefaults: [],
     }
   }
 
@@ -96,9 +96,22 @@ export default class Lister extends Component {
     );
   }
 
-  listDefaults() {
+  placeholder() {
     
+  }
+
+  listDefaults() {
     let items = this.state.defaults;
+    // let items = [];
+    // let i;
+    // for (i = 0; i < this.state.defaults.length; i++) 
+    // {
+    // items.push(<Item message={this.props.message} 
+    //   adder={this.addTotal}
+    //   booler={this.booler}
+    //   messager={this.messager}/>);
+    // }
+    //console.log(items);
     return (
       <ul>
         {
@@ -106,7 +119,10 @@ export default class Lister extends Component {
             return (
               <li key={index}
                   className="none">
-                { val.props.message }
+                { <Item message={val.props.message} 
+                        adder={this.placeholder}
+                        booler={this.placeholder}
+                        messager={this.placeholder}/> }
               </li>
             );
           })
