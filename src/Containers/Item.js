@@ -26,6 +26,12 @@ class Item extends React.Component {
       this.handleClick = this.handleClick.bind(this);    
     }
 
+    UNSAFE_componentWillMount() {
+      this.props.booler(this.state.checked);
+      this.props.messager(this.state.message);
+      console.log(this.state.checked);
+    }
+
     handleClick (e)
     {
       this.props.messager(this.state.message);
@@ -54,8 +60,12 @@ class Item extends React.Component {
         }
     }   
   render (){
-    this.props.booler(this.state.checked);
-    this.props.messager(this.state.message);
+   
+   
+    // this.props.booler(this.state.checked);
+    // this.props.messager(this.state.message);
+   
+   
     let text = this.state.checked ? <strike>{this.props.message}</strike> : this.props.message;
     return (
         <div>

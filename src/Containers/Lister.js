@@ -31,7 +31,7 @@ export default class Lister extends Component {
                 .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
                   .then((response)=>lastDefault = response.data)
                     .then(()=>array = Array.from(lastDefault))
-                      .then(()=>this.setState({defaults: array},()=>console.log(this.state.defaults)));
+                      .then(()=>this.setState({defaults: array},()=>console.log()));
   }
 
   booler = (bool) => {
@@ -110,9 +110,9 @@ export default class Lister extends Component {
               <li key={index}
                   className="none">
                 { <Item message={val.props.message} 
-                        adder={this.placeholder}
-                        booler={this.placeholder}
-                        messager={this.placeholder}/> }
+                        adder={this.addTotal}
+                        booler={this.booler}
+                        messager={this.messager}/> }
               </li>
             );
           })
@@ -174,8 +174,6 @@ export default class Lister extends Component {
           </div>
           <br/>
           {this.listDefaults()}
-          {console.log(this.state.defaults)}
-          {console.log(this.state.items)}
         </div>
       </div>
     );
