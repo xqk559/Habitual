@@ -21,19 +21,6 @@ class Store extends React.Component {
         newItem: "",
         submitted: true,
         date: utcDate,
-          vitamin: false,
-          walk: false,
-          program: false,
-          vegan: false,
-          vegetarian: false,
-          exercised: false,
-          drink: false,
-          smoke: false,
-          weight: false,
-          music: false,
-          art: false,
-          meditate: false,
-          chore: false,
       };
     }
 
@@ -57,15 +44,6 @@ class Store extends React.Component {
       !childChecked ?
           this.setState({totalChecked: this.state.totalChecked-1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal})) :
           this.setState({totalChecked: this.state.totalChecked+1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
-    };
-
-    defaultHider() {
-        let x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
     };
 
     submitHider() {
@@ -99,78 +77,12 @@ class Store extends React.Component {
       let dt = new Date();
       let utcDate = dt.toUTCString();
       const test = {
-                    Vitamin: this.state.vitamin,
-                    Walk: this.state.walk,
-                    Program: this.state.program,
-                    Chore: this.state.chore,
-                    Vegan: this.state.vegan,
-                    Vegetarian: this.state.vegetarian,
-                    Exercised: this.state.exercised,
-                    Drink: this.state.drink,
-                    Smoke: this.state.smoke,
-                    Weight: this.state.weight,
-                    Music: this.state.music,
-                    Art: this.state.art,
-                    Meditate: this.state.meditate,
                     ADate: utcDate,
                     Completed: this.state.trueTotal,
                    };
       const post = Object.assign({},this.state.dynamicNames) ;
       const fullPost = Object.assign(post, test);
-      //console.log(fullPost);
       axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
-    };
-
-    defaultHandler = ( defaultState ) => {
-      this.setState({vitamin: !defaultState})
-    };
-
-    walkHandler = ( defaultState ) => {
-      this.setState({walk: !defaultState})
-    };
-
-    programHandler = ( defaultState ) => {
-      this.setState({program: !defaultState})
-    };
-
-    choreHandler = ( defaultState ) => {
-      this.setState({chore: !defaultState})
-    };
-
-    veganHandler = ( defaultState ) => {
-      this.setState({vegan: !defaultState})
-    };
-
-    vegetarianHandler = ( defaultState ) => {
-      this.setState({vegetarian: !defaultState})
-    };
-
-    exercisedHandler = ( defaultState ) => {
-      this.setState({exercised: !defaultState})
-    };
-
-    drinkHandler = ( defaultState ) => {
-      this.setState({drink: !defaultState})
-    };
-
-    smokeHandler = ( defaultState ) => {
-      this.setState({smoke: !defaultState})
-    };
-
-    weightHandler = ( defaultState ) => {
-      this.setState({weight: !defaultState})
-    };
-
-    musicHandler = ( defaultState ) => {
-      this.setState({music: !defaultState})
-    };
-
-    artHandler = ( defaultState ) => {
-      this.setState({art: !defaultState})
-    };
-
-    meditateHandler = ( defaultState ) => {
-      this.setState({meditate: !defaultState})
     };
 
     fakeBooler = () => {
@@ -198,11 +110,6 @@ class Store extends React.Component {
               </button>
             </div>
             <br />
-            <button onClick={this.defaultHider}
-                    type="button"
-                    className="btn btn-outline-secondary btn-sm">
-              Defaults
-            </button>
             <br />
             <br />
             </div>
@@ -211,25 +118,6 @@ class Store extends React.Component {
                       namer={this.dynamicNamer}
                       booleroo={this.booler}/>
             </div>
-            <br />
-            <div className="hidden" id="myDIV">
-              <div className="bold">Defaults:</div>
-              <br/>
-            {/* <Item message="Ate Vitamins" adder={this.addTotal} status={this.defaultHandler} booler={this.fakeBooler}/>
-            <Item message="Went for a Walk" adder={this.addTotal} status={this.walkHandler} booler={this.fakeBooler}/>
-            <Item message="Programming" adder={this.addTotal} status={this.programHandler} booler={this.fakeBooler}/>
-            <Item message="Did Chores" adder={this.addTotal} status={this.choreHandler} booler={this.fakeBooler}/>
-            <Item message="Ate Vegan" adder={this.addTotal} status={this.veganHandler} booler={this.fakeBooler}/>
-            <Item message="Ate Vegetarian" adder={this.addTotal} status={this.vegetarianHandler} booler={this.fakeBooler}/>
-            <Item message="Exercised" adder={this.addTotal} status={this.exercisedHandler} booler={this.fakeBooler}/>
-            <Item message="Didn't Drink" adder={this.addTotal} status={this.drinkHandler} booler={this.fakeBooler}/>
-            <Item message="Didn't Smoke" adder={this.addTotal} status={this.smokeHandler} booler={this.fakeBooler}/>
-            <Item message="Lost Weight" adder={this.addTotal} status={this.weightHandler} booler={this.fakeBooler}/>
-            <Item message="Played Music" adder={this.addTotal} status={this.musicHandler} booler={this.fakeBooler}/>
-            <Item message="Created Art" adder={this.addTotal} status={this.artHandler} booler={this.fakeBooler}/>
-            <Item message="Meditated" adder={this.addTotal} status={this.meditateHandler} booler={this.fakeBooler}/> */}
-            </div>
-            <br />
         </div>
       );
     }

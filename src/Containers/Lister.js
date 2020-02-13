@@ -54,13 +54,15 @@ export default class Lister extends Component {
   };
 
   onInputChange(e) {
-    const capitalizer = (s) => {
-          return s.charAt(0).toUpperCase() + s.slice(1)
-        }
-        const capitalized = capitalizer(e.target.value)
-    this.setState({
-      inputValue: capitalized,
-    });
+    const capitalizer = (s) => 
+      {
+        return s.charAt(0).toUpperCase() + s.slice(1)
+      }
+    const capitalized = capitalizer(e.target.value)
+    this.setState
+      ({
+        inputValue: capitalized,
+      });
   }
 
   messager = (messager) => {
