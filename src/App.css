@@ -59,20 +59,26 @@ a {
 .link {
   display: inline;
   float: left;
-  border-right: 1px solid #bbb;
+  border-right: 1px solid black;
+}
+
+.rightLink {
+  display: inline;
+  float: right;
+  border-left: 1px solid black;
 }
 
 li a {
   display: block;
-  color: white;
+  color: rgb(68, 63, 63);
   text-align: center;
-  padding: 10px 40px;
+  padding: 9px 35px;
   text-decoration: none;
 }
 
 li a:hover {
   background-color: rgb(112, 12, 206);
-  color: rgba(245, 245, 245, 0.603);
+  color: rgba(211, 190, 190, 0.842);
 }
 
 .margin {
@@ -138,7 +144,9 @@ li a:hover {
   margin: 0;
   padding: 0;
   overflow: auto;
-  background-color: blueviolet;
+  background-color: rgba(173, 101, 241, 0.466);
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
 }
 
 @media only screen and (max-width: 600px) {
