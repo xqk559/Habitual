@@ -3,6 +3,7 @@ import './App.css';
 import ItemCount from './Components/ItemCount';
 import AppFooter from './AppFooter.js';
 import Store from './Containers/Store';
+import Toolbar from './Components/Toolbar';
 
 let allTheThings = [];
 
@@ -13,6 +14,7 @@ class App extends React.Component {
   render (){
     return (
       <div className="phone">
+        <Toolbar />
         <br />
         <br />
         <div className="rainbow-text">

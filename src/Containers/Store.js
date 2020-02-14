@@ -26,7 +26,8 @@ class Store extends React.Component {
 
     booler = (checked) => {
       //console.log(checked);
-      this.setState({bool: checked},()=>console.log());
+      this.setState({bool: checked},()=>console.log(this.state.bool));
+      return;
     }
 
     dynamicNamer = (passedName) => {
