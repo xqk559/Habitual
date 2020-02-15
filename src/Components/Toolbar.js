@@ -1,21 +1,22 @@
 import React from 'react';
 import '../App.css';
+import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
 
 const toolbar = () => {
     return (
         <div>
             <ul className="toolbar">
-                <li className="link"><a href="home.asp">
-                    Home</a>
+                <li className="link">
+                    <NavLink to="/">Home</NavLink>
                 </li>
-                <li className="link"><a href="checklist.asp">
-                    Checklist</a>
+                <li className="link">
+                    <NavLink to="/checklist">Checklist</NavLink>
                 </li>
-                <li className="link"><a href="stats.asp">
-                    Statistics</a>
+                <li className="link">
+                    <NavLink to="/statistics">Statistics</NavLink>
                 </li>
-                <li className="rightLink"><a href="login.asp">
-                    Login</a>
+                <li className="rightLink">
+                    <NavLink to="/login">Login</NavLink>
                 </li>
             </ul>
         </div>

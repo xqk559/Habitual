@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import Lister from '../Containers/Lister';
 import axios from 'axios';
+import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -27,7 +28,6 @@ class Store extends React.Component {
     booler = (checked) => {
       //console.log(checked);
       this.setState({bool: checked},()=>console.log(this.state.bool));
-      return;
     }
 
     dynamicNamer = (passedName) => {
