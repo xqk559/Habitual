@@ -91,6 +91,10 @@ class Store extends React.Component {
 
     }
 
+    test = () => {
+      return <div>FUCK</div>
+    } 
+
     render (){
       return (
         <div>

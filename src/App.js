@@ -4,7 +4,7 @@ import ItemCount from './Components/ItemCount';
 import AppFooter from './AppFooter.js';
 import Store from './Containers/Store';
 import Toolbar from './Components/Toolbar';
-import {BrowserRouter} from 'react-router-dom';
+import {Route, BrowserRouter, NavLink, Switch, Redirect} from 'react-router-dom';
 
 let allTheThings = [];
 
@@ -15,7 +15,8 @@ class App extends React.Component {
   render (){
     return (
       <BrowserRouter>
-        <div className="phone">
+        <Route path="/(|checklist)/" exact render={()=> 
+          <div className="phone">
           <Toolbar />
           <br />
           <br />
@@ -37,6 +38,8 @@ class App extends React.Component {
             <AppFooter />
           </div>
         </div>
+        }/>
+        <Route path="/(statistics|login)/" exact render={()=><Toolbar/>}/>
       </BrowserRouter>
     );
   }
