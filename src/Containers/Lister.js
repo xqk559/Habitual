@@ -25,21 +25,25 @@ export default class Lister extends Component {
     let array;
     axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
         .then((response)=> d = response.data)
-          .then(()=> keys = Object.keys(d))
-            .then(()=> leng = keys.length)
-              .then(()=> last = keys[leng-1])
-                .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-                  .then((response)=>lastDefault = response.data)
-                    .then(()=>array = Array.from(lastDefault))
-                      .then(()=>this.setState({defaults: array},()=>console.log()));
+        .then(()=> keys = Object.keys(d))
+        .then(()=> leng = keys.length)
+        .then(()=> last = keys[leng-1])
+        .then(()=>axios.get('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
+        .then((response)=>lastDefault = response.data)
+        .then(()=>array = Array.from(lastDefault))
+        .then(()=>this.setState({defaults: array},()=>console.log()));
   }
 
   booler = (bool) => {
-    this.props.booleroo(bool);
+    this.props.namer(bool);
   }
 
   reverseBooler = (bool) => {
-    this.props.booleroo(!bool);
+    this.props.namer(!bool);
+  }
+
+  dynamicNames = (checked, passed) => {
+    this.props.namer(checked, passed);
   }
 
   addTotal = (childChecked) =>  {
@@ -74,7 +78,8 @@ export default class Lister extends Component {
     items.push(<Item message={this.state.inputValue} 
                      adder={this.addTotal}
                      booler={this.booler}
-                     messager={this.messager}/>);
+                     messager={this.messager}
+                     dynamicNamer={this.dynamicNames}/>);
     this.setState({items});
   }
 
@@ -118,7 +123,8 @@ export default class Lister extends Component {
                 { <Item message={val.props.message} 
                         adder={this.addTotal}
                         booler={this.reverseBooler}
-                        messager={this.messager}/> }
+                        messager={this.messager}
+                        dynamicNamer={this.dynamicNames}/> }
               </li>
             );
           })
@@ -135,11 +141,11 @@ export default class Lister extends Component {
     let last;
     axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
         .then((response)=> d = response.data)
-          .then(()=> keys = Object.keys(d))
-            .then(()=> leng = keys.length)
-              .then(()=> last = keys[leng-1])
-                .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
-                  .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults));
+        .then(()=> keys = Object.keys(d))
+        .then(()=> leng = keys.length)
+        .then(()=> last = keys[leng-1])
+        .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/defaults/'+(last)+'.json'))
+        .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', defaults));
   }
 
 

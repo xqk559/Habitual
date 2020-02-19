@@ -13,17 +13,14 @@ class Item extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-      this.props.booler(this.state.checked);
-      this.props.messager(this.state.message);
+      this.props.dynamicNamer(this.state.checked,this.state.message)
       console.log(this.state.checked);
     }
 
     handleClick (e)
     {
-      this.props.messager(this.state.message);
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
-      this.setState({}, () => this.props.booler(this.state.checked));
-      //console.log(this.state.checked);
+      this.setState({checked: !this.state.checked}, () =>this.props.dynamicNamer(this.state.checked, this.state.message));
     }   
 
   render (){

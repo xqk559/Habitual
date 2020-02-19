@@ -4,7 +4,7 @@ import ItemCount from './Components/ItemCount';
 import AppFooter from './AppFooter.js';
 import Store from './Containers/Store';
 import Toolbar from './Components/Toolbar';
-import {Route, BrowserRouter, NavLink, Switch, Redirect} from 'react-router-dom';
+import {Route, BrowserRouter} from 'react-router-dom';
 
 let allTheThings = [];
 
