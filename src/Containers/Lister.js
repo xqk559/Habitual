@@ -34,15 +34,7 @@ export default class Lister extends Component {
         .then(()=>this.setState({defaults: array},()=>console.log()));
   }
 
-  booler = (bool) => {
-    this.props.namer(bool);
-  }
-
-  reverseBooler = (bool) => {
-    this.props.namer(!bool);
-  }
-
-  dynamicNames = (checked, passed) => {
+  dynamicNamer = (checked, passed) => {
     this.props.namer(checked, passed);
   }
 
@@ -69,17 +61,11 @@ export default class Lister extends Component {
       });
   }
 
-  messager = (messager) => {
-    this.setState({message: messager},()=>this.props.namer(this.state.message));
-  }
-
   addItem() {
     let items = this.state.items;
     items.push(<Item message={this.state.inputValue} 
                      adder={this.addTotal}
-                     booler={this.booler}
-                     messager={this.messager}
-                     dynamicNamer={this.dynamicNames}/>);
+                     dynamicNamer={this.dynamicNamer}/>);
     this.setState({items});
   }
 
@@ -122,9 +108,7 @@ export default class Lister extends Component {
                   className="none">
                 { <Item message={val.props.message} 
                         adder={this.addTotal}
-                        booler={this.reverseBooler}
-                        messager={this.messager}
-                        dynamicNamer={this.dynamicNames}/> }
+                        dynamicNamer={this.dynamicNamer}/> }
               </li>
             );
           })

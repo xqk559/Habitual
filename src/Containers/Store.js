@@ -24,7 +24,7 @@ class Store extends React.Component {
       };
     }
 
-    dynamicNames = (passedName, checked) => {
+    dynamicNamer = (passedName, checked) => {
       this.setState({dynamicNames:{...this.state.dynamicNames,[checked]: passedName}},()=>console.log(checked, passedName));
     };
      
@@ -36,9 +36,8 @@ class Store extends React.Component {
     }
 
     addTotal = (childChecked) => {
-      !childChecked ?
-          this.setState({totalChecked: this.state.totalChecked-1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal})) :
-          this.setState({totalChecked: this.state.totalChecked+1}, ()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
+      this.setState({totalChecked: this.state.totalChecked + (childChecked ? 1 : -1)},
+       () => this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
     };
 
     submitHider() {
@@ -114,7 +113,7 @@ class Store extends React.Component {
             </div>
             <div className="none">
               <Lister addTotal={this.callbackTotalAdder}
-                      namer={this.dynamicNames}
+                      namer={this.dynamicNamer}
                       />
             </div>
         </div>

@@ -20,7 +20,7 @@ class Item extends React.Component {
     handleClick (e)
     {
       this.setState({checked: !this.state.checked}, () => this.props.adder(this.state.checked));
-      this.setState({checked: !this.state.checked}, () =>this.props.dynamicNamer(this.state.checked, this.state.message));
+      this.setState({checked: !this.state.checked}, () => this.props.dynamicNamer(this.state.checked, this.state.message));
     }   
 
   render (){
