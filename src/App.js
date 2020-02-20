@@ -5,6 +5,7 @@ import AppFooter from './AppFooter.js';
 import Store from './Containers/Store';
 import Toolbar from './Components/Toolbar';
 import {Route, BrowserRouter} from 'react-router-dom';
+import Stats from './Containers/Stats/Stats';
 
 let allTheThings = [];
 
@@ -39,7 +40,19 @@ class App extends React.Component {
           </div>
         </div>
         }/>
-        <Route path="/(statistics|login)/" exact render={()=><Toolbar/>}/>
+        <Route path="/login/" 
+               exact 
+               render={()=><Toolbar/>}/>
+        <Route path="/statistics/" 
+               exact 
+               render=
+                {()=>
+                  <div>
+                    <Toolbar/>
+                    <Stats/>
+                  </div> 
+                }/>
+                
       </BrowserRouter>
     );
   }

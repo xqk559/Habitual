@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const toolbar = () => {
     return (

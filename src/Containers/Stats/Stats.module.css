@@ -1,0 +1,10 @@
+.Stats {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    color: purple;
+    font-weight: bold;
+    padding: 30px 30px;
+}
