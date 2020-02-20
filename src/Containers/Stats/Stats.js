@@ -41,12 +41,12 @@ class Stats extends Component {
         return (
             <ul>
                 {
-                result.map((val, index) => {
+                result.map((key, value) => {
                     return (
-                    <li key={index}
+                    <li key={key}
                         className="none">
                         { <div>
-                            {val}{index}
+                            {String(key)}
                         </div> }
                     </li>
                     );
@@ -62,6 +62,7 @@ class Stats extends Component {
         return (
             <div className={classes.Stats}>
                 <button onClick={this.statUpdater}>Update Stats</button>
+                <br/>
                 {this.statMapper()}
             </div>
         );
