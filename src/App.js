@@ -19,6 +19,7 @@ class App extends React.Component {
         <Route path="/(|checklist)/" exact render={()=> 
           <div className="phone">
           <Toolbar />
+          {/* <Calendar /> */}
           <br />
           <br />
           <div className="rainbow-text">

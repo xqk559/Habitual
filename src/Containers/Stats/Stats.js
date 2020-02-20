@@ -41,29 +41,29 @@ class Stats extends Component {
         return (
             <ul>
                 {
-                result.map((key, index) => {
-                    if (index>1 && key[1]){
-                        key[2] = "✓";
-                    }
-                    return (
-                    <li key={key}
-                        className="none">
-                        { <div>
-                            {String(key).replace(","," : ")
-                                        .replace("AAAAA","")
-                                        .replace("AAAA","")
-                                        .replace("true","True")
-                                        .replace("false","False")
-                            }
-                        </div> }
-                    </li>
-                    );
-                })
+                result.map((key, index) => 
+                    {
+                        if (index>1 && key[1]){
+                            key[2] = "✓";
+                        }
+                        return (
+                            <li key={key}
+                                className="none">
+                                { <div>
+                                    {String(key).replace(","," : ")
+                                                .replace("AAAAA","")
+                                                .replace("AAAA","")
+                                                .replace("true","True")
+                                                .replace("false","False")
+                                    }
+                                </div> }
+                            </li>
+                            );
+                    })
                 }
                 <br/>
                 <div className={classes.Bold}>
                     {"Completed " +(result[1][1]) + " out of " + (resultLength) + " things!"}
-                    <br/>
                 </div>
                 <div className={classes.Bold}>
                 That's {((result[1][1])/(resultLength))*100}% of things!
@@ -77,7 +77,7 @@ class Stats extends Component {
     {
         return (
             <div className={classes.Stats}>
-                <button onClick={this.statUpdater}>Update Stats</button>
+                <button onClick={this.statUpdater}>Update to Latest Stats</button>
                 <br/>
                 {this.statMapper()}
             </div>
