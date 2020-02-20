@@ -37,6 +37,7 @@ class Stats extends Component {
             return [key, obj[key]]
         }) 
         console.log(result);
+        let resultLength = result.length - 2;
         return (
             <ul>
                 {
@@ -59,6 +60,14 @@ class Stats extends Component {
                     );
                 })
                 }
+                <br/>
+                <div className={classes.Bold}>
+                    {"Completed " +(result[1][1]) + " out of " + (resultLength) + " things!"}
+                    <br/>
+                </div>
+                <div className={classes.Bold}>
+                That's {((result[1][1])/(resultLength))*100}% of things!
+                </div>
             </ul>
             );
         }
