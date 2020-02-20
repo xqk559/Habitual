@@ -40,7 +40,10 @@ class Stats extends Component {
         return (
             <ul>
                 {
-                result.map((key) => {
+                result.map((key, index) => {
+                    if (index>1 && key[1]){
+                        key[2] = "✓";
+                    }
                     return (
                     <li key={key}
                         className="none">
@@ -49,7 +52,8 @@ class Stats extends Component {
                                         .replace("AAAAA","")
                                         .replace("AAAA","")
                                         .replace("true","True")
-                                        .replace("false","False")}
+                                        .replace("false","False")
+                            }
                         </div> }
                     </li>
                     );
