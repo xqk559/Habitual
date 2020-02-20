@@ -45,7 +45,11 @@ class Stats extends Component {
                     <li key={key}
                         className="none">
                         { <div>
-                            {String(key).replace(","," : ").replace("AAAAA","").replace("AAAA","")}
+                            {String(key).replace(","," : ")
+                                        .replace("AAAAA","")
+                                        .replace("AAAA","")
+                                        .replace("true","True")
+                                        .replace("false","False")}
                         </div> }
                     </li>
                     );
