@@ -8,35 +8,27 @@ class Stats extends Component {
         map: [1],
     }
 
-    UNSAFE_componentWillMount() {
+    UNSAFE_componentWillMount() 
+    {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
         .then((response) => this.setState({stats: response.data}));
     }
 
-    statUpdater = () => {
+    statUpdater = () => 
+    {
         let keys = Object.keys(this.state.stats)
         let key = keys[1];
         let obj = this.state.stats[key];
         this.setState({map: obj});
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
                         .then((response) => this.setState({stats: response.data}));
-                        //.then(()=>this.setState({map: obj}),()=>console.log(this.state.map));
-                        // .then(()=>axiosArray = Array.from(this.state.stats))
-                        // .then(()=>this.setState({map: axiosArray}),()=>console.log(this.state.map)); 
     }
 
-    statMapper = () => {
+    statMapper = () => 
+    {
         let keys = Object.keys(this.state.stats)
         let key = keys[0];
         let obj = this.state.stats[key];
-        console.log(obj);
-        // if (obj){
-        
-        // let result = Object.keys(obj).map((key)=>{
-        //     return [key, obj[key]]
-        // })
-        // }
-        //this.setState({map: obj})
         if (obj) {
         let result = Object.keys(obj).map((key)=>{
             return [key, obj[key]]
@@ -61,7 +53,8 @@ class Stats extends Component {
         }
     }
 
-    render() {
+    render() 
+    {
         return (
             <div className={classes.Stats}>
                 <button onClick={this.statUpdater}>Update Stats</button>
