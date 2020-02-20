@@ -28,7 +28,6 @@ class Stats extends Component {
     statMapper = () => 
     {
         let length = Object.keys(this.state.stats).length -1;
-        console.log(length)
         let keys = Object.keys(this.state.stats)
         let key = keys[length];
         let obj = this.state.stats[key];
@@ -41,12 +40,12 @@ class Stats extends Component {
         return (
             <ul>
                 {
-                result.map((key, value) => {
+                result.map((key) => {
                     return (
                     <li key={key}
                         className="none">
                         { <div>
-                            {String(key)}
+                            {String(key).replace(","," : ").replace("AAAAA","").replace("AAAA","")}
                         </div> }
                     </li>
                     );

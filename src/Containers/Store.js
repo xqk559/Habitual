@@ -71,8 +71,8 @@ class Store extends React.Component {
       let dt = new Date();
       let utcDate = dt.toUTCString();
       const test = {
-                    ADate: utcDate,
-                    Completed: this.state.trueTotal,
+                    AAAAADate: utcDate,
+                    AAAACompleted: this.state.trueTotal,
                    };
       const post = Object.assign({},this.state.dynamicNames) ;
       const fullPost = Object.assign(post, test);
