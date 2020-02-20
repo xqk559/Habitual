@@ -5,7 +5,7 @@ import axios from 'axios';
 class Stats extends Component {
     state = {
         stats : {},
-        map: [1],
+        map: [],
     }
 
     UNSAFE_componentWillMount() 
@@ -16,8 +16,9 @@ class Stats extends Component {
 
     statUpdater = () => 
     {
-        let keys = Object.keys(this.state.stats)
-        let key = keys[1];
+        let length = Object.keys(this.state.stats).length -1;
+        let keys = Object.keys(this.state.stats);
+        let key = keys[length];
         let obj = this.state.stats[key];
         this.setState({map: obj});
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
@@ -26,9 +27,12 @@ class Stats extends Component {
 
     statMapper = () => 
     {
+        let length = Object.keys(this.state.stats).length -1;
+        console.log(length)
         let keys = Object.keys(this.state.stats)
-        let key = keys[0];
+        let key = keys[length];
         let obj = this.state.stats[key];
+        console.log(obj);
         if (obj) {
         let result = Object.keys(obj).map((key)=>{
             return [key, obj[key]]
