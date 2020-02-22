@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import classes from './Stats.module.css';
 import axios from 'axios';
 
+let dt = new Date();
+let utcDate = dt.toUTCString();
+let day = new Date(Date.UTC(2018, 1, 1, 1, 1, 1));
+let dayString = day.toString();
+
 class Stats extends Component {
     state = {
         stats : {},
@@ -11,7 +16,7 @@ class Stats extends Component {
     UNSAFE_componentWillMount() 
     {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
-        .then((response) => this.setState({stats: response.data}));
+            .then((response) => this.setState({stats: response.data}));
     }
 
     statUpdater = () => 
@@ -22,7 +27,7 @@ class Stats extends Component {
         let obj = this.state.stats[key];
         this.setState({map: obj});
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
-                        .then((response) => this.setState({stats: response.data}));
+            .then((response) => this.setState({stats: response.data}));
     }
 
     statMapper = () => 
@@ -77,6 +82,8 @@ class Stats extends Component {
     {
         return (
             <div className={classes.Stats}>
+                {dayString}
+                <div>It is currently {utcDate}</div>
                 <button onClick={this.statUpdater}>Update to Latest Stats</button>
                 <br/>
                 {this.statMapper()}
