@@ -24,50 +24,29 @@ class Store extends React.Component {
       };
     }
 
-    dynamicNamer = (passedName, checked) => {
+    dynamicNamer = (passedName, checked) => 
+    {
       this.setState({dynamicNames:{...this.state.dynamicNames,[checked]: passedName}},()=>console.log(checked, passedName));
     };
      
-    callbackTotalAdder = (dynamic) => {
+    callbackTotalAdder = (dynamic) => 
+    {
       this.setState({},()=>
       {
         this.setState({dynamicTotal: dynamic},()=>this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}))
       })
     }
 
-    addTotal = (childChecked) => {
+    addTotal = (childChecked) => 
+    {
       this.setState({totalChecked: this.state.totalChecked + (childChecked ? 1 : -1)},
        () => this.setState({trueTotal: this.state.totalChecked + this.state.dynamicTotal}));
     };
 
-    submitHider() {
-      document.getElementById("submitter").disabled=this.state.submitted;
-    };
-
-    undoHider() {
-      document.getElementById("undo").disabled=!this.state.submitted;
-    };
-
-    undoHandler = () => {
-      this.setState({submitted: !this.state.submitted});
-      this.submitHider();
-      let d;
-      let keys;
-      let leng;
-      let last;
-      axios.get('https://habitual-f64a5.firebaseio.com/history.json')
-          .then((response)=> d = response.data)
-          .then(()=> keys = Object.keys(d))
-          .then(()=> leng = keys.length)
-          .then(()=> last = keys[leng-1])
-          .then(()=>axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json'));
-    }
-
-    submitHandler = () => {
+    submitHandler = () => 
+    {
       this.setState({submitted: !this.state.submitted},
                      () => console.log());
-      this.submitHider();
-      this.undoHider();
       let d;
       let result;
       let dt = new Date();
@@ -82,27 +61,41 @@ class Store extends React.Component {
       let length;
       let lastPost;
       let lastPostValues;
+      let lastDay;
+      let currentDay;
+      let leng;
+      let last;
+      let keys;
       axios.get('https://habitual-f64a5.firebaseio.com/history.json')
         .then((response)=> d = response.data)
         .then(()=> result =  Object.keys(d).map((key)=>{return [key, d[key]]}))
         .then(()=>length = result.length -1)
         .then(()=>lastPost= result[length][1])
         .then(()=>lastPostValues = Object.values(lastPost))
-        .then(()=>console.log(lastPostValues[0][0]+''+
-                              lastPostValues[0][1]+''+
-                              lastPostValues[0][2]+''+
-                              lastPostValues[0][3]+''+
-                              lastPostValues[0][4]+''+
-                              lastPostValues[0][5]+''+
-                              lastPostValues[0][6]
-                              )
-             )
+        .then(()=>lastDay= (lastPostValues[0][0]+''+
+                            lastPostValues[0][1]+''+
+                            lastPostValues[0][2]+''+
+                            lastPostValues[0][3]+''+
+                            lastPostValues[0][4]+''+
+                            lastPostValues[0][5]+''+
+                            lastPostValues[0][6]))
+        .then(()=>currentDay= utcDate[0]+''+
+                               utcDate[1]+''+
+                               utcDate[2]+''+
+                               utcDate[3]+''+
+                               utcDate[4]+''+
+                               utcDate[5]+''+
+                               utcDate[6])
+        .then(console.log(currentDay))
+        .then(()=> keys = Object.keys(d))
+        .then(()=> leng = keys.length)
+        .then(()=> last = keys[leng-1])
+        .then(()=>lastDay===currentDay ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json') : console.log("naw"))
+        .then(()=>console.log(lastDay))
         .then(axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost));
-    };
+      };
 
-    fakeBooler = () => {
-
-    }
+    fakeBooler = () => {}
 
     render (){
       return (
@@ -116,13 +109,6 @@ class Store extends React.Component {
                 Submit Completed Day
               </button>
               &nbsp;
-              <button id="undo"
-                      disabled={this.state.submitted}
-                      onClick={this.undoHandler}
-                      type="button"
-                      className="btn btn-outline-danger btn-sm">
-                Undo
-              </button>
             </div>
             <br />
             <br />
