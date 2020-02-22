@@ -71,7 +71,7 @@ class Stats extends Component {
                     {"Completed " +(result[1][1]) + " out of " + (resultLength) + " things!"}
                 </div>
                 <div className={classes.Bold}>
-                That's {((result[1][1])/(resultLength))*100}% of things!
+                That's ~{Math.round(((result[1][1])/(resultLength))*100)}% of things!
                 </div>
             </ul>
             );
@@ -82,8 +82,8 @@ class Stats extends Component {
     {
         return (
             <div className={classes.Stats}>
-                {dayString}
                 <div>It is currently {utcDate}</div>
+                <br/>
                 <button onClick={this.statUpdater}>Update to Latest Stats</button>
                 <br/>
                 {this.statMapper()}

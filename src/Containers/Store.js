@@ -10,9 +10,11 @@ let axiosDefaults = require('axios/lib/defaults');
 axiosDefaults.baseURL = 'https://habitual-f64a5.firebaseio.com';
 
 class Store extends React.Component {
-    constructor (props){
+    constructor (props)
+    {
       super ();
-      this.state = {
+      this.state = 
+      {
         bool: false,
         dynamicNames: {},
         totalChecked: 0,
