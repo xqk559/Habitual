@@ -28,9 +28,11 @@ class Store extends React.Component {
 
     dynamicNamer = (passedName, checked) => 
     {
-      this.setState({dynamicNames:{...this.state.dynamicNames,[checked]: passedName}},()=>console.log(checked, passedName));
+      let newList = {...this.state.dynamicNames,[checked]: passedName};
+      console.log(newList);
+      this.setState({dynamicNames:newList},()=>console.log(checked, passedName));
     };
-     
+    
     callbackTotalAdder = (dynamic) => 
     {
       this.setState({},()=>

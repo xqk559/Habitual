@@ -14,7 +14,6 @@ class Item extends React.Component {
 
     UNSAFE_componentWillMount() {
       this.props.dynamicNamer(this.state.checked,this.state.message)
-      console.log(this.state.checked);
     }
 
     handleClick (e)
