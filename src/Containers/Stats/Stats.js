@@ -4,8 +4,9 @@ import axios from 'axios';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
-let day = new Date(Date.UTC(2018, 1, 1, 1, 1, 1));
-let dayString = day.toString();
+//this is utc date format example
+//let day = new Date(Date.UTC(2018, 1, 1, 1, 1, 1));
+//let dayString = day.toString();
 
 class Stats extends Component {
     state = {
@@ -36,12 +37,10 @@ class Stats extends Component {
         let keys = Object.keys(this.state.stats)
         let key = keys[length];
         let obj = this.state.stats[key];
-        console.log(obj);
         if (obj) {
         let result = Object.keys(obj).map((key)=>{
             return [key, obj[key]]
         }) 
-        console.log(result);
         let resultLength = result.length - 2;
         return (
             <ul>

@@ -47,13 +47,11 @@ class Store extends React.Component {
 
     submitHandler = () => 
     {
-      this.setState({submitted: !this.state.submitted},
-                     () => console.log());
+      this.setState({submitted: !this.state.submitted});
       let d;
       let result;
       let dt = new Date();
       let utcDate = dt.toUTCString();
-      console.log(utcDate);
       const test = {
                     AAAAADate: utcDate,
                     AAAACompleted: this.state.trueTotal,
@@ -88,16 +86,12 @@ class Store extends React.Component {
                                utcDate[4]+''+
                                utcDate[5]+''+
                                utcDate[6])
-        .then(console.log(currentDay))
         .then(()=> keys = Object.keys(d))
         .then(()=> leng = keys.length)
         .then(()=> last = keys[leng-1])
-        .then(()=>lastDay===currentDay ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json') : console.log("naw"))
-        .then(()=>console.log(lastDay))
+        .then(()=>lastDay===currentDay ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+(last)+'.json') : console.log("New Day!"))
         .then(axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost));
       };
-
-    fakeBooler = () => {}
 
     render (){
       return (

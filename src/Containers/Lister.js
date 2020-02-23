@@ -93,10 +93,6 @@ export default class Lister extends Component {
     );
   }
 
-  placeholder() {
-    
-  }
-
   listDefaults() {
     let items = this.state.defaults;
     return (
