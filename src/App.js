@@ -48,8 +48,7 @@ const App = () => {
                     <Toolbar/>
                     <Stats/>
                   </div> 
-                }/>
-                
+                }/>     
       </BrowserRouter>
     );
 }
