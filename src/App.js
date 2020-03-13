@@ -9,29 +9,7 @@ import Stats from './Containers/Stats/Stats';
 
 let allTheThings = [];
 
-class App extends React.Component {
-  constructor (props){
-    super ();
-  }
-
-  render (){
-    // const firebaseConfig = {
-    //   apiKey: "AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk",
-    //   authDomain: "habitual-f64a5.firebaseapp.com",
-    //   databaseURL: "https://habitual-f64a5.firebaseio.com",
-    //   projectId: "habitual-f64a5",
-    //   storageBucket: "habitual-f64a5.appspot.com",
-    //   messagingSenderId: "724890967012",
-    //   appId: "1:724890967012:web:db8bcdd688daf44a78c5f1"
-    // };
-
-    // login = firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-    // // Handle Errors here.
-    // var errorCode = error.code;
-    // var errorMessage = error.message;
-    // // ...
-    // });
-
+const App = () => {
     return (
       <BrowserRouter>
         <Route path="/(|checklist)/" exact render={()=> 
@@ -74,7 +52,6 @@ class App extends React.Component {
                 
       </BrowserRouter>
     );
-  }
 }
 
 export default App;
