@@ -18,6 +18,9 @@ const toolbar = () => {
                 <li className="rightLink">
                     <NavLink to="/login">Login</NavLink>
                 </li>
+                <li className="link">
+                    <NavLink to="/redux">Redux</NavLink>
+                </li>
             </ul>
         </div>
     )

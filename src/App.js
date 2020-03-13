@@ -48,7 +48,10 @@ const App = () => {
                     <Toolbar/>
                     <Stats/>
                   </div> 
-                }/>     
+                }/>
+        <Route path="/redux/" 
+               exact 
+               render={()=><Toolbar/>}/>     
       </BrowserRouter>
     );
 }
