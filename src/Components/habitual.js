@@ -5,7 +5,7 @@ import * as actionCreators from '../Store/actions/index';
 const Habitual = props => {
     return (
         <div className="centered">
-            <button onClick={ () => props.addItem }
+            <button onClick={ () => props.addItem() }
                 type="button" 
                 className="btn btn-outline-dark btn-sm">
                 Add Item
