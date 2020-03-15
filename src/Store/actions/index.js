@@ -1,5 +1,5 @@
 export {
     addItem,
-    nameItem,
     removeItem,
+    checkboxClicked,
 } from './listActions';

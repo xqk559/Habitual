@@ -1,9 +1,11 @@
 import * as actionTypes from './actionTypes';
+import axios from 'axios';
 
 export const addItem = (newItem) => {
     return {
         type: actionTypes.ADD_ITEM,
         item: newItem,
+        id: newItem + Math.random().toString(),
     }
 }
 
@@ -13,9 +15,8 @@ export const removeItem = () => {
     }
 }
 
-export const nameItem = (itemName) => {
+export const checkboxClicked = () => {
     return {
-        type: actionTypes.NAME_ITEM,
-        itemName: itemName,
+        type: actionTypes.CHECKBOX_CLICKED,
     }
 }

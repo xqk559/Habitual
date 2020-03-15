@@ -3,18 +3,25 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
 import {store} from '../index';
+import axios from 'axios';
+
+let name;
 
 const Habitual = props => {
+
+    const uploadChecklist = () => {
+        axios.post('https://habitual-f64a5.firebaseio.com/history.json', props.listReducer)
+    }
 
     const checklist = () => {
         return (
             <ul>
             {
-            props.listReducer.items.map((val, index) => {
+            props.listReducer.map((val, index) => {
                 return (
                 <li key={index}
                     className="none">
-                    { val }
+                    { <Item name={val.name} /> }
                 </li>
                 );
             })
@@ -27,10 +34,10 @@ const Habitual = props => {
         <div>
             <div className="centered2">
                 <input type="text"
-                       onChange={ (event) => props.nameItem(event.target.value) } 
+                       onChange={(event)=>{name = event.target.value}}
                         />
                 &nbsp;&nbsp;
-                <button onClick={ () => props.addItem() }
+                <button onClick={ () => props.addItem(name) }
                         type="button" 
                         className="btn btn-outline-dark btn-sm">
                     Add Item
@@ -41,9 +48,17 @@ const Habitual = props => {
                         className="btn btn-outline-danger btn-sm">
                 Remove Last Item
                 </button>
+                &nbsp;
+                <button onClick={ () => uploadChecklist() }
+                        id= "submitter"
+                        type="button"
+                        className="btn btn-outline-primary btn-sm">
+                Submit Completed Day
+              </button>
                 {props.listReducer.items}
             </div>
             {checklist()}
+            {console.log(name)}
         </div>
     );
 }
@@ -58,8 +73,7 @@ const mapDispatchToProps = dispatch => {
     const state = store.getState();
 
     return {
-        addItem: () => dispatch(actionCreators.addItem(<Item name={state.listReducer.itemNames.slice(-1)[0]}/>)),
-        nameItem: (e) => dispatch(actionCreators.nameItem(e)),
+        addItem: (name) => dispatch(actionCreators.addItem(name)),
         removeItem: () => dispatch(actionCreators.removeItem()),
     };
   };
