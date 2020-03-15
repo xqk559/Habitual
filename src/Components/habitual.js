@@ -25,13 +25,14 @@ const Habitual = props => {
 
     return (
         <div>
-            <div className="centered">
+            <div className="centered2">
                 <input type="text"
                        onChange={ (event) => props.nameItem(event.target.value) } 
                         />
+                &nbsp;&nbsp;
                 <button onClick={ () => props.addItem() }
-                    type="button" 
-                    className="btn btn-outline-dark btn-sm">
+                        type="button" 
+                        className="btn btn-outline-dark btn-sm">
                     Add Item
                 </button>
                 {props.listReducer.items}
