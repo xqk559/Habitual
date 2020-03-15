@@ -10,6 +10,11 @@ const addItem = (state, action) => {
     return {...state, ...updatedList};
 };
 
+const removeItem = (state, action) => {
+    let updatedList = state.items.splice(-1);
+    return {...state, ...updatedList};
+};
+
 const nameItem = (state, action) => {
     let updatedNames = state.itemNames.push(action.itemName);
     return {...state, ...updatedNames}
@@ -19,6 +24,7 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_ITEM: return addItem(state, action);
         case actionTypes.NAME_ITEM: return nameItem(state, action);
+        case actionTypes.REMOVE_ITEM: return removeItem(state, action);
         default: return state;
     }
 };

@@ -35,6 +35,12 @@ const Habitual = props => {
                         className="btn btn-outline-dark btn-sm">
                     Add Item
                 </button>
+                &nbsp;
+                <button onClick={ () => props.removeItem() }
+                        type="button" 
+                        className="btn btn-outline-danger btn-sm">
+                Remove Last Item
+                </button>
                 {props.listReducer.items}
             </div>
             {checklist()}
@@ -53,7 +59,8 @@ const mapDispatchToProps = dispatch => {
 
     return {
         addItem: () => dispatch(actionCreators.addItem(<Item name={state.listReducer.itemNames.slice(-1)[0]}/>)),
-        nameItem: (e) => dispatch(actionCreators.nameItem(e))
+        nameItem: (e) => dispatch(actionCreators.nameItem(e)),
+        removeItem: () => dispatch(actionCreators.removeItem()),
     };
   };
   

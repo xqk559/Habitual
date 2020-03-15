@@ -7,6 +7,12 @@ export const addItem = (newItem) => {
     }
 }
 
+export const removeItem = () => {
+    return {
+        type: actionTypes.REMOVE_ITEM,
+    }
+}
+
 export const nameItem = (itemName) => {
     return {
         type: actionTypes.NAME_ITEM,
