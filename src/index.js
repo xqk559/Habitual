@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import reducer from './Store/reducers/reducer.js';
 import {BrowserRouter} from 'react-router-dom';
 
-const rootReducer = combineReducers({reducer});
+const rootReducer = combineReducers({listReducer: reducer});
 
 const composeEnhancers = process.env.REACT_APP_NODE_ENVX === "development" ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 

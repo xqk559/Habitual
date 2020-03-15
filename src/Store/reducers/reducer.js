@@ -1,13 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    items: [],
+    items: ['penis'],
 };
 
-let updatedList;
-
 const addItem = (state, action) => {
-    return updatedList
+    let updatedList = ({});
+    return {...state, ...updatedList};
 };
 
 const reducer = (state = initialState, action) => {

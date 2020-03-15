@@ -2,6 +2,8 @@ import React from 'react';
 import '../App.css';
 import Lister from '../Containers/Lister';
 import axios from 'axios';
+import * as actionCreators from '../Store/actions/index';
+import {connect} from 'react-redux';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -98,6 +100,7 @@ class Store extends React.Component {
     render (){
       return (
         <div>
+          {console.log(this.props.listReducer.items)}
           <div className="centered">
             <div>You've completed {this.state.trueTotal} things! &nbsp;
               <button onClick={this.submitHandler}
@@ -122,4 +125,17 @@ class Store extends React.Component {
     }
   }
 
-  export default Store ;
+const mapStateToProps = state => {
+  return {
+      listReducer: state.listReducer,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+      addItem: () => dispatch(actionCreators.addItem()),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Store) ;
