@@ -6,3 +6,10 @@ export const addItem = (newItem) => {
         item: newItem,
     }
 }
+
+export const nameItem = (itemName) => {
+    return {
+        type: actionTypes.NAME_ITEM,
+        itemName: itemName,
+    }
+}

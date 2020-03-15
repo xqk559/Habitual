@@ -2,11 +2,33 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
+import {store} from '../index';
 
 const Habitual = props => {
+
+    const checklist = () => {
+        return (
+            <ul>
+            {
+            props.listReducer.items.map((val, index) => {
+                return (
+                <li key={index}
+                    className="none">
+                    { val }
+                </li>
+                );
+            })
+            }
+            </ul>
+        );
+    }
+
     return (
         <div>
             <div className="centered">
+                <input type="text"
+                       onChange={ (event) => props.nameItem(event.target.value) } 
+                        />
                 <button onClick={ () => props.addItem() }
                     type="button" 
                     className="btn btn-outline-dark btn-sm">
@@ -14,18 +36,7 @@ const Habitual = props => {
                 </button>
                 {props.listReducer.items}
             </div>
-            <ul>
-            {
-            props.listReducer.items.map((val, index) => {
-                return (
-                <li key={index}
-                    className="none">
-                    { <Item /> }
-                </li>
-                );
-            })
-            }
-            </ul>
+            {checklist()}
         </div>
     );
 }
@@ -37,8 +48,11 @@ const mapStateToProps = state => {
   };
   
 const mapDispatchToProps = dispatch => {
+    const state = store.getState();
+
     return {
-        addItem: () => dispatch(actionCreators.addItem(<Item/>)),
+        addItem: () => dispatch(actionCreators.addItem(<Item name={state.listReducer.itemNames.slice(-1)[0]}/>)),
+        nameItem: (e) => dispatch(actionCreators.nameItem(e))
     };
   };
   

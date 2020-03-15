@@ -6,7 +6,7 @@ const Item = props => {
           <div className="col-md-12">
             <input type="checkbox" 
                     />
-                &nbsp;checkbox
+                &nbsp;{props.name}
                 <hr className="hr"/>
           </div>
         </div>
