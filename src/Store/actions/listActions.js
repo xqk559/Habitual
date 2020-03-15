@@ -15,8 +15,9 @@ export const removeItem = () => {
     }
 }
 
-export const checkboxClicked = () => {
+export const checkboxClicked = (id) => {
     return {
         type: actionTypes.CHECKBOX_CLICKED,
+        id: id
     }
 }

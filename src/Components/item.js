@@ -1,11 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../Store/actions/index';
 
 const Item = props => {
     return (
         <div>
           <div className="col-md-12">
             <input type="checkbox" 
-                    />
+                    onClick={()=>props.checkboxClicked(props.id)}/>
                 &nbsp;{props.name}
                 <hr className="hr"/>
           </div>
@@ -13,4 +15,16 @@ const Item = props => {
     );
 }
 
-export default Item;
+const mapStateToProps = state => {
+    return {
+        listReducer: state.listReducer,
+    };
+  };
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        checkboxClicked: (id) => dispatch(actionCreators.checkboxClicked(id)), 
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

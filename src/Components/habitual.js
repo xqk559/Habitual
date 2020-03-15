@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
-import {store} from '../index';
 import axios from 'axios';
 
 let name;
@@ -21,7 +20,8 @@ const Habitual = props => {
                 return (
                 <li key={index}
                     className="none">
-                    { <Item name={val.name} /> }
+                    { <Item name={val.name}
+                            id={val.id} /> }
                 </li>
                 );
             })
@@ -70,8 +70,6 @@ const mapStateToProps = state => {
   };
   
 const mapDispatchToProps = dispatch => {
-    const state = store.getState();
-
     return {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
         removeItem: () => dispatch(actionCreators.removeItem()),
