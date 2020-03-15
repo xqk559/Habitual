@@ -5,7 +5,8 @@ const initialState = {
 };
 
 const addItem = (state, action) => {
-    let updatedList = ({});
+    let updatedList = action.newItem;
+    console.log(state.items);
     return {...state, ...updatedList};
 };
 

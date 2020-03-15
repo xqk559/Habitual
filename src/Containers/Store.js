@@ -133,7 +133,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      addItem: () => dispatch(actionCreators.addItem()),
+      addItem: () => dispatch(actionCreators.addItem('cock')),
   };
 };
 
