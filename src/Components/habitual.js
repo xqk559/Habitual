@@ -5,7 +5,6 @@ import Item from './item';
 import axios from 'axios';
 
 let name;
-let date = new Date().toString();
 
 const Habitual = props => {
 
@@ -14,11 +13,14 @@ const Habitual = props => {
     }
 
     const checklist = () => {
+        const capitalizeFirstLetter = string => {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
         return (<ul>
             {props.listReducer.map((val, index) => {return (<li key={index}
                     className="none">
-                    { <Item name={val.name}
-                            id={val.id} /> }
+                    { <Item name={capitalizeFirstLetter(val.name)}
+                            id={val.id}/> }
                         </li>
                 );
             })}
@@ -49,7 +51,6 @@ const Habitual = props => {
                 {props.listReducer.items}
             </div>
             {checklist()}
-            {console.log(date.slice(0,15))}
         </div>
     );
 }

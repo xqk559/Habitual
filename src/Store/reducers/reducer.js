@@ -1,5 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
+let date = new Date().toString();
+
 const initialState = [];
 
 const addItem = (state, action) => {
@@ -8,7 +10,8 @@ const addItem = (state, action) => {
         {
             id: action.id,
             name: action.item,
-            completed: false
+            completed: false,
+            date: date.slice(0,15),
         }
     ];
 };
