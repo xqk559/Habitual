@@ -5,11 +5,19 @@ import Item from './item';
 import axios from 'axios';
 
 let name;
+let axiosData;
+let axiosDays;
+let lastAxiosDay;
 
 const Habitual = props => {
 
     const uploadChecklist = () => {
-        axios.post('https://habitual-f64a5.firebaseio.com/history.json', props.listReducer)
+        axios.get('https://habitual-f64a5.firebaseio.com/history.json')
+            .then((response)=> axiosData = response.data)
+            .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
+            .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
+            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log(props.listReducer[props.listReducer.length-1].date))
+            .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/history.json', props.listReducer));
     }
 
     const checklist = () => {
@@ -48,7 +56,6 @@ const Habitual = props => {
                         className="btn btn-outline-primary btn-sm">
                 Submit Completed Day
               </button>
-                {props.listReducer.items}
             </div>
             {checklist()}
         </div>

@@ -16,6 +16,8 @@ const addItem = (state, action) => {
     ];
 };
 
+//const getAxiosList = (state,action)
+
 const removeItem = (state, action) => {
     let updatedState = state.filter(function( item ) {
         return item.id !== action.id;
@@ -24,7 +26,6 @@ const removeItem = (state, action) => {
 };
 
 const checkboxClicked = (state, action) => {
-    state.map(item=>console.log(action.id, item.id))
     return state.map(item =>
         item.id === action.id ? {...item, completed: !item.completed} : item    
     )

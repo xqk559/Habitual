@@ -22,3 +22,9 @@ export const checkboxClicked = (id) => {
         id: id
     }
 }
+
+export const getAxiosList = () => {
+    return {
+        type: actionTypes.GET_AXIOS_LIST,
+    }
+}
