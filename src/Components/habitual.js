@@ -31,7 +31,9 @@ const Habitual = props => {
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
-        axios.post('https://habitual-f64a5.firebaseio.com/history.json', props.listReducer);
+        let fullPost = props.listReducer;
+        if (defaultList != null){fullPost = props.listReducer.concat(defaultList)}
+        axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
     }
 
     const uploadDefaultList = () => {
@@ -59,23 +61,6 @@ const Habitual = props => {
         );
     }
 
-    // async function defaultChecklist() {
-    //     console.log(defaultList);
-        const capitalizeFirstLetter = string => {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        // return (<ul>
-        //     {defaultList.map((val, index) => {return (<li key={index}
-        //             className="none">
-        //             { <Item name={val.name}
-        //                     id={val.id}/> }
-        //                 </li>
-        //         );
-        //     })}
-        //     </ul>
-        // );
-    // }
-
     const defaultChecklist = () => {
         console.log(defaultList)
         const capitalizeFirstLetter = string => {
@@ -95,9 +80,7 @@ const Habitual = props => {
         );
         }
     }
-
-
-            
+     
     return (
         <div >
           <div className="rainbow-text">
@@ -144,7 +127,6 @@ const Habitual = props => {
                     </div>
                     <br/>
                     {defaultChecklist()}
-                    {console.log(defaultList)}
                 </div>
             </div>
             <div className="centered">
