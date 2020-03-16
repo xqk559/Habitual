@@ -14,8 +14,10 @@ const addItem = (state, action) => {
 };
 
 const removeItem = (state, action) => {
-    let updatedList = state.splice(-1);
-    return {...state, ...updatedList};
+    let updatedState = state.filter(function( item ) {
+        return item.id !== action.id;
+    });
+    return [...updatedState];
 };
 
 const checkboxClicked = (state, action) => {

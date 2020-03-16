@@ -13,22 +13,18 @@ const Habitual = props => {
     }
 
     const checklist = () => {
-        return (
-            <ul>
-            {
-            props.listReducer.map((val, index) => {
-                return (
-                <li key={index}
+        return (<ul>
+            {props.listReducer.map((val, index) => {return (<li key={index}
                     className="none">
                     { <Item name={val.name}
                             id={val.id} /> }
-                </li>
+                        </li>
                 );
-            })
-            }
+            })}
             </ul>
         );
     }
+            
 
     return (
         <div>
@@ -43,12 +39,6 @@ const Habitual = props => {
                     Add Item
                 </button>
                 &nbsp;
-                <button onClick={ () => props.removeItem() }
-                        type="button" 
-                        className="btn btn-outline-danger btn-sm">
-                Remove Last Item
-                </button>
-                &nbsp;
                 <button onClick={ () => uploadChecklist() }
                         id= "submitter"
                         type="button"
@@ -58,7 +48,7 @@ const Habitual = props => {
                 {props.listReducer.items}
             </div>
             {checklist()}
-            {console.log(name)}
+            {console.log(props.listReducer)}
         </div>
     );
 }
@@ -72,7 +62,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
-        removeItem: () => dispatch(actionCreators.removeItem()),
     };
   };
   

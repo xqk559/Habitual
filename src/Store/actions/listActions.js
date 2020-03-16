@@ -9,9 +9,10 @@ export const addItem = (newItem) => {
     }
 }
 
-export const removeItem = () => {
+export const removeItem = (itemId) => {
     return {
         type: actionTypes.REMOVE_ITEM,
+        id: itemId,
     }
 }
 

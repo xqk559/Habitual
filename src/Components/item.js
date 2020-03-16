@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
+import '../App.css';
 
 const Item = props => {
     return (
@@ -9,8 +10,14 @@ const Item = props => {
             <input type="checkbox" 
                     onClick={()=>props.checkboxClicked(props.id)}/>
                 &nbsp;{props.name}
-                <hr className="hr"/>
+                <button type="button" 
+                        class="close" 
+                        aria-label="Close"
+                        onClick={()=>props.removeItem(props.id)}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
           </div>
+                <hr className="hr"/>
         </div>
     );
 }
@@ -23,7 +30,8 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
     return {
-        checkboxClicked: (id) => dispatch(actionCreators.checkboxClicked(id)), 
+        checkboxClicked: (id) => dispatch(actionCreators.checkboxClicked(id)),
+        removeItem: (id) => dispatch(actionCreators.removeItem(id)), 
     };
   };
 
