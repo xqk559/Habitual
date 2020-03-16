@@ -3,4 +3,5 @@ export {
     removeItem,
     checkboxClicked,
     getAxiosList,
+    addDefaultToState,
 } from './listActions';

@@ -16,7 +16,13 @@ const addItem = (state, action) => {
     ];
 };
 
-//const getAxiosList = (state,action)
+const addDefaultToState = (state, action) => {
+    let updatedState = state.concat(action.defaults);
+    console.log(action.defaults)
+    return [
+        ...updatedState
+    ]
+}
 
 const removeItem = (state, action) => {
     let updatedState = state.filter(function( item ) {
@@ -36,6 +42,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_ITEM: return addItem(state, action);
         case actionTypes.REMOVE_ITEM: return removeItem(state, action);
         case actionTypes.CHECKBOX_CLICKED: return checkboxClicked(state, action);
+        case actionTypes.ADD_DEFAULT_TO_STATE: return addDefaultToState(state, action);
         default: return state;
     }
 };

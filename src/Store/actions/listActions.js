@@ -8,6 +8,13 @@ export const addItem = (newItem) => {
     }
 }
 
+export const addDefaultToState = (defaults) => {
+    return {
+        type: actionTypes.ADD_DEFAULT_TO_STATE,
+        defaults: defaults,
+    }
+}
+
 export const removeItem = (itemId) => {
     return {
         type: actionTypes.REMOVE_ITEM,

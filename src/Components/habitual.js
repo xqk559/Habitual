@@ -14,7 +14,7 @@ let defaultArray;
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState()
-
+    
     useEffect(() => {
         const fetchData = async () => {
           const result = await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
@@ -24,6 +24,12 @@ const Habitual = props => {
         };
         fetchData();
       }, []);
+    
+      useEffect(()=> {
+          if(defaultList != null){
+            props.addDefaultToState(defaultList);
+          }
+      }, [defaultList])
 
     const uploadChecklist = () => {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
@@ -32,7 +38,6 @@ const Habitual = props => {
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
         let fullPost = props.listReducer;
-        if (defaultList != null){fullPost = props.listReducer.concat(defaultList)}
         axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
     }
 
@@ -61,26 +66,6 @@ const Habitual = props => {
         );
     }
 
-    const defaultChecklist = () => {
-        console.log(defaultList)
-        const capitalizeFirstLetter = string => {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        if (defaultList != null)
-        {
-        return (<ul>
-            {defaultList.map((val, index) => {return (<li key={index}
-                    className="none">
-                    { <Item name={capitalizeFirstLetter(val.name)}
-                            id={val.id}/> }
-                        </li>
-                );
-            })}
-            </ul>
-        );
-        }
-    }
-     
     return (
         <div >
           <div className="rainbow-text">
@@ -122,11 +107,6 @@ const Habitual = props => {
                     </div>
                     <br />
                     {checklist()}
-                    <div className="bold2">&nbsp;&nbsp;
-                        Defaults:
-                    </div>
-                    <br/>
-                    {defaultChecklist()}
                 </div>
             </div>
             <div className="centered">
@@ -145,6 +125,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
+        addDefaultToState: (defaults) => dispatch(actionCreators.addDefaultToState(defaults)),
     };
   };
   
