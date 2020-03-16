@@ -50,6 +50,10 @@ a {
   margin-left: 28%;
 }
 
+.item {
+  width: 70%;
+}
+
 .jumbotron {
   background-color: #333;
   color: white;

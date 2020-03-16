@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
 import axios from 'axios';
+import AppFooter from '../AppFooter';
 
 let name;
 let axiosData;
@@ -10,7 +11,6 @@ let axiosDays;
 let lastAxiosDay;
 
 const Habitual = props => {
-
     const uploadChecklist = () => {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
             .then((response)=> axiosData = response.data)
@@ -36,9 +36,14 @@ const Habitual = props => {
         );
     }
             
-
     return (
-        <div>
+        <div >
+          <div className="rainbow-text">
+            Habitual
+          </div>
+          <div className="rainbow-text-small">
+            You've done so many things today!
+          </div>
             <div className="centered2">
                 <input type="text"
                        onChange={(event)=>{name = event.target.value}}
@@ -55,9 +60,32 @@ const Habitual = props => {
                         type="button"
                         className="btn btn-outline-primary btn-sm">
                 Submit Completed Day
-              </button>
+                </button>
+              &nbsp;
+              <button 
+                type="button" 
+                className="btn btn-outline-dark btn-sm">
+                Set as Default
+               </button>
             </div>
-            {checklist()}
+               <br/>
+            <div>
+               <div  className="margin">
+                    <div className="bold2">&nbsp;&nbsp;
+                        To Do:
+                    </div>
+                    <br />
+                    {checklist()}
+                    <div className="bold2">&nbsp;&nbsp;
+                        Defaults:
+                    </div>
+                    <br/>
+                    {/* {this.listDefaults()} */}
+                </div>
+            </div>
+            <div className="centered">
+                <AppFooter/>
+            </div>
         </div>
     );
 }
@@ -73,7 +101,6 @@ const mapDispatchToProps = dispatch => {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
     };
   };
-  
   
 export default connect(mapStateToProps, mapDispatchToProps)(Habitual) ;
 

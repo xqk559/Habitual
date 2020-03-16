@@ -5,7 +5,7 @@ import '../App.css';
 
 const Item = props => {
     return (
-        <div>
+        <div className ="item">
           <div className="col-md-12">
             <input type="checkbox" 
                     onClick={()=>props.checkboxClicked(props.id)}/>
