@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
@@ -9,14 +9,28 @@ let name;
 let axiosData;
 let axiosDays;
 let lastAxiosDay;
+let defaults;
+let defaultArray;
 
 const Habitual = props => {
+    const [defaultList, setDefaultList] = useState()
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+            .then((response)=> {defaults = (Object.values(response.data))})
+            .then(()=> defaultArray = defaults[0])
+            .then(()=> setDefaultList(defaultArray));
+        };
+        fetchData();
+      }, []);
+
     const uploadChecklist = () => {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
             .then((response)=> axiosData = response.data)
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log(''))
+            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
         axios.post('https://habitual-f64a5.firebaseio.com/history.json', props.listReducer);
     }
 
@@ -25,7 +39,7 @@ const Habitual = props => {
         .then((response)=> axiosData = response.data)
         .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
         .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-        .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/defaults/'+ lastAxiosDay[0] +'.json') : console.log(props.listReducer[props.listReducer.length-1].date))
+        .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/defaults/'+ lastAxiosDay[0] +'.json') : console.log())
         axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', props.listReducer);
     }
 
@@ -44,6 +58,45 @@ const Habitual = props => {
             </ul>
         );
     }
+
+    // async function defaultChecklist() {
+    //     console.log(defaultList);
+        const capitalizeFirstLetter = string => {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        // return (<ul>
+        //     {defaultList.map((val, index) => {return (<li key={index}
+        //             className="none">
+        //             { <Item name={val.name}
+        //                     id={val.id}/> }
+        //                 </li>
+        //         );
+        //     })}
+        //     </ul>
+        // );
+    // }
+
+    const defaultChecklist = () => {
+        console.log(defaultList)
+        const capitalizeFirstLetter = string => {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        if (defaultList != null)
+        {
+        return (<ul>
+            {defaultList.map((val, index) => {return (<li key={index}
+                    className="none">
+                    { <Item name={capitalizeFirstLetter(val.name)}
+                            id={val.id}/> }
+                        </li>
+                );
+            })}
+            </ul>
+        );
+        }
+    }
+
+
             
     return (
         <div >
@@ -90,7 +143,8 @@ const Habitual = props => {
                         Defaults:
                     </div>
                     <br/>
-                    {/* {this.listDefaults()} */}
+                    {defaultChecklist()}
+                    {console.log(defaultList)}
                 </div>
             </div>
             <div className="centered">
