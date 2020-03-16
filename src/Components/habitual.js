@@ -5,6 +5,7 @@ import Item from './item';
 import axios from 'axios';
 
 let name;
+let date = new Date().toString();
 
 const Habitual = props => {
 
@@ -48,7 +49,7 @@ const Habitual = props => {
                 {props.listReducer.items}
             </div>
             {checklist()}
-            {console.log(props.listReducer)}
+            {console.log(date.slice(0,15))}
         </div>
     );
 }
