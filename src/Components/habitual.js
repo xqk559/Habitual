@@ -12,7 +12,7 @@ let lastAxiosDay;
 let defaults;
 let defaultArray;
 let defaultExecuted = false;
-let today = {date: new Date().toString().slice(0,15)};
+let today = new Date().toString().slice(0,15);
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState()
@@ -22,6 +22,9 @@ const Habitual = props => {
           await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
             .then((response)=> {defaults = (Object.values(response.data))})
             .then(()=> defaultArray = defaults[0])
+            .then(()=>{for(let i in defaultArray){
+                defaultArray[i].date = today 
+                return defaultArray}})
             .then(()=> setDefaultList(defaultArray))
             .then(defaultExecuted = true)
         };
@@ -30,6 +33,7 @@ const Habitual = props => {
     
       useEffect(()=> 
       {
+          console.log(defaultList)
         if(defaultList != null){
         props.addDefaultToState(defaultList);
         }
