@@ -12,6 +12,7 @@ let lastAxiosDay;
 let defaults;
 let defaultArray;
 let defaultExecuted = false;
+let today = {date: new Date().toString().slice(0,15)};
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState()
@@ -23,7 +24,6 @@ const Habitual = props => {
             .then(()=> defaultArray = defaults[0])
             .then(()=> setDefaultList(defaultArray))
             .then(defaultExecuted = true)
-            //.then(()=>props.addDefaultToState(defaultList));
         };
         fetchData();
       }, []);
@@ -40,7 +40,8 @@ const Habitual = props => {
             .then((response)=> axiosData = response.data)
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
+            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
+                ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
         let fullPost = props.listReducer;
         axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
     }
