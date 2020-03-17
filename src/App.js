@@ -16,19 +16,11 @@ const App = () => {
         <Route path="/(|checklist)/" exact render={()=> 
           <div className="phone">
           <Toolbar />
-          {/* <Calendar /> */}
           <br />
-          <br />
-          <div className="rainbow-text">
-            Habitual
-          </div>
-          <div className="rainbow-text-small">
-            You've done so many things today!
-          </div>
           <br />
           <br />
           <div >
-            <Store/>
+            <Habitual/>
           </div>
           <br />
           <div className="centered">
@@ -50,14 +42,6 @@ const App = () => {
                     <Stats/>
                   </div> 
                 }/>
-        <Route path="/redux/" 
-               exact 
-               render={()=><div>
-                              <Toolbar/>
-                              <Habitual/>
-                            </div>
-                      }
-        />     
       </BrowserRouter>
     );
 }

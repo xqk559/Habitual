@@ -11,25 +11,29 @@ let axiosDays;
 let lastAxiosDay;
 let defaults;
 let defaultArray;
+let defaultExecuted = false;
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState()
     
     useEffect(() => {
         const fetchData = async () => {
-          const result = await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+          await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
             .then((response)=> {defaults = (Object.values(response.data))})
             .then(()=> defaultArray = defaults[0])
-            .then(()=> setDefaultList(defaultArray));
+            .then(()=> setDefaultList(defaultArray))
+            .then(defaultExecuted = true)
+            //.then(()=>props.addDefaultToState(defaultList));
         };
         fetchData();
       }, []);
     
-      useEffect(()=> {
-          if(defaultList != null){
-            props.addDefaultToState(defaultList);
-          }
-      }, [defaultList])
+      useEffect(()=> 
+      {
+        if(defaultList != null){
+        props.addDefaultToState(defaultList);
+        }
+      }, [defaultExecuted])
 
     const uploadChecklist = () => {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
