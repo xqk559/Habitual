@@ -18,7 +18,6 @@ const addItem = (state, action) => {
 
 const addDefaultToState = (state, action) => {
     let updatedState = state.concat(action.defaults);
-    console.log(action.defaults)
     return [
         ...updatedState
     ]

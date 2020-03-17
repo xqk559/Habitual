@@ -32,7 +32,6 @@ const Habitual = props => {
     
       useEffect(()=> 
       {
-          console.log(defaultList)
         if(defaultList != null){
         props.addDefaultToState(defaultList);
         }
