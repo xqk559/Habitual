@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
 import axios from 'axios';
-import AppFooter from '../AppFooter';
 
 let name;
 let axiosData;
@@ -113,9 +112,6 @@ const Habitual = props => {
                     <br />
                     {checklist()}
                 </div>
-            </div>
-            <div className="centered">
-                <AppFooter/>
             </div>
         </div>
     );
