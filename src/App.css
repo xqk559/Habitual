@@ -69,6 +69,10 @@ a {
   border-right: 1px solid black;
 }
 
+.loginInput {
+
+}
+
 .rightLink {
   display: inline;
   float: right;
@@ -144,6 +148,17 @@ li a:hover {
 
 .smallMargin {
   margin-left: 80px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: purple;
+  font-weight: bold;
+  padding: 30px 30px;
 }
 
 .toolbar {

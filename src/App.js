@@ -7,6 +7,7 @@ import Toolbar from './Components/Toolbar';
 import {Route, BrowserRouter} from 'react-router-dom';
 import Stats from './Containers/Stats/Stats';
 import Habitual from './Components/habitual';
+import Auth from './Components/auth';
 
 let allTheThings = [];
 
@@ -32,7 +33,10 @@ const App = () => {
         }/>
         <Route path="/login/" 
                exact 
-               render={()=><Toolbar/>}/>
+               render={()=><div>
+                            <Toolbar/>
+                            <Auth />
+                           </div>}/>
         <Route path="/statistics/" 
                exact 
                render=
