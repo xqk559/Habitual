@@ -70,7 +70,8 @@ a {
 }
 
 .loginInput {
-
+  margin: 5px;
+  width: auto;
 }
 
 .rightLink {
