@@ -14,20 +14,16 @@ const Auth = () => {
     };
     const login = () => {
     let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
-
+    let axiosResponse;
     const post = axios.post(url, authData)
-
-    .then(response=>localStorage.setItem('token', response.data.idToken))
-    //.then(response=>console.log(response.data.idToken))
-    //.then(localStorage.setItem('expirationDate', expirationDate))
-    //.then(response=>localStorage.setItem('userId', response.data.localId))
-    //.then(response=>console.log(response.data));
+        .then(response=>axiosResponse=response.data)
+        .then(()=>localStorage.setItem('token', axiosResponse.idToken))
+        .then(()=>localStorage.setItem('userId', axiosResponse.localId))
     }
     let [title, setTitle] = useState("Login")
     
     const logout = () => {
         localStorage.removeItem('token');
-        //localStorage.removeItem('expirationDate');
         localStorage.removeItem('userId');
     }
 
