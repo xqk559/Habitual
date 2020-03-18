@@ -1,7 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
 let date = new Date().toString();
-
+let userId = null;
+if(localStorage.getItem('userId')){
+    userId = localStorage.getItem('userId')
+}
 const initialState = [];
 
 const addItem = (state, action) => {
@@ -12,6 +15,7 @@ const addItem = (state, action) => {
             name: action.item,
             completed: false,
             date: date.slice(0,15),
+            userId: userId,
         }
     ];
 };
