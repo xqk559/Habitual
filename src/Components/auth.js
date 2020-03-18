@@ -9,7 +9,7 @@ const Auth = props => {
     let [title, setTitle] = useState("Sign Up");
     let [email, setEmail] = useState();
     let [password, setPassword] = useState();
-    let [error, setError] = useState();
+    let [error, setError] = useState(null);
 
     const authData = {
         email: email,
@@ -26,7 +26,7 @@ const Auth = props => {
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
             .catch(err=>setError(err.response.data.error))
-            .then(()=>{if(!error){
+            .then(()=>{if(error = null){
                     props.signUpRedux(localStorage.getItem('token'),
                                       localStorage.getItem('userId'),
                                       email)
