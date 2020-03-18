@@ -29,7 +29,10 @@ const Habitual = props => {
             .then(defaultExecuted = true)
             .then(()=>console.log(defaultList))
             .then(()=>console.log(defaultArray))
-        }};
+        } else {
+            setDefaultList()
+        }
+        };
         fetchData();
       }, []);
 
@@ -68,6 +71,7 @@ const Habitual = props => {
         const capitalizeFirstLetter = string => {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
+        if (localStorage.getItem('userId')) {
         return (<ul>
             {props.listReducer.map((val, index) => {return (<li key={index}
                     className="none">
@@ -77,7 +81,9 @@ const Habitual = props => {
                 );
             })}
             </ul>
-        );
+        );} else {
+            return null;
+        }
     }
 
     return (
