@@ -10,6 +10,7 @@ const Auth = props => {
     let [email, setEmail] = useState();
     let [password, setPassword] = useState();
     let [error, setError] = useState(null);
+    let [update, setUpdate] = useState();
 
     const authData = {
         email: email,
@@ -30,7 +31,6 @@ const Auth = props => {
                     props.signUpRedux(localStorage.getItem('token'),
                                       localStorage.getItem('userId'),
                                       email)
-                    console.log("FUCK")
                 }})
     }
     
@@ -48,6 +48,7 @@ const Auth = props => {
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        setUpdate('updated');
     }
 
     const switchSignUpLogin = () => {
@@ -101,7 +102,6 @@ const Auth = props => {
             </button>
             </div>
             {errorChecker()}
-            {console.log(error)}
         </div>
     );
 }

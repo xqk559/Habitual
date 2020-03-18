@@ -3,7 +3,7 @@ import '../App.css';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const toolbar = props => {
+const Toolbar = props => {
     return (
         <div>
             <ul className="toolbar">
@@ -16,16 +16,18 @@ const toolbar = props => {
                 <li className="link">
                     <NavLink to="/statistics">Statistics</NavLink>
                 </li>
-                {props.loginReducer[0].token ? <li className="dotlink">
+                {props.loginReducer[0].token 
+                ? <li className="dotlink">
                     <div className="dot"></div>
-                </li> : null}
+                  </li>
+                : null}
                 <div>
                     <li className="rightLink">
                         <NavLink to="/login">Login-Sign Up</NavLink>
                     </li>
                 </div>
             </ul>
-            {console.log(props.loginReducer[0].token + "COCK")}
+            {console.log(props.loginReducer[0].token)}
         </div>
     )
 }
@@ -36,4 +38,4 @@ const mapStateToProps = state => {
     };
   };
 
-export default connect(mapStateToProps)(toolbar);
+export default connect(mapStateToProps)(Toolbar);
