@@ -16,16 +16,14 @@ const Toolbar = props => {
                 <li className="link">
                     <NavLink to="/statistics">Statistics</NavLink>
                 </li>
-                {localStorage.getItem('token') 
-                ? <div>
-                    <li className="dotlink">
-                        <div className="dot"></div>
-                    </li>
-                    <li className="username">
-                        {localStorage.getItem('email')}
-                    </li>
-                  </div>
+                {props.loginReducer[0].token 
+                ? <li className="dotlink">
+                    <div className="dot"></div>
+                  </li>
                 : null}
+                <li className="username">
+                {props.loginReducer[0].email}
+                </li>
                 <div>
                     <li className="rightLink">
                         <NavLink to="/login">Login-Sign Up</NavLink>

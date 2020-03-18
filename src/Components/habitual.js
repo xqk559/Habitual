@@ -14,7 +14,7 @@ let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 
 const Habitual = props => {
-    const [defaultList, setDefaultList] = useState()
+    const [defaultList, setDefaultList] = useState();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -26,16 +26,26 @@ const Habitual = props => {
                 return defaultArray}})
             .then(()=> setDefaultList(defaultArray))
             .then(defaultExecuted = true)
+            .then(()=>console.log(defaultList))
+            .then(()=>console.log(defaultArray))
         };
         fetchData();
       }, []);
-    
-      useEffect(()=> 
-      {
+
+      useEffect(()=> {
         if(defaultList != null){
         props.addDefaultToState(defaultList);
         }
-      }, [defaultExecuted])
+      }, [defaultExecuted, defaultList])
+
+      useEffect(()=>{
+        const token = localStorage.getItem('token');
+        if(token){
+        props.signUpRedux(localStorage.getItem('token'),
+                           localStorage.getItem('userId'),
+                           localStorage.getItem('email'))
+        }
+        }, [])
 
     const uploadChecklist = () => {
         axios.get('https://habitual-f64a5.firebaseio.com/history.json')
@@ -127,6 +137,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
+        signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
         addDefaultToState: (defaults) => dispatch(actionCreators.addDefaultToState(defaults)),
     };
   };
