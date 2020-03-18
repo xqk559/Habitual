@@ -3,12 +3,11 @@ import '../App.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
 
-let email;
-let password;
-
 const Auth = () => {
 
-    let [title, setTitle] = useState("Sign Up")
+    let [title, setTitle] = useState("Sign Up");
+    let [email, setEmail] = useState();
+    let [password, setPassword] = useState();
 
     const authData = {
         email: email,
@@ -16,13 +15,22 @@ const Auth = () => {
         returnSecureToken: true
     };
 
+    const signUp = () => {
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
+        let axiosResponse;
+        const post = axios.post(url, authData)
+            .then(response=>axiosResponse=response.data)
+            .then(()=>localStorage.setItem('token', axiosResponse.idToken))
+            .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+    }
+    
     const login = () => {
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
-    let axiosResponse;
-    const post = axios.post(url, authData)
-        .then(response=>axiosResponse=response.data)
-        .then(()=>localStorage.setItem('token', axiosResponse.idToken))
-        .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
+        let axiosResponse;
+        const post = axios.post(url, authData)
+            .then(response=>axiosResponse=response.data)
+            .then(()=>localStorage.setItem('token', axiosResponse.idToken))
+            .then(()=>localStorage.setItem('userId', axiosResponse.localId))
     }
     
     const logout = () => {
@@ -45,8 +53,10 @@ const Auth = () => {
                 <input type="text" 
                     className="loginInput" 
                     placeholder="Email"
-                    onChange={event=>email=event.target.value}/>
-                <button onClick={()=>login()}
+                    onChange={event=>setEmail(event.target.value)}/>
+                <button onClick={title === "Sign Up" 
+                                 ? ()=>signUp() 
+                                 : ()=>login()}
                         className="btn btn-outline-dark btn-sm">
                             {title}
                 </button>
@@ -55,7 +65,7 @@ const Auth = () => {
                 <input type="text" 
                     className="loginInput" 
                     placeholder="Password"
-                    onChange={event=>email=event.target.value}/>
+                    onChange={event=>setPassword(event.target.value)}/>
                 <button onClick={()=>logout()}
                         className="btn btn-outline-danger btn-sm">
                             Logout
