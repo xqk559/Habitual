@@ -46,18 +46,27 @@ const Auth = () => {
                     className="loginInput" 
                     placeholder="Email"
                     onChange={event=>email=event.target.value}/>
-                <button className="loginButtons" onClick={()=>login()}>{title}</button>
+                <button onClick={()=>login()}
+                        className="btn btn-outline-dark btn-sm">
+                            {title}
+                </button>
             </div>
             <div className="loginButtons">
                 <input type="text" 
                     className="loginInput" 
                     placeholder="Password"
                     onChange={event=>email=event.target.value}/>
-                <button onClick={()=>logout()}>Logout</button>
+                <button onClick={()=>logout()}
+                        className="btn btn-outline-danger btn-sm">
+                            Logout
+                </button>
             </div>
             <br/>
             <div className="stats">
-            <button onClick={()=>switchSignUpLogin()}>Switch Login/Signup</button>
+            <button onClick={()=>switchSignUpLogin()}
+                    className="btn btn-outline-primary btn-sm">
+                        Switch Login/Signup
+            </button>
             </div>
         </div>
     );
