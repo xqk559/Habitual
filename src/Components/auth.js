@@ -8,6 +8,7 @@ const Auth = () => {
     let [title, setTitle] = useState("Sign Up");
     let [email, setEmail] = useState();
     let [password, setPassword] = useState();
+    let [error, setError] = useState();
 
     const authData = {
         email: email,
@@ -16,21 +17,25 @@ const Auth = () => {
     };
 
     const signUp = () => {
+        setError();
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
         let axiosResponse;
         const post = axios.post(url, authData)
             .then(response=>axiosResponse=response.data)
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+            .catch(err=>setError(err.response.data.error))
     }
     
     const login = () => {
+        setError();
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
         let axiosResponse;
         const post = axios.post(url, authData)
             .then(response=>axiosResponse=response.data)
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+            .catch(err=>setError(err.response.data.error))
     }
     
     const logout = () => {
@@ -43,6 +48,16 @@ const Auth = () => {
             setTitle("Login")
         } else if (title === "Login") {
             setTitle("Sign Up") 
+        }
+    }
+
+    const errorChecker = () => {
+        if (error) {
+            return (
+                <div className="centered">
+                    Error: {error.message}
+                </div>
+            )
         }
     }
 
@@ -78,6 +93,7 @@ const Auth = () => {
                         Switch Login/Signup
             </button>
             </div>
+            {errorChecker()}
         </div>
     );
 }
