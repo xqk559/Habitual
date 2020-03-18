@@ -11,7 +11,7 @@ const Item = props => {
                     onClick={()=>props.checkboxClicked(props.id)}/>
                 &nbsp;{props.name}
                 <button type="button" 
-                        class="close" 
+                        className="close" 
                         aria-label="Close"
                         onClick={()=>props.removeItem(props.id)}>
                   <span aria-hidden="true">&times;</span>

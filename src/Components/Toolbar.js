@@ -30,7 +30,6 @@ const Toolbar = props => {
                     </li>
                 </div>
             </ul>
-            {console.log(props.loginReducer[0].email)}
         </div>
     )
 }

@@ -120,6 +120,7 @@ const Habitual = props => {
 const mapStateToProps = state => {
     return {
         listReducer: state.listReducer,
+        loginReducer: state.loginReducer,
     };
   };
   
