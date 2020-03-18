@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 let email;
 let password;
