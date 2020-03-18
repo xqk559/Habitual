@@ -101,4 +101,16 @@ const Auth = () => {
     );
 }
 
-export default Auth;
+const mapStateToProps = state => {
+    return {
+        loginReducer: state.loginReducer,
+    };
+  };
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
