@@ -1,6 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = [];
+const initialState = [{
+    token: null,
+    userId: null,
+    email: null,
+}];
 
 const signup = (state, action) => {
     let updatedState = [{
@@ -9,7 +13,6 @@ const signup = (state, action) => {
         email: action.email,
     }]
     return [
-        ...state,
         ...updatedState,
     ]
 }

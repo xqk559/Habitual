@@ -18,7 +18,7 @@ const Auth = props => {
     };
 
     const signUp = () => {
-        setError();
+        setError(null);
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
         let axiosResponse;
         const post = axios.post(url, authData)
@@ -26,15 +26,16 @@ const Auth = props => {
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
             .catch(err=>setError(err.response.data.error))
-            .then(()=>{if(error = null){
+            .then(()=>{if(localStorage.getItem('token')){
                     props.signUpRedux(localStorage.getItem('token'),
                                       localStorage.getItem('userId'),
                                       email)
+                    console.log("FUCK")
                 }})
     }
     
     const login = () => {
-        setError();
+        setError(null);
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
         let axiosResponse;
         const post = axios.post(url, authData)
@@ -100,6 +101,7 @@ const Auth = props => {
             </button>
             </div>
             {errorChecker()}
+            {console.log(error)}
         </div>
     );
 }
