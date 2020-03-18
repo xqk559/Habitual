@@ -54,6 +54,11 @@ const Auth = props => {
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
             .then(()=>localStorage.setItem('email', authData.email))
             .catch(err=>setError(err.response.data.error))
+            .then(()=>{if(localStorage.getItem('token')){
+                props.signUpRedux(localStorage.getItem('token'),
+                                  localStorage.getItem('userId'),
+                                  localStorage.getItem('email'))
+            }})
     }
     
     const logout = () => {
