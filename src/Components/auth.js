@@ -25,6 +25,9 @@ const Auth = () => {
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
             .catch(err=>setError(err.response.data.error))
+            // .then(()=>{if(!error){
+
+            //     }})
     }
     
     const login = () => {
