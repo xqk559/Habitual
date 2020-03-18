@@ -18,7 +18,8 @@ const Habitual = props => {
     
     useEffect(() => {
         const fetchData = async () => {
-          await axios.get('https://habitual-f64a5.firebaseio.com/defaults.json')
+          if(localStorage.getItem('userId')){  
+          await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
             .then((response)=> {defaults = (Object.values(response.data))})
             .then(()=> defaultArray = defaults[0])
             .then(()=>{for(let i in defaultArray){
@@ -28,7 +29,7 @@ const Habitual = props => {
             .then(defaultExecuted = true)
             .then(()=>console.log(defaultList))
             .then(()=>console.log(defaultArray))
-        };
+        }};
         fetchData();
       }, []);
 
@@ -59,8 +60,8 @@ const Habitual = props => {
     }
 
     const uploadDefaultList = () => {
-        axios.delete('https://habitual-f64a5.firebaseio.com/defaults.json');
-        axios.post('https://habitual-f64a5.firebaseio.com/defaults.json', props.listReducer);
+        axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
+        axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
     }
 
     const checklist = () => {
