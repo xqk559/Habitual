@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import * as actionCreators from '../Store/actions/index';
 
-const Auth = () => {
+const Auth = props => {
 
     let [title, setTitle] = useState("Sign Up");
     let [email, setEmail] = useState();
@@ -25,9 +26,11 @@ const Auth = () => {
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
             .catch(err=>setError(err.response.data.error))
-            // .then(()=>{if(!error){
-
-            //     }})
+            .then(()=>{if(!error){
+                    props.signUpRedux(localStorage.getItem('token'),
+                                      localStorage.getItem('userId'),
+                                      email)
+                }})
     }
     
     const login = () => {
@@ -109,7 +112,7 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
     return {
-        
+        signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
     };
   };
 
