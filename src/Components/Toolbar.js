@@ -15,9 +15,14 @@ const toolbar = () => {
                 <li className="link">
                     <NavLink to="/statistics">Statistics</NavLink>
                 </li>
-                <li className="rightLink">
-                    <NavLink to="/login">Login-Sign Up</NavLink>
+                <li className="dotlink">
+                    <div className="dot"></div>
                 </li>
+                <div>
+                    <li className="rightLink">
+                        <NavLink to="/login">Login-Sign Up</NavLink>
+                    </li>
+                </div>
             </ul>
         </div>
     )

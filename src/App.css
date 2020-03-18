@@ -45,6 +45,22 @@ a {
   padding: 10px;
 }
 
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  float: right;
+}
+
+.dotlink {
+  display: inline;
+  float: left;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
 .hidden {
   display: none;
   margin-left: 28%;
@@ -84,6 +100,7 @@ a {
   display: inline;
   float: right;
   border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 li a {
