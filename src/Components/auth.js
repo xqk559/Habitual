@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -17,6 +17,15 @@ const Auth = props => {
         password: password,
         returnSecureToken: true
     };
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token');
+        if(token){
+        props.signUpRedux(localStorage.getItem('token'),
+                           localStorage.getItem('userId'),
+                           email)
+        }
+    }, [])
 
     const signUp = () => {
         setError(null);
@@ -49,6 +58,7 @@ const Auth = props => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         setUpdate('updated');
+        props.logoutRedux();
     }
 
     const switchSignUpLogin = () => {
@@ -115,6 +125,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
+        logoutRedux: (token, userId)=> dispatch(actionCreators.logout(token, userId)),
     };
   };
 

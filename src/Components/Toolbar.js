@@ -18,7 +18,7 @@ const Toolbar = props => {
                 </li>
                 {props.loginReducer[0].token 
                 ? <li className="dotlink">
-                    <div className="dot"></div>
+                    <div className="dot">&nbsp;&nbsp;&nbsp;&nbsp;Loggedinassbitch</div>
                   </li>
                 : null}
                 <div>

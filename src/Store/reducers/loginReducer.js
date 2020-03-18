@@ -17,9 +17,14 @@ const signup = (state, action) => {
     ]
 }
 
+const logout = (state, action) => {
+    return []
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.SIGN_UP: return signup(state,action);
+        case actionTypes.LOGOUT: return logout(state,action);
         default: return state; 
     }
 }
