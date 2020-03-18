@@ -18,10 +18,8 @@ export const login = (token, userId, email) => {
     }
 }
 
-export const logout = (token, userId) => {
+export const logout = () => {
     return {
         type: actionTypes.SIGN_UP,
-        token: token,
-        userId: userId,
     }
 }

@@ -195,6 +195,14 @@ li a:hover {
   border-left: 1px solid black;
 }
 
+.username {
+  font-weight: bold;
+  display: inline;
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 600px) {
   phone {
     zoom: 10%;

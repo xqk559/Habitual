@@ -23,7 +23,7 @@ const Auth = props => {
         if(token){
         props.signUpRedux(localStorage.getItem('token'),
                            localStorage.getItem('userId'),
-                           email)
+                           localStorage.getItem('email'))
         }
     }, [])
 
@@ -35,11 +35,12 @@ const Auth = props => {
             .then(response=>axiosResponse=response.data)
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+            .then(()=>localStorage.setItem('email', authData.email))
             .catch(err=>setError(err.response.data.error))
             .then(()=>{if(localStorage.getItem('token')){
                     props.signUpRedux(localStorage.getItem('token'),
                                       localStorage.getItem('userId'),
-                                      email)
+                                      localStorage.getItem('email'))
                 }})
     }
     
@@ -51,12 +52,14 @@ const Auth = props => {
             .then(response=>axiosResponse=response.data)
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+            .then(()=>localStorage.setItem('email', authData.email))
             .catch(err=>setError(err.response.data.error))
     }
     
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('email');
         setUpdate('updated');
         props.logoutRedux();
     }

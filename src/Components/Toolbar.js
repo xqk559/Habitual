@@ -18,16 +18,19 @@ const Toolbar = props => {
                 </li>
                 {props.loginReducer[0].token 
                 ? <li className="dotlink">
-                    <div className="dot">&nbsp;&nbsp;&nbsp;&nbsp;Loggedinassbitch</div>
+                    <div className="dot"></div>
                   </li>
                 : null}
+                <li className="username">
+                {props.loginReducer[0].email}
+                </li>
                 <div>
                     <li className="rightLink">
                         <NavLink to="/login">Login-Sign Up</NavLink>
                     </li>
                 </div>
             </ul>
-            {console.log(props.loginReducer[0].token)}
+            {console.log(props.loginReducer[0].email)}
         </div>
     )
 }
