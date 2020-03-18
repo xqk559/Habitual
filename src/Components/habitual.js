@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import Item from './item';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom'
 
 let name;
 let axiosData;
@@ -12,10 +13,18 @@ let defaults;
 let defaultArray = null;
 let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
+let cleared;
+
+const refresh = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState();
-    console.log(defaultList)
+    const [userIdExists, setUserIdExists] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
           if(localStorage.getItem('userId') && defaultArray == null){  
@@ -27,20 +36,33 @@ const Habitual = props => {
                 return defaultArray}})
             .then(()=> setDefaultList(defaultArray))
             .then(defaultExecuted = true)
-            .then(()=>console.log(defaultList))
-            .then(()=>console.log(defaultArray))
-        } else {
-            setDefaultList()
-        }
+        } 
         };
         fetchData();
-      }, []);
+      }, [cleared]);
+
+      let location = useLocation()
+
+      useEffect(()=>{
+        setUserIdExists(true)
+        refresh()
+      }, [userIdExists, props, localStorage, location])
+
+
+
 
       useEffect(()=> {
         if(defaultList != null){
-        props.addDefaultToState(defaultList);
+            props.addDefaultToState(defaultList); 
+      }
+    }, [defaultList, cleared, localStorage])
+
+      useEffect(()=>{
+        if(!localStorage.getItem('userId')){
+            props.clearAll()
+            cleared = 69;
         }
-      }, [defaultList])
+      }, [localStorage])
 
       useEffect(()=>{
         const token = localStorage.getItem('token');
@@ -71,7 +93,6 @@ const Habitual = props => {
         const capitalizeFirstLetter = string => {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-        if (localStorage.getItem('userId')) {
         return (<ul>
             {props.listReducer.map((val, index) => {return (<li key={index}
                     className="none">
@@ -81,9 +102,7 @@ const Habitual = props => {
                 );
             })}
             </ul>
-        );} else {
-            return null;
-        }
+        );
     }
 
     return (
@@ -127,7 +146,7 @@ const Habitual = props => {
                         To Do:
                     </div>
                     <br />
-                    {checklist()}
+                    {userIdExists ? checklist():null}
                 </div>
             </div>
         </div>
@@ -146,6 +165,7 @@ const mapDispatchToProps = dispatch => {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
         signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
         addDefaultToState: (defaults) => dispatch(actionCreators.addDefaultToState(defaults)),
+        clearAll: () => dispatch(actionCreators.clearAll()),
     };
   };
   

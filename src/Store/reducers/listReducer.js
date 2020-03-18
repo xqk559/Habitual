@@ -40,12 +40,17 @@ const checkboxClicked = (state, action) => {
     )
 }
 
+const clearAll = (state, action) => {
+    return []
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_ITEM: return addItem(state, action);
         case actionTypes.REMOVE_ITEM: return removeItem(state, action);
         case actionTypes.CHECKBOX_CLICKED: return checkboxClicked(state, action);
         case actionTypes.ADD_DEFAULT_TO_STATE: return addDefaultToState(state, action);
+        case actionTypes.CLEAR_ALL: return clearAll(state, action);
         default: return state;
     }
 };

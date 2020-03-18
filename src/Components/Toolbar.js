@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+
+function usePageViews() {
+    let location = useLocation()
+    let [refresh, setRefresh] = useState()
+    useEffect(
+      () => {
+          setRefresh(Math.random())
+      },
+      [location]
+    )
+  }
+
 const Toolbar = props => {
+
     return (
         <div>
+            {usePageViews()}
             <ul className="toolbar">
                 <li className="link">
                     <NavLink to="/">Home</NavLink>

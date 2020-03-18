@@ -34,3 +34,9 @@ export const getAxiosList = () => {
         type: actionTypes.GET_AXIOS_LIST,
     }
 }
+
+export const clearAll = () => {
+    return {
+        type: actionTypes.CLEAR_ALL,
+    }
+}

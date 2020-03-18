@@ -8,3 +8,5 @@ export const ADD_DEFAULT_TO_STATE = 'ADD_DEFAULT_TO_STATE';
 export const SIGN_UP = 'SIGN_UP';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+
+export const CLEAR_ALL = 'CLEAR_ALL';
