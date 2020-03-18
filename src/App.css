@@ -74,6 +74,12 @@ a {
   width: auto;
 }
 
+.loginButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .rightLink {
   display: inline;
   float: right;

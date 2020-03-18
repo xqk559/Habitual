@@ -8,11 +8,14 @@ let password;
 
 const Auth = () => {
 
+    let [title, setTitle] = useState("Sign Up")
+
     const authData = {
         email: email,
         password: password,
         returnSecureToken: true
     };
+
     const login = () => {
     let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
     let axiosResponse;
@@ -21,26 +24,41 @@ const Auth = () => {
         .then(()=>localStorage.setItem('token', axiosResponse.idToken))
         .then(()=>localStorage.setItem('userId', axiosResponse.localId))
     }
-    let [title, setTitle] = useState("Login")
     
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
     }
 
+    const switchSignUpLogin = () => {
+        if (title === "Sign Up") {
+            setTitle("Login")
+        } else if (title === "Login") {
+            setTitle("Sign Up") 
+        }
+    }
+
     return (
-        <div className="stats">
+        <div>
             <h1 className="stats">{title}</h1>
-            <input type="text" 
-                   className="loginInput" 
-                   placeholder="Email"
-                   onChange={event=>email=event.target.value}/>
-            <input type="text" 
-                   className="loginInput" 
-                   placeholder="Password"
-                   onChange={event=>password=event.target.value}/>
-            <button onClick={()=>login()}>{title}</button>
-            <button onClick={()=>logout()}>Logout</button>
+            <div className="loginButtons">
+                <input type="text" 
+                    className="loginInput" 
+                    placeholder="Email"
+                    onChange={event=>email=event.target.value}/>
+                <button className="loginButtons" onClick={()=>login()}>{title}</button>
+            </div>
+            <div className="loginButtons">
+                <input type="text" 
+                    className="loginInput" 
+                    placeholder="Password"
+                    onChange={event=>email=event.target.value}/>
+                <button onClick={()=>logout()}>Logout</button>
+            </div>
+            <br/>
+            <div className="stats">
+            <button onClick={()=>switchSignUpLogin()}>Switch Login/Signup</button>
+            </div>
         </div>
     );
 }

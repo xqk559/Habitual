@@ -77,6 +77,7 @@ const Habitual = props => {
           <div className="rainbow-text-small">
             You've done so many things today!
           </div>
+          <br />
             <div className="centered2">
                 <input type="text"
                        onChange={(event)=>{name = event.target.value}}
