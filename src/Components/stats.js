@@ -48,7 +48,9 @@ const Statistics = props => {
     return (
         <div className="stats">
             <div>It is currently {utcDate}</div>
+            <br/>
             <button onClick={setLastDay}>Get Today's Data</button>
+            <br/>
             <div>
                 {localDay ? dayMapper() : null}
                 You've completed out of {localDay.length} things!
