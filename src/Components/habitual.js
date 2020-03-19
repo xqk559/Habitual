@@ -46,7 +46,7 @@ const Habitual = props => {
       useEffect(()=>{
         setUserIdExists(true)
         refresh()
-      }, [userIdExists, props, localStorage, location])
+      }, [userIdExists, props, location])
 
 
 
@@ -55,7 +55,7 @@ const Habitual = props => {
         if(defaultList != null){
             props.addDefaultToState(defaultList); 
       }
-    }, [defaultList, cleared, localStorage])
+    }, [defaultList, localStorage])
 
       useEffect(()=>{
         if(!localStorage.getItem('userId')){
