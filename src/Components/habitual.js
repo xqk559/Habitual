@@ -15,12 +15,7 @@ let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 let cleared;
 
-// const refresh = function() {
-//     if(!window.location.hash) {
-//         window.location = window.location + '#loaded';
-//         window.location.reload();
-//     }
-// }
+
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState();
@@ -75,14 +70,17 @@ const Habitual = props => {
         }, [])
 
     const uploadChecklist = () => {
-        axios.get('https://habitual-f64a5.firebaseio.com/history.json')
+        if(localStorage.getItem('userId'))
+        {
+        axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
             .then((response)=> axiosData = response.data)
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
-                ? axios.delete('https://habitual-f64a5.firebaseio.com/history/'+ lastAxiosDay[0] +'.json') : console.log())
+                ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
         let fullPost = props.listReducer;
-        axios.post('https://habitual-f64a5.firebaseio.com/history.json', fullPost);
+        axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
+        }
     }
 
     const uploadDefaultList = () => {
