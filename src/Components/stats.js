@@ -51,6 +51,7 @@ const Statistics = props => {
             <button onClick={setLastDay}>Get Today's Data</button>
             <div>
                 {localDay ? dayMapper() : null}
+                You've completed out of {localDay.length} things!
             </div>
         </div>
     )
