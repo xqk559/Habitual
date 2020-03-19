@@ -73,7 +73,7 @@ const Habitual = props => {
         if(localStorage.getItem('userId'))
         {
         axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-            .then((response)=> axiosData = response.data)
+            .then((response)=> {if(response.data != null){axiosData = response.data}})
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
