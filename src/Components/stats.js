@@ -29,13 +29,15 @@ const Statistics = props => {
     }, [])
     
     const dayMapper = () => {
-        console.log('MAPPT')
+        const capitalize = (s) => {
+            return s.charAt(0).toUpperCase() + s.slice(1)
+          }
         return (<ul>
             {localDay ? 
              localDay.map((value, index) => 
                 {return (<li key={index}
                             className="none">
-                            <div>{value.name}</div> 
+                            <div>{value.name}: {capitalize(value.completed.toString())}</div> 
                         </li>
                         )})
              :null}
@@ -46,7 +48,7 @@ const Statistics = props => {
     return (
         <div className="stats">
             <div>It is currently {utcDate}</div>
-            <button onClick={setLastDay}>UPDATE</button>
+            <button onClick={setLastDay}>Get Today's Data</button>
             <div>
                 {localDay ? dayMapper() : null}
             </div>
