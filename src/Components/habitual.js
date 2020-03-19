@@ -15,12 +15,12 @@ let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 let cleared;
 
-const refresh = function() {
-    if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-}
+// const refresh = function() {
+//     if(!window.location.hash) {
+//         window.location = window.location + '#loaded';
+//         window.location.reload();
+//     }
+// }
 
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState();
@@ -31,6 +31,7 @@ const Habitual = props => {
           await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
             .then((response)=> {defaults = (Object.values(response.data))})
             .then(()=> defaultArray = defaults[0])
+            .then(()=>console.log(defaultArray))
             .then(()=>{for(let i in defaultArray){
                 defaultArray[i].date = today 
                 return defaultArray}})
@@ -45,7 +46,7 @@ const Habitual = props => {
 
       useEffect(()=>{
         setUserIdExists(true)
-        refresh()
+        //refresh()
       }, [userIdExists, props, location])
 
 
