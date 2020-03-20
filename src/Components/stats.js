@@ -49,7 +49,7 @@ const Statistics = props => {
         <div className="stats">
             <div>It is currently {utcDate}</div>
             <br/>
-            <button onClick={setLastDay}>Get Today's Data</button>
+            <button onClick={setLastDay}>Get Last Day's Data</button>
             <br/>
             <div>
                 {localDay ? dayMapper() : null}
