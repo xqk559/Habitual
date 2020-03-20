@@ -8,7 +8,6 @@ let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
 
-
 const Statistics = props => {
     let [lastDay, setLastDay] = useState();
     let [totalCompleted, setTotalCompleted] = useState(0);
@@ -19,7 +18,6 @@ const Statistics = props => {
             {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
                 .then((response)=> axiosResponse = response.data)
                 .then(()=> localDay = Object.values(axiosResponse).pop())
-                .then(()=>console.log(localDay))
                 .then(()=>
                     {if(localDay)
                         {
@@ -77,7 +75,6 @@ const Statistics = props => {
                 You've completed {totalCompleted} out of {localDay.length} things!
             </div>
             <div>That's {(totalCompleted/localDay.length)*100}% of things!</div>
-            {console.log(totalCompleted)}
         </div>
     )
 }
