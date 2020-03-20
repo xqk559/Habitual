@@ -5,6 +5,9 @@ let userId = null;
 if(localStorage.getItem('userId')){
     userId = localStorage.getItem('userId')
 }
+
+let todaysDate = new Date().toString().slice(0,15);
+
 const initialState = [];
 
 const addItem = (state, action) => {
@@ -16,6 +19,7 @@ const addItem = (state, action) => {
             completed: false,
             date: date.slice(0,15),
             userId: userId,
+            date: todaysDate,
         }
     ];
 };

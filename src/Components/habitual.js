@@ -41,11 +41,7 @@ const Habitual = props => {
 
       useEffect(()=>{
         setUserIdExists(true)
-        //refresh()
       }, [userIdExists, props, location])
-
-
-
 
       useEffect(()=> {
         if(defaultList != null){

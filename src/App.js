@@ -11,48 +11,48 @@ import Statistics from './Components/stats';
 const App = () => {
     return (
       <BrowserRouter forceRefresh={true}>
-      <Switch>
-        <Route path="/(|checklist)/" exact render={()=> 
-          <div className="phone">
-          <Toolbar />
-          <br />
-          <br />
-          <br />
-          <div >
-            <Habitual/>
+        <Switch>
+          <Route path="/(|checklist)/" exact render={()=> 
+            <div className="phone">
+            <Toolbar />
+            <br />
+            <br />
+            <br />
+            <div >
+              <Habitual/>
+            </div>
+            <br />
+            <div className="centered">
+              <hr />
+              <AppFooter />
+            </div>
           </div>
-          <br />
-          <div className="centered">
-            <hr />
-            <AppFooter />
-          </div>
-        </div>
-        }/>
-        <Route path="/login/" 
-               exact 
-               render={()=><div>
-                            <Toolbar/>
-                            <Auth />
-                           </div>}/>
-        <Route path="/oldstatistics/" 
-               exact 
-               render=
-                {()=>
-                  <div>
-                    <Toolbar/>
-                    <Stats/>
-                  </div> 
-                }/>
-                <Route path="/statistics/" 
-               exact 
-               render=
-                {()=>
-                  <div>
-                    <Toolbar/>
-                    <Statistics/>
-                  </div> 
-                }/>
-      </Switch>
+          }/>
+          <Route path="/login/" 
+                exact 
+                render={()=><div>
+                                <Toolbar/>
+                                <Auth />
+                            </div>}/>
+          <Route path="/oldstatistics/" 
+                exact 
+                render=
+                  {()=>
+                    <div>
+                      <Toolbar/>
+                      <Stats/>
+                    </div> 
+                  }/>
+                  <Route path="/statistics/" 
+                exact 
+                render=
+                  {()=>
+                    <div>
+                      <Toolbar/>
+                      <Statistics/>
+                    </div> 
+                  }/>
+        </Switch>
       </BrowserRouter>
     );
 }

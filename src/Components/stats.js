@@ -33,14 +33,17 @@ const Statistics = props => {
             return s.charAt(0).toUpperCase() + s.slice(1)
           }
         return (<ul>
+            {localDay? localDay[0].date : null}
             {localDay ? 
-             localDay.map((value, index) => 
-                {return (<li key={index}
-                            className="none">
-                            <div>{value.name}: {capitalize(value.completed.toString())}</div> 
-                        </li>
+             localDay.map((value) => 
+                {return (<div>
+                            <li key={value.id}
+                                className="none">
+                                <div>{value.name}: {capitalize(value.completed.toString())}</div>
+                            </li>
+                        </div>
                         )})
-             :null}
+             :null} 
             </ul>
         );
     }
