@@ -76,7 +76,7 @@ const Statistics = props => {
                 {localDay ? dayMapper() : null}
                 You've completed {totalCompleted} out of {localDay.length} things!
             </div>
-            <div>That's {}</div>
+            <div>That's {(totalCompleted/localDay.length)*100}% of things!</div>
             {console.log(totalCompleted)}
         </div>
     )
