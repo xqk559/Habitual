@@ -8,8 +8,10 @@ let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
 
+
 const Statistics = props => {
     let [lastDay, setLastDay] = useState();
+    let [totalCompleted, setTotalCompleted] = useState(0);
 
     useEffect(()=>{
         let axiosResponse;
@@ -17,6 +19,19 @@ const Statistics = props => {
             .then((response)=> axiosResponse = response.data)
             .then(()=> localDay = Object.values(axiosResponse).pop())
             .then(()=>console.log(localDay))
+            .then(()=>
+                {if(localDay)
+                    {
+                        {for(let i = 0; i < localDay.length; i++)
+                            {
+                                if(localDay[i].completed)
+                                {
+                                setTotalCompleted(totalCompleted++)
+                                }
+                            }
+                        }
+                    }
+                })
     }, [])
 
     useEffect(()=>{
@@ -31,8 +46,9 @@ const Statistics = props => {
     const dayMapper = () => {
         const capitalize = (s) => {
             return s.charAt(0).toUpperCase() + s.slice(1)
-          }
+          };
         return (<ul>
+            
             {localDay? localDay[0].date : null}
             {localDay ? 
              localDay.map((value) => 
@@ -56,8 +72,9 @@ const Statistics = props => {
             <br/>
             <div>
                 {localDay ? dayMapper() : null}
-                You've completed out of {localDay.length} things!
+                You've completed {totalCompleted} out of {localDay.length} things!
             </div>
+            {console.log(totalCompleted)}
         </div>
     )
 }

@@ -15,8 +15,6 @@ let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 let cleared;
 
-
-
 const Habitual = props => {
     const [defaultList, setDefaultList] = useState();
     const [userIdExists, setUserIdExists] = useState(false);
