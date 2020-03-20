@@ -15,23 +15,25 @@ const Statistics = props => {
 
     useEffect(()=>{
         let axiosResponse;
-        axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-            .then((response)=> axiosResponse = response.data)
-            .then(()=> localDay = Object.values(axiosResponse).pop())
-            .then(()=>console.log(localDay))
-            .then(()=>
-                {if(localDay)
-                    {
-                        {for(let i = 0; i < localDay.length; i++)
-                            {
-                                if(localDay[i].completed)
+        if(localStorage.getItem('userId'))
+            {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+                .then((response)=> axiosResponse = response.data)
+                .then(()=> localDay = Object.values(axiosResponse).pop())
+                .then(()=>console.log(localDay))
+                .then(()=>
+                    {if(localDay)
+                        {
+                            {for(let i = 0; i < localDay.length; i++)
                                 {
-                                setTotalCompleted(++totalCompleted)
+                                    if(localDay[i].completed)
+                                    {
+                                    setTotalCompleted(++totalCompleted)
+                                    }
                                 }
                             }
                         }
-                    }
-                })
+                    })
+                }    
     }, [])
 
     useEffect(()=>{
@@ -74,6 +76,7 @@ const Statistics = props => {
                 {localDay ? dayMapper() : null}
                 You've completed {totalCompleted} out of {localDay.length} things!
             </div>
+            <div>That's {}</div>
             {console.log(totalCompleted)}
         </div>
     )
