@@ -26,7 +26,7 @@ const Statistics = props => {
                             {
                                 if(localDay[i].completed)
                                 {
-                                setTotalCompleted(totalCompleted++)
+                                setTotalCompleted(++totalCompleted)
                                 }
                             }
                         }
