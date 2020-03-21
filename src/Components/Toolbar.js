@@ -14,9 +14,6 @@ const Toolbar = props => {
                     <NavLink to="/checklist">Checklist</NavLink>
                 </li>
                 <li className="link">
-                    <NavLink to="/oldstatistics">Old Statistics</NavLink>
-                </li>
-                <li className="link">
                     <NavLink to="/statistics">Statistics</NavLink>
                 </li>
                 {props.loginReducer[0].token 
