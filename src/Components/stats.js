@@ -72,6 +72,10 @@ const Statistics = props => {
         );
     }
 
+
+
+
+
     const allDates = () => {
         let allDatesArray = [];
         if(fullAxiosHistory[0] != null){
@@ -98,6 +102,9 @@ const Statistics = props => {
         }
     }
 
+
+
+    
     return (
         <div className="stats">
             <div>It is currently {utcDate}</div>
