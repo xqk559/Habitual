@@ -37,6 +37,7 @@ class Calendar extends React.Component {
       muted: JSON.parse(storedMuted) || false,
       showColorPicker: false,
       selectedColor: storedColor || "#2196f3",
+      lastDaySelected: null,
     }
     this.audio.muted = this.state.muted
   }
@@ -61,7 +62,8 @@ class Calendar extends React.Component {
     }
 
     localStorage.setItem("selectedDays", serializeDates(selectedDays))
-    this.setState({ selectedDays }, ()=>console.log(day))
+    this.setState({ selectedDays })
+    this.setState(this.state.lastDaySelected = day, ()=>console.log((this.state.lastDaySelected).toString().slice(0,15)))
   }
 
   toggleMute() {
@@ -83,7 +85,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    //const icon = this.state.muted ? faVolumeMute : faVolumeUp
     const mutedStyle = this.state.muted ? { color: "grey" } : {}
     const string = 'Reverse';
     return (
@@ -108,10 +109,6 @@ class Calendar extends React.Component {
 
             {this.state.showColorPicker && (
               <div className="color-picker">
-                {/* <FontAwesomeIcon
-                  icon={faHandPointRight}
-                  className="hand-right"
-                /> */}
                 <CirclePicker
                   colors={pickableColors}
                   circleSize={20}
@@ -121,13 +118,6 @@ class Calendar extends React.Component {
                 />
               </div>
             )}
-
-            {/* <FontAwesomeIcon
-              icon={icon}
-              onClick={this.toggleMute}
-              className="mute-icon"
-              style={mutedStyle}
-            /> */}
           </div>
         </div>
       </div>
