@@ -36,7 +36,7 @@ class Calendar extends React.Component {
       selectedDays: deserializeDates(storedDays),
       muted: JSON.parse(storedMuted) || false,
       showColorPicker: false,
-      selectedColor: storedColor || "#2196f3",
+      selectedColor: storedColor || "#9c27b0",
       lastDaySelected: null,
     }
     this.audio.muted = this.state.muted
