@@ -13,7 +13,7 @@ const App = () => {
       <BrowserRouter forceRefresh={true}>
         <Switch>
           <Route path="/(|checklist)/" exact render={()=> 
-            <div className="phone">
+            <div className="overflow">
             <Toolbar />
             <br />
             <br />
@@ -38,10 +38,10 @@ const App = () => {
                  exact 
                  render=
                   {()=>
-                    <div>
+                    <div className="overflow">
                       <Toolbar/>
                       <Statistics/>
-                      <div className="Calendar">
+                      <div className="calendar">
                         <Calendar/>
                       </div>
                     </div> 

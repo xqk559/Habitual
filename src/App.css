@@ -1,3 +1,5 @@
+
+
 a {
   display: block;
   padding: 8px;
@@ -28,7 +30,9 @@ a {
 }
 
 .calendar {
-  position: absolute;
+  margin-top: 250px;
+  margin-left: 100px;
+  float: right;
 }
 
 .centered {
@@ -78,6 +82,17 @@ a {
   display: inline;
   float: left;
   border-right: 1px solid black;
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: purple;
+  font-weight: bold;
+  padding: 30px 30px;
 }
 
 .loginInput {
@@ -131,6 +146,11 @@ li a:hover {
   margin:5px;
 }
 
+.overflow {
+  height: 700px;
+  overflow: scroll;
+}
+
 .rainbow-text {
   background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
   -webkit-background-clip: text;
@@ -161,6 +181,11 @@ li a:hover {
   margin-right: 330px;
 }
 
+.scroll {
+  height: 700px;
+  overflow: scroll;
+}
+
 .smallMargin {
   margin-left: 80px;
 }
@@ -174,7 +199,8 @@ li a:hover {
   color: purple;
   font-weight: bold;
   padding: 30px 30px;
-  position: absolute;
+  float: left;
+  position: relative;
 }
 
 .statListDate {

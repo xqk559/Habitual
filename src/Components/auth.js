@@ -89,7 +89,7 @@ const Auth = props => {
 
     return (
         <div>
-            <h1 className="stats">{title}</h1>
+            <h1 className="loginPage">{title}</h1>
             <div className="loginButtons">
                 <input type="text" 
                     className="loginInput" 
@@ -113,7 +113,7 @@ const Auth = props => {
                 </button>
             </div>
             <br/>
-            <div className="stats">
+            <div className="loginPage">
             <button onClick={()=>switchSignUpLogin()}
                     className="btn btn-outline-primary btn-sm">
                         Switch Login/Signup
