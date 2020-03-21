@@ -172,6 +172,13 @@ li a:hover {
   padding: 30px 30px;
 }
 
+.statListDate {
+  padding-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 27px;
+  font-weight: 900;
+}
+
 .toolbar {
   list-style-type: none;
   margin: 0;

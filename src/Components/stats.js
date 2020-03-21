@@ -47,19 +47,21 @@ const Statistics = props => {
         const capitalize = (s) => {
             return s.charAt(0).toUpperCase() + s.slice(1)
           };
-        return (<ul>
-            
-            {localDay? localDay[0].date : null}
-            {localDay ? 
-             localDay.map((value) => 
-                {return (<div>
-                            <li key={value.id}
-                                className="none">
-                                <div>{value.name}: {capitalize(value.completed.toString())}</div>
-                            </li>
-                        </div>
-                        )})
-             :null} 
+        return (
+            <ul>
+                <div className="statListDate">    
+                    {localDay? localDay[0].date : null}
+                </div>
+                {localDay ? 
+                localDay.map((value) => 
+                    {return (<div>
+                                <li key={value.id}
+                                    className="none">
+                                    <div>{value.name}: {capitalize(value.completed.toString())}</div>
+                                </li>
+                            </div>
+                            )})
+                :null} 
             </ul>
         );
     }
