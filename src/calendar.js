@@ -2,13 +2,6 @@ import React from "react"
 import DayPicker, { DateUtils } from "react-day-picker"
 import "react-day-picker/lib/style.css"
 import { CirclePicker } from "react-color"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faVolumeUp,
-  faVolumeMute,
-  faHandPointRight,
-} from "@fortawesome/free-solid-svg-icons"
-
 import "./calendar.css"
 import { serializeDates, deserializeDates } from "./storage"
 
@@ -89,52 +82,8 @@ class Calendar extends React.Component {
     }
   }
 
-
-
-
-  fizzbuzzMapper = (number) => {
-    number = 'nothing';
-    return number;
-  }
-
-  arraySubtractor = (total, number) => {
-    total = total - number;
-    return total;
-  }
-
-  fizzbuzzFilter = (element) => {
-    return element === 'FizzBuzz';
-  }
-
-  fizzbuzz = () => {
-    let i = 1;
-    let fizzbuzzArray = [];
-    for (i; i < 100; i++) {
-      if (i % 3 === 0 && i % 5 === 0) {
-       fizzbuzzArray.push( 'FizzBuzz');
-      } else if (i % 5 === 0) {
-        fizzbuzzArray.push( 'Buzz');
-      } else if (i % 3 === 0) {
-        fizzbuzzArray.push( 'Fizz');
-      } else {
-        fizzbuzzArray.push(i);
-      }
-    }
-    
-    let sortedArray = fizzbuzzArray.sort();
-
-    console.log(sortedArray);
-  }
-
-  stringReverse = (string) => {
-    let newString;
-    newString =  Array.from(string);
-    console.log(newString.reverse())
-  }
-
-
   render() {
-    const icon = this.state.muted ? faVolumeMute : faVolumeUp
+    //const icon = this.state.muted ? faVolumeMute : faVolumeUp
     const mutedStyle = this.state.muted ? { color: "grey" } : {}
     const string = 'Reverse';
     return (
@@ -159,10 +108,10 @@ class Calendar extends React.Component {
 
             {this.state.showColorPicker && (
               <div className="color-picker">
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon={faHandPointRight}
                   className="hand-right"
-                />
+                /> */}
                 <CirclePicker
                   colors={pickableColors}
                   circleSize={20}
@@ -173,12 +122,12 @@ class Calendar extends React.Component {
               </div>
             )}
 
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               icon={icon}
               onClick={this.toggleMute}
               className="mute-icon"
               style={mutedStyle}
-            />
+            /> */}
           </div>
         </div>
       </div>

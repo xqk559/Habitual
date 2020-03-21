@@ -6,7 +6,7 @@ import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import Habitual from './Components/habitual';
 import Auth from './Components/auth';
 import Statistics from './Components/stats';
-import Calendar from './Containers/calendar';
+import Calendar from './calendar';
 
 const App = () => {
     return (
@@ -41,7 +41,9 @@ const App = () => {
                     <div>
                       <Toolbar/>
                       <Statistics/>
-                      <Calendar/>
+                      <div className="Calendar">
+                        <Calendar/>
+                      </div>
                     </div> 
                   }/>
         </Switch>

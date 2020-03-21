@@ -27,6 +27,10 @@ a {
   padding: 10px;
 }
 
+.calendar {
+  position: absolute;
+}
+
 .centered {
   display: flex;
   flex-direction: column;
@@ -170,6 +174,7 @@ li a:hover {
   color: purple;
   font-weight: bold;
   padding: 30px 30px;
+  position: absolute;
 }
 
 .statListDate {
