@@ -84,9 +84,13 @@ const Statistics = props => {
                 allDatesArray.push(fullAxiosHistory[i][0].date) ;
             }
         }
-        let selectedDaysArray = localStorage.getItem('selectedDays')
+        let selectedDaysString = localStorage.getItem('selectedDays')
+        let selectedDaysArray = deserializeDates(selectedDaysString)
+        let shortenedSelectedDays = selectedDaysArray.map(day=>{
+            return day.toString().slice(0,15)
+        })
         //console.log(allDatesArray)
-        console.log(deserializeDates(selectedDaysArray))
+        console.log(shortenedSelectedDays)
     }
 
     const selectedDayFilter = (selectedDay) => {
@@ -112,7 +116,7 @@ const Statistics = props => {
         <div className="stats">
             <div>It is currently {utcDate}</div>
             <br/>
-            <button onClick={setLastDay}>Get Last Day's Data</button>
+            <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
             <div>
                 {localDay ? dayMapper() : null}
