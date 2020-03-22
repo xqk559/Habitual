@@ -103,7 +103,7 @@ const Auth = props => {
                 </button>
             </div>
             <div className="loginButtons">
-                <input type="text"
+                <input type="password"
                     className="loginInput"
                     placeholder="Password"
                     onChange={event=>setPassword(event.target.value)}/>

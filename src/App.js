@@ -12,28 +12,34 @@ const App = () => {
     return (
       <BrowserRouter forceRefresh={true}>
         <Switch>
-          <Route path="/(|checklist)/" exact render={()=>
-            <div className="overflow">
-            <Toolbar />
-            <br />
-            <br />
-            <br />
-            <div >
-              <Habitual/>
-            </div>
-            <br />
-            <div className="centered">
-              <hr />
-              <AppFooter />
-            </div>
-          </div>
-          }/>
-          <Route path="/login/"
-                 exact
-                 render={()=><div>
-                                <Toolbar/>
-                                <Auth />
-                            </div>}/>
+          <Route
+            path="/(|checklist)/"
+            exact
+            render=
+              {()=>
+                <div className="overflow">
+                <Toolbar />
+                <br/>
+                <br/>
+                <br/>
+                <div >
+                  <Habitual/>
+                </div>
+                <br/>
+                <div className="centered">
+                  <hr />
+                  <AppFooter />
+                </div>
+                </div>
+                }/>
+          <Route
+            path="/login/"
+            exact
+            render=
+            {()=> <div>
+                    <Toolbar/>
+                    <Auth />
+                  </div>}/>
           <Route path="/statistics/"
                  exact
                  render=

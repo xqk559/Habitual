@@ -14,7 +14,6 @@ let axiosResponse;
 const Statistics = props => {
 
     let [lastDay, setLastDay] = useState();
-    let [totalCompleted, setTotalCompleted] = useState(0);
     let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
 
     useEffect(()=>{
@@ -31,20 +30,7 @@ const Statistics = props => {
                         .then((response)=> axiosResponse = response.data)
                         .then(()=> localDay = Object.values(axiosResponse).pop())
                         .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
-                        .then(()=>
-                            {if(localDay)
-                                {
-                                    {for(let i = 0; i < localDay.length; i++)
-                                        {
-                                            if(localDay[i].completed)
-                                            {
-                                            setTotalCompleted(++totalCompleted)
-                                            }
-                                        }
-                                    }
-                                }
-                            })
-                        }
+                    }
             }})
     }, [])
 
@@ -125,22 +111,20 @@ const Statistics = props => {
 
     const mappedDay = (day) => {
         let totaler = 0;
-        {for(let i = 0; i < day.length; i++)
-            {
-                if(day[i].completed)
-                {
-                totaler = ++totaler
-                }
-            }
+        for(let i = 0; i < day.length; i++){
+          if(day[i].completed){
+            totaler = ++totaler
+          }
         }
+
         return (
+          <div>
             <div>
-                <div>
-                {day ? dayMapper(day) : <div className="loader"/>}
-                You've completed {totaler} out of {day.length} things!
-                </div>
-                <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
+            {day ? dayMapper(day) : <div className="loader"/>}
+            You've completed {totaler} out of {day.length} things!
             </div>
+            <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
+          </div>
         );
     }
 
@@ -166,13 +150,13 @@ const Statistics = props => {
 
 const mapStateToProps = state => {
     return {
-        loginReducer: state.loginReducer,
+      loginReducer: state.loginReducer,
     };
   };
 
   const mapDispatchToProps = dispatch => {
     return {
-        signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
+      signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
     };
   };
 
