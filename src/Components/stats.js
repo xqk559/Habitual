@@ -9,17 +9,19 @@ let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
 let axiosResponse;
-let filteredHist
 
 const Statistics = props => {
+    
     let [lastDay, setLastDay] = useState();
     let [totalCompleted, setTotalCompleted] = useState(0);
     let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
+    
     useEffect(()=>{
         if(axiosResponse != null){
             setFullAxiosHistory(Object.values(axiosResponse))
         }
     }, [axiosResponse])
+    
     useEffect(()=>{
         if(localStorage.getItem('userId'))
             {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
@@ -73,12 +75,10 @@ const Statistics = props => {
         );
     }
 
-
-
     let shortenedSelectedDays;
     let historicalDatesArray = [];
 
-    const allDates = () => {
+    const historicalDates = () => {
         if(fullAxiosHistory[0] != null){
             for(let i = 0; i < fullAxiosHistory.length; i++){
                 historicalDatesArray.push(fullAxiosHistory[i][0].date) ;
@@ -93,7 +93,6 @@ const Statistics = props => {
         //console.log(shortenedSelectedDays)
     }
 
-
     const findMatchingDates = (selected, historical) => {
         let matches = [];
         selected.sort();
@@ -106,40 +105,26 @@ const Statistics = props => {
         console.log(matches)
     }
 
-    // const selectedDayFilter = (selectedDay) => {
-    //     // if(fullAxiosHistory[0] != null){
-    //     //     for(let i = 0; i < fullAxiosHistory.length; i++){
-    //     //         return selectedDay;
-    //     //     }
-    //     // }
-    //     return selectedDay.date;
-    // }
+    const mappedDay = () => {
+        return (
+            <div>
+                <div>
+                {localDay ? dayMapper() : null}
+                You've completed {totalCompleted} out of {localDay.length} things!
+                </div>
+                <div>That's {((totalCompleted/localDay.length)*100).toFixed(0)}% of things!</div>
+            </div>
+        );
+    }
 
-    // const filteredHistory = () => {
-    //     if(fullAxiosHistory[0] != null){
-    //         filteredHist = fullAxiosHistory.filter(selectedDayFilter);
-    //         //console.log(filteredHist)
-    //     }
-    // }
-
-
-
-    
     return (
         <div className="stats">
             <div>It is currently {utcDate}</div>
             <br/>
             <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
-            <div>
-                {localDay ? dayMapper() : null}
-                You've completed {totalCompleted} out of {localDay.length} things!
-            </div>
-            <div>That's {((totalCompleted/localDay.length)*100).toFixed(0)}% of things!</div>
-            {/* {fullAxiosHistory ? console.log((fullAxiosHistory.filter(selectedDayFilter))[0]) : null} */}
-            {/* {fullAxiosHistory[0] ? console.log(fullAxiosHistory[0][0].date) : null} */}
-            {/* {filteredHistory()} */}
-            {allDates()}
+            {mappedDay()}
+            {historicalDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
         </div>
     )
