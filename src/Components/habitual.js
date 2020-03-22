@@ -22,17 +22,17 @@ const Habitual = props => {
         const fetchData = async () => {
           await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
             .then((response)=>{if(response.data != null){
-              if(localStorage.getItem('userId') && defaultArray == null){  
+              if(localStorage.getItem('userId') && defaultArray == null){
                 axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
                   .then((response)=> {defaults = (Object.values(response.data))})
                   .then(()=> defaultArray = defaults[0])
                   .then(()=>console.log(defaultArray))
                   .then(()=>{for(let i in defaultArray){
-                      defaultArray[i].date = today 
+                      defaultArray[i].date = today
                       return defaultArray}})
                   .then(()=> setDefaultList(defaultArray))
                   .then(defaultExecuted = true)
-              } 
+              }
             }})
         };
         fetchData();
@@ -46,7 +46,7 @@ const Habitual = props => {
 
       useEffect(()=> {
         if(defaultList != null){
-            props.addDefaultToState(defaultList); 
+            props.addDefaultToState(defaultList);
       }
     }, [defaultList, localStorage])
 
@@ -74,7 +74,7 @@ const Habitual = props => {
             .then((response)=> {if(response.data != null){axiosData = response.data}})
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
+            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
                 ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
           }})
         let fullPost = props.listReducer.map(day=>{
@@ -121,7 +121,7 @@ const Habitual = props => {
                         />
                 &nbsp;&nbsp;
                 <button onClick={ () => props.addItem(name) }
-                        type="button" 
+                        type="button"
                         className="btn btn-outline-dark btn-sm">
                     Add Item
                 </button>
@@ -133,9 +133,9 @@ const Habitual = props => {
                 Submit Completed Day
                 </button>
               &nbsp;
-              <button   
+              <button
                     onClick={ ()=> uploadDefaultList() }
-                    type="button" 
+                    type="button"
                     className="btn btn-outline-dark btn-sm">
                 Set as Default
                </button>
@@ -163,7 +163,7 @@ const mapStateToProps = state => {
         loginReducer: state.loginReducer,
     };
   };
-  
+
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (name) => dispatch(actionCreators.addItem(name)),
@@ -172,5 +172,5 @@ const mapDispatchToProps = dispatch => {
         clearAll: () => dispatch(actionCreators.clearAll()),
     };
   };
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(Habitual) ;

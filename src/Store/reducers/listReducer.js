@@ -40,7 +40,7 @@ const removeItem = (state, action) => {
 
 const checkboxClicked = (state, action) => {
     return state.map(item =>
-        item.id === action.id ? {...item, completed: !item.completed} : item    
+        item.id === action.id ? {...item, completed: !item.completed} : item
     )
 }
 

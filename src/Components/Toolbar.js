@@ -16,7 +16,7 @@ const Toolbar = props => {
                 <li className="link">
                     <NavLink to="/statistics">Statistics</NavLink>
                 </li>
-                {props.loginReducer[0].token 
+                {props.loginReducer[0].token
                 ? <li className="dotlink">
                     <div className="dot"></div>
                   </li>

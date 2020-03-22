@@ -7,11 +7,11 @@ const Item = props => {
     return (
         <div className ="item">
           <div className="col-md-12">
-            <input type="checkbox" 
+            <input type="checkbox"
                     onClick={()=>props.checkboxClicked(props.id)}/>
                 &nbsp;{props.name}
-                <button type="button" 
-                        className="close" 
+                <button type="button"
+                        className="close"
                         aria-label="Close"
                         onClick={()=>props.removeItem(props.id)}>
                   <span aria-hidden="true">&times;</span>
@@ -27,11 +27,11 @@ const mapStateToProps = state => {
         listReducer: state.listReducer,
     };
   };
-  
+
 const mapDispatchToProps = dispatch => {
     return {
         checkboxClicked: (id) => dispatch(actionCreators.checkboxClicked(id)),
-        removeItem: (id) => dispatch(actionCreators.removeItem(id)), 
+        removeItem: (id) => dispatch(actionCreators.removeItem(id)),
     };
   };
 

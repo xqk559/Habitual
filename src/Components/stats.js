@@ -12,17 +12,17 @@ let firstHistoricalDay = false;
 let axiosResponse;
 
 const Statistics = props => {
-    
+
     let [lastDay, setLastDay] = useState();
     let [totalCompleted, setTotalCompleted] = useState(0);
     let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
-    
+
     useEffect(()=>{
         if(axiosResponse != null){
             setFullAxiosHistory(Object.values(axiosResponse))
         }
     }, [axiosResponse])
-    
+
     useEffect(()=>{
         axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
             .then((response)=>{if(response.data != null){
@@ -44,7 +44,7 @@ const Statistics = props => {
                                     }
                                 }
                             })
-                        }    
+                        }
             }})
     }, [])
 
@@ -56,18 +56,18 @@ const Statistics = props => {
                            localStorage.getItem('email'))
         }
     }, [])
-    
+
     const dayMapper = (day) => {
         const capitalize = (s) => {
             return s.charAt(0).toUpperCase() + s.slice(1)
           };
         return (
             <ul>
-                <div className="statListDate">    
+                <div className="statListDate">
                     {day? day[0].date : null}
                 </div>
-                {day ? 
-                day.map((value) => 
+                {day ?
+                day.map((value) =>
                     {return (<div>
                                 <li key={value.id}
                                     className="none">
@@ -75,7 +75,7 @@ const Statistics = props => {
                                 </li>
                             </div>
                             )})
-                :null} 
+                :null}
             </ul>
         );
     }

@@ -43,7 +43,7 @@ const Auth = props => {
                                       localStorage.getItem('email'))
                 }})
     }
-    
+
     const login = () => {
         setError(null);
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
@@ -60,7 +60,7 @@ const Auth = props => {
                                   localStorage.getItem('email'))
             }})
     }
-    
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
@@ -73,7 +73,7 @@ const Auth = props => {
         if (title === "Sign Up") {
             setTitle("Login")
         } else if (title === "Login") {
-            setTitle("Sign Up") 
+            setTitle("Sign Up")
         }
     }
 
@@ -91,20 +91,20 @@ const Auth = props => {
         <div>
             <h1 className="loginPage">{title}</h1>
             <div className="loginButtons">
-                <input type="text" 
-                    className="loginInput" 
+                <input type="text"
+                    className="loginInput"
                     placeholder="Email"
                     onChange={event=>setEmail(event.target.value)}/>
-                <button onClick={title === "Sign Up" 
-                                 ? ()=>signUp() 
+                <button onClick={title === "Sign Up"
+                                 ? ()=>signUp()
                                  : ()=>login()}
                         className="btn btn-outline-dark btn-sm">
                             {title}
                 </button>
             </div>
             <div className="loginButtons">
-                <input type="text" 
-                    className="loginInput" 
+                <input type="text"
+                    className="loginInput"
                     placeholder="Password"
                     onChange={event=>setPassword(event.target.value)}/>
                 <button onClick={()=>logout()}
@@ -129,7 +129,7 @@ const mapStateToProps = state => {
         loginReducer: state.loginReducer,
     };
   };
-  
+
 const mapDispatchToProps = dispatch => {
     return {
         signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),

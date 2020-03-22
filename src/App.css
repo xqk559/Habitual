@@ -25,12 +25,12 @@ a {
 }
 
 .bold {
-  font-weight: bold; 
+  font-weight: bold;
   margin-left: -20px;
 }
 
 .bold2 {
-  font-weight: bold; 
+  font-weight: bold;
   margin-left: 10px;
 }
 
@@ -216,7 +216,7 @@ li a:hover {
 }
 
 .nothing {
-  float:left; 
+  float:left;
   margin:5px;
 }
 
