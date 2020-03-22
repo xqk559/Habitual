@@ -29,7 +29,6 @@ const Statistics = props => {
                 .then((response)=> axiosResponse = response.data)
                 .then(()=> localDay = Object.values(axiosResponse).pop())
                 .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
-                .then(()=>(console.log(firstHistoricalDay)))
                 .then(()=>
                     {if(localDay)
                         {
@@ -105,14 +104,14 @@ const Statistics = props => {
                 matches.push(historical[i]);
             }
         }
-        //console.log(matches)
+        console.log(matches)
     }
 
     const mappedDay = (day) => {
         return (
             <div>
                 <div>
-                {day ? dayMapper(day) : null}
+                {day ? dayMapper(day) : <div className="loader"/>}
                 You've completed {totalCompleted} out of {day.length} things!
                 </div>
                 <div>That's {((totalCompleted/day.length)*100).toFixed(0)}% of things!</div>
@@ -127,6 +126,7 @@ const Statistics = props => {
             <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
             {mappedDay(localDay)}
+            <br/>
             {mappedDay(firstHistoricalDay)}
             {historicalDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
