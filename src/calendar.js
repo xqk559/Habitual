@@ -19,7 +19,6 @@ const pickableColors = [
 const monday = 1
 
 class Calendar extends React.Component {
-  audio = new Audio("ding.mp3")
 
   constructor(props) {
     super(props)
@@ -39,7 +38,6 @@ class Calendar extends React.Component {
       selectedColor: storedColor || "#9c27b0",
       lastDaySelected: null,
     }
-    this.audio.muted = this.state.muted
   }
 
   handleDayClick(day, { selected }) {
@@ -47,8 +45,6 @@ class Calendar extends React.Component {
     if (selected) {
       const lastSelectedDay = selectedDays[selectedDays.length - 1]
       if (DateUtils.isSameDay(lastSelectedDay, day)) {
-        this.audio.pause()
-        this.audio.currentTime = 0
       }
 
       const ind = selectedDays.findIndex(selectedDay =>
@@ -57,8 +53,6 @@ class Calendar extends React.Component {
       selectedDays.splice(ind, 1)
     } else {
       selectedDays.push(day)
-      this.audio.currentTime = 0
-      this.audio.play()
     }
 
     localStorage.setItem("selectedDays", serializeDates(selectedDays))
@@ -68,7 +62,6 @@ class Calendar extends React.Component {
 
   toggleMute() {
     const toggled = !this.state.muted
-    this.audio.muted = toggled
     this.setState({ muted: toggled })
     localStorage.setItem("muted", JSON.stringify(toggled))
   }

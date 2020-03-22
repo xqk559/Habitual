@@ -3,6 +3,7 @@ import '../App.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
+import {deserializeDates} from '../storage';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -83,7 +84,9 @@ const Statistics = props => {
                 allDatesArray.push(fullAxiosHistory[i][0].date) ;
             }
         }
-        console.log(allDatesArray)
+        let selectedDaysArray = localStorage.getItem('selectedDays')
+        //console.log(allDatesArray)
+        console.log(deserializeDates(selectedDaysArray))
     }
 
     const selectedDayFilter = (selectedDay) => {
@@ -98,7 +101,7 @@ const Statistics = props => {
     const filteredHistory = () => {
         if(fullAxiosHistory[0] != null){
             filteredHist = fullAxiosHistory.filter(selectedDayFilter);
-            console.log(filteredHist)
+            //console.log(filteredHist)
         }
     }
 
