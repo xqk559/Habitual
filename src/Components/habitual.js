@@ -48,7 +48,7 @@ const Habitual = props => {
         if(defaultList != null){
             props.addDefaultToState(defaultList);
       }
-    }, [defaultList, localStorage])
+      }, [defaultList, localStorage])
 
       useEffect(()=>{
         if(!localStorage.getItem('userId')){
@@ -95,64 +95,64 @@ const Habitual = props => {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
         return (<ul>
-            {props.listReducer.map((val, index) => {return (<li key={index}
-                    className="none">
-                    { <Item name={capitalizeFirstLetter(val.name)}
-                            id={val.id}/> }
-                        </li>
-                );
-            })}
-            </ul>
+                  {props.listReducer.map((val, index) =>
+                    {return <li key={index}
+                                className="none">
+                                { <Item name={capitalizeFirstLetter(val.name)}
+                                        id={val.id}/> }
+                            </li>
+                  })}
+                </ul>
         );
     }
 
     return (
-        <div >
+        <div>
           <div className="rainbow-text">
             Habitual
           </div>
           <div className="rainbow-text-small">
             You've done so many things today!
           </div>
-          <br />
-            <div className="centered2">
-                <input type="text"
-                       onChange={(event)=>{name = event.target.value}}
-                        />
-                &nbsp;&nbsp;
-                <button onClick={ () => props.addItem(name) }
-                        type="button"
-                        className="btn btn-outline-dark btn-sm">
-                    Add Item
-                </button>
-                &nbsp;
-                <button onClick={ () => uploadChecklist() }
-                        id= "submitter"
-                        type="button"
-                        className="btn btn-outline-primary btn-sm">
+          <br/>
+          <div className="centered2">
+              <input type="text"
+                      onChange={(event)=>{name = event.target.value}}
+                      />
+              &nbsp;&nbsp;
+              <button onClick={ () => props.addItem(name) }
+                      type="button"
+                      className="btn btn-outline-dark btn-sm">
+                Add Item
+              </button>
+              &nbsp;
+              <button onClick={ () => uploadChecklist() }
+                      id= "submitter"
+                      type="button"
+                      className="btn btn-outline-primary btn-sm">
                 Submit Completed Day
-                </button>
+              </button>
               &nbsp;
               <button
-                    onClick={ ()=> uploadDefaultList() }
-                    type="button"
-                    className="btn btn-outline-dark btn-sm">
+                  onClick={ ()=> uploadDefaultList() }
+                  type="button"
+                  className="btn btn-outline-dark btn-sm">
                 Set as Default
-               </button>
-            </div>
-               <br/>
-            <div>
-               <div  className="margin">
-                    <div className="bold2">&nbsp;&nbsp;
-                        To Do:
-                    </div>
-                    <br />
-                    <div className="absoluteCentered">
-                    {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
-                    </div>
-                    {userIdExists ? checklist():<div className="loader"/>}
+              </button>
+          </div>
+          <br/>
+          <div>
+            <div  className="margin">
+                <div className="bold2">&nbsp;&nbsp;
+                  To Do:
                 </div>
+                <br />
+                <div className="absoluteCentered">
+                {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
+                </div>
+                {userIdExists ? checklist():<div className="loader"/>}
             </div>
+          </div>
         </div>
     );
 }

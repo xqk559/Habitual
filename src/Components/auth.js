@@ -22,8 +22,8 @@ const Auth = props => {
         const token = localStorage.getItem('token');
         if(token){
         props.signUpRedux(localStorage.getItem('token'),
-                           localStorage.getItem('userId'),
-                           localStorage.getItem('email'))
+                          localStorage.getItem('userId'),
+                          localStorage.getItem('email'))
         }
     }, [])
 
