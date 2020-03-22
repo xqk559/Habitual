@@ -8,6 +8,7 @@ import {deserializeDates} from '../storage';
 let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
+let firstHistoricalDay = false;
 let axiosResponse;
 
 const Statistics = props => {
@@ -27,6 +28,8 @@ const Statistics = props => {
             {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
                 .then((response)=> axiosResponse = response.data)
                 .then(()=> localDay = Object.values(axiosResponse).pop())
+                .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
+                .then(()=>(console.log(firstHistoricalDay)))
                 .then(()=>
                     {if(localDay)
                         {
@@ -52,17 +55,17 @@ const Statistics = props => {
         }
     }, [])
     
-    const dayMapper = () => {
+    const dayMapper = (day) => {
         const capitalize = (s) => {
             return s.charAt(0).toUpperCase() + s.slice(1)
           };
         return (
             <ul>
                 <div className="statListDate">    
-                    {localDay? localDay[0].date : null}
+                    {day? day[0].date : null}
                 </div>
-                {localDay ? 
-                localDay.map((value) => 
+                {day ? 
+                day.map((value) => 
                     {return (<div>
                                 <li key={value.id}
                                     className="none">
@@ -102,17 +105,17 @@ const Statistics = props => {
                 matches.push(historical[i]);
             }
         }
-        console.log(matches)
+        //console.log(matches)
     }
 
-    const mappedDay = () => {
+    const mappedDay = (day) => {
         return (
             <div>
                 <div>
-                {localDay ? dayMapper() : null}
-                You've completed {totalCompleted} out of {localDay.length} things!
+                {day ? dayMapper(day) : null}
+                You've completed {totalCompleted} out of {day.length} things!
                 </div>
-                <div>That's {((totalCompleted/localDay.length)*100).toFixed(0)}% of things!</div>
+                <div>That's {((totalCompleted/day.length)*100).toFixed(0)}% of things!</div>
             </div>
         );
     }
@@ -123,7 +126,8 @@ const Statistics = props => {
             <br/>
             <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
-            {mappedDay()}
+            {mappedDay(localDay)}
+            {mappedDay(firstHistoricalDay)}
             {historicalDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
         </div>
