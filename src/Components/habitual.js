@@ -20,17 +20,21 @@ const Habitual = props => {
     const [userIdExists, setUserIdExists] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
-          if(localStorage.getItem('userId') && defaultArray == null){  
           await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
-            .then((response)=> {defaults = (Object.values(response.data))})
-            .then(()=> defaultArray = defaults[0])
-            .then(()=>console.log(defaultArray))
-            .then(()=>{for(let i in defaultArray){
-                defaultArray[i].date = today 
-                return defaultArray}})
-            .then(()=> setDefaultList(defaultArray))
-            .then(defaultExecuted = true)
-        } 
+            .then((response)=>{if(response.data != null){
+              if(localStorage.getItem('userId') && defaultArray == null){  
+                axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+                  .then((response)=>{if(!response.data){Promise.reject()}})
+                  .then((response)=> {defaults = (Object.values(response.data))})
+                  .then(()=> defaultArray = defaults[0])
+                  .then(()=>console.log(defaultArray))
+                  .then(()=>{for(let i in defaultArray){
+                      defaultArray[i].date = today 
+                      return defaultArray}})
+                  .then(()=> setDefaultList(defaultArray))
+                  .then(defaultExecuted = true)
+              } 
+            }})
         };
         fetchData();
       }, [cleared]);
@@ -65,13 +69,15 @@ const Habitual = props => {
 
     const uploadChecklist = () => {
         if(localStorage.getItem('userId'))
-        {
-        axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+        {axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+          .then((response)=>{if(response.data != null){
+            axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
             .then((response)=> {if(response.data != null){axiosData = response.data}})
             .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
                 ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
+          }})
         let fullPost = props.listReducer.map(day=>{
           day.date = today;
           return day;

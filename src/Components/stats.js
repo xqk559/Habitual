@@ -24,25 +24,28 @@ const Statistics = props => {
     }, [axiosResponse])
     
     useEffect(()=>{
-        if(localStorage.getItem('userId'))
-            {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-                .then((response)=> axiosResponse = response.data)
-                .then(()=> localDay = Object.values(axiosResponse).pop())
-                .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
-                .then(()=>
-                    {if(localDay)
-                        {
-                            {for(let i = 0; i < localDay.length; i++)
+        axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+            .then((response)=>{if(response.data != null){
+                if(localStorage.getItem('userId'))
+                    {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+                        .then((response)=> axiosResponse = response.data)
+                        .then(()=> localDay = Object.values(axiosResponse).pop())
+                        .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
+                        .then(()=>
+                            {if(localDay)
                                 {
-                                    if(localDay[i].completed)
-                                    {
-                                    setTotalCompleted(++totalCompleted)
+                                    {for(let i = 0; i < localDay.length; i++)
+                                        {
+                                            if(localDay[i].completed)
+                                            {
+                                            setTotalCompleted(++totalCompleted)
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-                    })
-                }    
+                            })
+                        }    
+            }})
     }, [])
 
     useEffect(()=>{
@@ -144,9 +147,6 @@ const Statistics = props => {
             <br/>
             <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
-            {/* {mappedDay(localDay)}
-            <br/>
-            {mappedDay(firstHistoricalDay)} */}
             {historicalDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
             {displayMatchingDates()}
