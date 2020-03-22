@@ -75,22 +75,35 @@ const Statistics = props => {
 
 
 
-
+    let shortenedSelectedDays;
+    let historicalDatesArray = [];
 
     const allDates = () => {
-        let allDatesArray = [];
         if(fullAxiosHistory[0] != null){
             for(let i = 0; i < fullAxiosHistory.length; i++){
-                allDatesArray.push(fullAxiosHistory[i][0].date) ;
+                historicalDatesArray.push(fullAxiosHistory[i][0].date) ;
             }
         }
         let selectedDaysString = localStorage.getItem('selectedDays')
         let selectedDaysArray = deserializeDates(selectedDaysString)
-        let shortenedSelectedDays = selectedDaysArray.map(day=>{
+        shortenedSelectedDays = selectedDaysArray.map(day=>{
             return day.toString().slice(0,15)
         })
-        //console.log(allDatesArray)
-        console.log(shortenedSelectedDays)
+        //console.log(historicalDatesArray)
+        //console.log(shortenedSelectedDays)
+    }
+
+
+    const findMatchingDates = (selected, historical) => {
+        let matches = [];
+        selected.sort();
+        historical.sort();
+        for(let i = 0; i < historical.length; i += 1){
+            if(selected.indexOf(historical[i]) > -1) {
+                matches.push(historical[i]);
+            }
+        }
+        console.log(matches)
     }
 
     const selectedDayFilter = (selectedDay) => {
@@ -99,7 +112,7 @@ const Statistics = props => {
         //         return selectedDay;
         //     }
         // }
-        return selectedDay.date = 'Sat Mar 21 2020';
+        return selectedDay.date;
     }
 
     const filteredHistory = () => {
@@ -127,6 +140,7 @@ const Statistics = props => {
             {/* {fullAxiosHistory[0] ? console.log(fullAxiosHistory[0][0].date) : null} */}
             {filteredHistory()}
             {allDates()}
+            {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
         </div>
     )
 }
