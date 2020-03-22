@@ -6,6 +6,16 @@ a {
   background-color: #dddddd;
 }
 
+.absoluteCentered {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 185px;
+}
+
 .App {
   text-align: center;
 }

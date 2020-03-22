@@ -24,7 +24,6 @@ const Habitual = props => {
             .then((response)=>{if(response.data != null){
               if(localStorage.getItem('userId') && defaultArray == null){  
                 axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
-                  .then((response)=>{if(!response.data){Promise.reject()}})
                   .then((response)=> {defaults = (Object.values(response.data))})
                   .then(()=> defaultArray = defaults[0])
                   .then(()=>console.log(defaultArray))
@@ -148,6 +147,9 @@ const Habitual = props => {
                         To Do:
                     </div>
                     <br />
+                    <div className="absoluteCentered">
+                    {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
+                    </div>
                     {userIdExists ? checklist():<div className="loader"/>}
                 </div>
             </div>
