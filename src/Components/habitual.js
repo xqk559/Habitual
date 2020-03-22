@@ -142,7 +142,7 @@ const Habitual = props => {
                         To Do:
                     </div>
                     <br />
-                    {userIdExists ? checklist():null}
+                    {userIdExists ? checklist():<div className="loader"/>}
                 </div>
             </div>
         </div>
