@@ -91,12 +91,14 @@ const Statistics = props => {
         shortenedSelectedDays = selectedDaysArray.map(day=>{
             return day.toString().slice(0,15)
         })
+        //console.log(fullAxiosHistory)
         //console.log(historicalDatesArray)
         //console.log(shortenedSelectedDays)
     }
 
+    let matches = [];
+
     const findMatchingDates = (selected, historical) => {
-        let matches = [];
         selected.sort();
         historical.sort();
         for(let i = 0; i < historical.length; i += 1){
@@ -104,7 +106,18 @@ const Statistics = props => {
                 matches.push(historical[i]);
             }
         }
-        console.log(matches)
+        //console.log(matches)
+    }
+
+    let displayedMatches = [];
+
+    const displayMatchingDates = () => {
+        for(let i = 0; i < fullAxiosHistory.length; i++){
+            if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
+                displayedMatches.push(fullAxiosHistory[i])
+            }
+        }
+        console.log(displayedMatches);
     }
 
     const mappedDay = (day) => {
@@ -119,17 +132,25 @@ const Statistics = props => {
         );
     }
 
+    const filteredMapSelectedDays = () => {
+        return displayedMatches.map(s=>{
+            return mappedDay(s)
+        })
+    }
+
     return (
         <div className="stats">
             <div>It is currently {utcDate}</div>
             <br/>
             <button onClick={setLastDay}>Get Selected Day's Data</button>
             <br/>
-            {mappedDay(localDay)}
+            {/* {mappedDay(localDay)}
             <br/>
-            {mappedDay(firstHistoricalDay)}
+            {mappedDay(firstHistoricalDay)} */}
             {historicalDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
+            {displayMatchingDates()}
+            {filteredMapSelectedDays()}
         </div>
     )
 }
