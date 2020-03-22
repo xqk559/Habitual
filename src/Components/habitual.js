@@ -72,7 +72,10 @@ const Habitual = props => {
             .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
             .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date 
                 ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
-        let fullPost = props.listReducer;
+        let fullPost = props.listReducer.map(day=>{
+          day.date = today;
+          return day;
+        });
         axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
         }
     }

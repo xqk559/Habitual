@@ -106,21 +106,21 @@ const Statistics = props => {
         console.log(matches)
     }
 
-    const selectedDayFilter = (selectedDay) => {
-        // if(fullAxiosHistory[0] != null){
-        //     for(let i = 0; i < fullAxiosHistory.length; i++){
-        //         return selectedDay;
-        //     }
-        // }
-        return selectedDay.date;
-    }
+    // const selectedDayFilter = (selectedDay) => {
+    //     // if(fullAxiosHistory[0] != null){
+    //     //     for(let i = 0; i < fullAxiosHistory.length; i++){
+    //     //         return selectedDay;
+    //     //     }
+    //     // }
+    //     return selectedDay.date;
+    // }
 
-    const filteredHistory = () => {
-        if(fullAxiosHistory[0] != null){
-            filteredHist = fullAxiosHistory.filter(selectedDayFilter);
-            //console.log(filteredHist)
-        }
-    }
+    // const filteredHistory = () => {
+    //     if(fullAxiosHistory[0] != null){
+    //         filteredHist = fullAxiosHistory.filter(selectedDayFilter);
+    //         //console.log(filteredHist)
+    //     }
+    // }
 
 
 
@@ -138,7 +138,7 @@ const Statistics = props => {
             <div>That's {((totalCompleted/localDay.length)*100).toFixed(0)}% of things!</div>
             {/* {fullAxiosHistory ? console.log((fullAxiosHistory.filter(selectedDayFilter))[0]) : null} */}
             {/* {fullAxiosHistory[0] ? console.log(fullAxiosHistory[0][0].date) : null} */}
-            {filteredHistory()}
+            {/* {filteredHistory()} */}
             {allDates()}
             {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
         </div>
