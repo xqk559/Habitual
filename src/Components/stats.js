@@ -124,13 +124,22 @@ const Statistics = props => {
     }
 
     const mappedDay = (day) => {
+        let totaler = 0;
+        {for(let i = 0; i < day.length; i++)
+            {
+                if(day[i].completed)
+                {
+                totaler = ++totaler
+                }
+            }
+        }
         return (
             <div>
                 <div>
                 {day ? dayMapper(day) : <div className="loader"/>}
-                You've completed {totalCompleted} out of {day.length} things!
+                You've completed {totaler} out of {day.length} things!
                 </div>
-                <div>That's {((totalCompleted/day.length)*100).toFixed(0)}% of things!</div>
+                <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
             </div>
         );
     }
