@@ -66,12 +66,10 @@ a {
   width: 15px;
   background-color: green;
   border-radius: 50%;
-  display: inline-block;
   float: right;
 }
 
 .dotlink {
-  display: inline;
   float: left;
   margin-top: 15px;
   margin-left: 15px;
@@ -93,7 +91,6 @@ a {
 }
 
 .link {
-  display: inline;
   float: left;
   border-right: 1px solid black;
 }
@@ -121,7 +118,6 @@ a {
 }
 
 .rightLink {
-  display: inline;
   float: right;
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -302,7 +298,6 @@ li a:hover {
 
 .username {
   font-weight: bold;
-  display: inline;
   float: left;
   margin-top: 10px;
   margin-left: 10px;
