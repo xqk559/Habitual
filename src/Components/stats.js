@@ -4,6 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import {deserializeDates} from '../storage';
+import {NavLink} from 'react-router-dom';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -138,17 +139,31 @@ const Statistics = props => {
       })
   }
 
+  const redirectToSignin = () => {
+    if(props.listReducer == null){
+      return <li
+                className="redirectLink">
+                <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
+            </li>
+    }
+  }
+
   return (
-      <div className="stats">
-          <div>It is currently {utcDate}</div>
-          <br/>
-          <button onClick={setLastDay}>Get Selected Day's Data</button>
-          <br/>
-          {historicalDates()}
-          {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
-          {displayMatchingDates()}
-          {filteredMapSelectedDays()}
+    <div>
+      <div className="centered">
+        {redirectToSignin()}
       </div>
+      <div className="stats">
+        <div>It is currently {utcDate}</div>
+        <br/>
+        <button onClick={setLastDay}>Get Selected Day's Data</button>
+        <br/>
+        {historicalDates()}
+        {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
+        {displayMatchingDates()}
+        {filteredMapSelectedDays()}
+        </div>
+    </div>
   )
 }
 

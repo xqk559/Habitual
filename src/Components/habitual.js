@@ -5,6 +5,7 @@ import Item from './item';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom'
 import '../App.scss';
+import {NavLink} from 'react-router-dom';
 
 let name;
 let axiosData;
@@ -111,6 +112,15 @@ const Habitual = props => {
     setTimeout(()=>{return <div className="loader"/>;}, 500)
   }
 
+  const redirectToSignin = () => {
+    if(props.listReducer.length == 0){
+      return <li
+                className="redirectLink">
+                <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
+            </li>
+    }
+  }
+
   return (
     <div>
       <div className="rainbow-text">
@@ -153,7 +163,7 @@ const Habitual = props => {
             </div>
             <br/>
             <div className="absoluteCentered">
-            {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
+              {redirectToSignin()}
             </div>
             {userIdExists ? checklist() : loaderTimeout()}
         </div>

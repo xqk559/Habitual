@@ -242,6 +242,17 @@ li a {
   font-size: 10px;
 }
 
+.redirectLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(173, 101, 241, 0.466);
+  list-style-type: none;
+  border: 1px solid black;
+  width: 387px;
+}
+
 .rightLink {
   float: right;
   border-left: 1px solid black;

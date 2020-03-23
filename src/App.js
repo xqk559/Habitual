@@ -18,13 +18,13 @@ const App = () => {
             render=
               {()=>
                 <div className="overflow">
-                <Toolbar />
+                <Toolbar/>
                 <div >
                   <Habitual/>
                 </div>
                 <div className="centered">
                   <hr />
-                  <AppFooter />
+                  <AppFooter/>
                 </div>
                 </div>
                 }/>
