@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
-import '../App.css';
+import '../App.scss';
 
 const Item = props => {
     return (

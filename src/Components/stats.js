@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../App.css';
+import '../App.scss';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';

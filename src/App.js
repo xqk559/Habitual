@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import AppFooter from './AppFooter.js';
 import Toolbar from './Components/Toolbar';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';

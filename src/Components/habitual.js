@@ -4,6 +4,7 @@ import * as actionCreators from '../Store/actions/index';
 import Item from './item';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom'
+import '../App.scss';
 
 let name;
 let axiosData;
