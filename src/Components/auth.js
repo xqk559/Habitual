@@ -100,7 +100,6 @@ const Auth = props => {
                   placeholder="Confirm Password"
                   onChange={event=>setPassword(event.target.value)}/>
                <button
-                  onClick={()=>logout()}
                   className="transparent"
                   style={{width: 70}}>
                </button>
@@ -133,8 +132,7 @@ const Auth = props => {
           placeholder="Password"
           onChange={event=>setPassword(event.target.value)}/>
         <button
-          onClick={()=>logout()}
-          className="btn btn-outline-danger btn-sm"
+          className="transparent"
           style={{width: 70}}>
             Logout
         </button>
