@@ -109,48 +109,49 @@ const Auth = props => {
   }
 
   return (
-      <div>
-          <h1 className="loginPage">{title}</h1>
-          <div className="loginButtons">
-              <input
-                  type="text"
-                  className="loginInput"
-                  placeholder="Email"
-                  onChange={event=>setEmail(event.target.value)}/>
-              <button onClick={title === "Sign Up"
-                                ? ()=>signUp()
-                                : ()=>login()}
-                      className="btn btn-outline-dark btn-sm"
-                      style={{width: 70}}>
-                          {title}
-              </button>
-          </div>
-          <div className="loginButtons">
-              <input
-                  type="password"
-                  className="loginInput"
-                  placeholder="Password"
-                  onChange={event=>setPassword(event.target.value)}/>
-              <button
-                  onClick={()=>logout()}
-                  className="btn btn-outline-danger btn-sm"
+    <div>
+      <h1 className="loginPage">{title}</h1>
+      <div className="loginButtons">
+        <input
+          type="text"
+          className="loginInput"
+          placeholder="Email"
+          onChange={event=>setEmail(event.target.value)}/>
+        <button
+          onClick={title === "Sign Up"
+                    ? ()=>signUp()
+                    : ()=>login()}
+                  className="btn btn-outline-dark btn-sm"
                   style={{width: 70}}>
-                      Logout
-              </button>
-          </div>
-          <div className="loginButtons">
-            {confirmPassword()}
-          </div>
-          <br/>
-          <div className="loginPage">
-          <button
-              onClick={()=>switchSignUpLogin()}
-              className="btn btn-outline-primary btn-sm">
-                  Switch Login/Signup
-          </button>
-          </div>
-          {errorChecker()}
+                    {title}
+        </button>
       </div>
+      <div className="loginButtons">
+        <input
+          type="password"
+          className="loginInput"
+          placeholder="Password"
+          onChange={event=>setPassword(event.target.value)}/>
+        <button
+          onClick={()=>logout()}
+          className="btn btn-outline-danger btn-sm"
+          style={{width: 70}}>
+            Logout
+        </button>
+      </div>
+      <div className="loginButtons">
+        {confirmPassword()}
+      </div>
+      <br/>
+      <div className="loginPage">
+      <button
+        onClick={()=>switchSignUpLogin()}
+        className="btn btn-outline-primary btn-sm">
+          Switch Login/Signup
+      </button>
+      </div>
+      {errorChecker()}
+    </div>
   );
 }
 
