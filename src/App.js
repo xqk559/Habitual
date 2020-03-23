@@ -22,7 +22,6 @@ const App = () => {
                 <div >
                   <Habitual/>
                 </div>
-
                 <div className="centered">
                   <hr />
                   <AppFooter />
@@ -36,6 +35,9 @@ const App = () => {
             {()=> <div>
                     <Toolbar/>
                     <Auth />
+                    <div className="centered">
+                      <AppFooter/>
+                    </div>
                   </div>}/>
           <Route path="/statistics/"
                  exact
@@ -46,6 +48,9 @@ const App = () => {
                       <Statistics/>
                       <div className="calendar">
                         <Calendar/>
+                      </div>
+                      <div className="centered">
+                        <AppFooter/>
                       </div>
                     </div>
                   }/>
