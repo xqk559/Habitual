@@ -16,145 +16,149 @@ let today = new Date().toString().slice(0,15);
 let cleared;
 
 const Habitual = props => {
-    const [defaultList, setDefaultList] = useState();
-    const [userIdExists, setUserIdExists] = useState(false);
-    useEffect(() => {
-        const fetchData = async () => {
-          await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
-            .then((response)=>{if(response.data != null){
-              if(localStorage.getItem('userId') && defaultArray == null){
-                axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
-                  .then((response)=> {defaults = (Object.values(response.data))})
-                  .then(()=> defaultArray = defaults[0])
-                  .then(()=>console.log(defaultArray))
-                  .then(()=>{for(let i in defaultArray){
-                      defaultArray[i].date = today
-                      return defaultArray}})
-                  .then(()=> setDefaultList(defaultArray))
-                  .then(defaultExecuted = true)
-              }
-            }})
-        };
-        fetchData();
-      }, [cleared]);
-
-      let location = useLocation()
-
-      useEffect(()=>{
-        setUserIdExists(true)
-      }, [userIdExists, props, location])
-
-      useEffect(()=> {
-        if(defaultList != null){
-            props.addDefaultToState(defaultList);
-      }
-      }, [defaultList, localStorage])
-
-      useEffect(()=>{
-        if(!localStorage.getItem('userId')){
-            props.clearAll()
-            cleared = 69;
-        }
-      }, [localStorage])
-
-      useEffect(()=>{
-        const token = localStorage.getItem('token');
-        if(token){
-        props.signUpRedux(localStorage.getItem('token'),
-                           localStorage.getItem('userId'),
-                           localStorage.getItem('email'))
-        }
-        }, [])
-
-    const uploadChecklist = () => {
-        if(localStorage.getItem('userId'))
-        {axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+  const [defaultList, setDefaultList] = useState();
+  const [userIdExists, setUserIdExists] = useState(false);
+  useEffect(() => {
+      const fetchData = async () => {
+        await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
           .then((response)=>{if(response.data != null){
-            axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-            .then((response)=> {if(response.data != null){axiosData = response.data}})
-            .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
-            .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-            .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
-                ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
+            if(localStorage.getItem('userId') && defaultArray == null){
+              axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+                .then((response)=> {defaults = (Object.values(response.data))})
+                .then(()=> defaultArray = defaults[0])
+                .then(()=>console.log(defaultArray))
+                .then(()=>{for(let i in defaultArray){
+                    defaultArray[i].date = today
+                    return defaultArray}})
+                .then(()=> setDefaultList(defaultArray))
+                .then(defaultExecuted = true)
+            }
           }})
-        let fullPost = props.listReducer.map(day=>{
-          day.date = today;
-          return day;
-        });
-        axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
-        }
-    }
+      };
+      fetchData();
+    }, [cleared]);
 
-    const uploadDefaultList = () => {
-        axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
-        axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
-    }
+    let location = useLocation()
 
-    const checklist = () => {
-        const capitalizeFirstLetter = string => {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        return (<ul>
-                  {props.listReducer.map((val, index) =>
-                    {return <li key={index}
-                                className="none">
-                                { <Item name={capitalizeFirstLetter(val.name)}
-                                        id={val.id}/> }
-                            </li>
-                  })}
-                </ul>
-        );
-    }
+    useEffect(()=>{
+      setUserIdExists(true)
+    }, [userIdExists, props, location])
 
-    return (
+    useEffect(()=> {
+      if(defaultList != null){
+          props.addDefaultToState(defaultList);
+    }
+    }, [defaultList, localStorage])
+
+    useEffect(()=>{
+      if(!localStorage.getItem('userId')){
+          props.clearAll()
+          cleared = 69;
+      }
+    }, [localStorage])
+
+    useEffect(()=>{
+      const token = localStorage.getItem('token');
+      if(token){
+      props.signUpRedux(localStorage.getItem('token'),
+                          localStorage.getItem('userId'),
+                          localStorage.getItem('email'))
+      }
+      }, [])
+
+  const uploadChecklist = () => {
+      if(localStorage.getItem('userId'))
+      {axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+        .then((response)=>{if(response.data != null){
+          axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+          .then((response)=> {if(response.data != null){axiosData = response.data}})
+          .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
+          .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
+          .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
+              ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
+        }})
+      let fullPost = props.listReducer.map(day=>{
+        day.date = today;
+        return day;
+      });
+      axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
+      }
+  }
+
+  const uploadDefaultList = () => {
+      axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
+      axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
+  }
+
+  const checklist = () => {
+      const capitalizeFirstLetter = string => {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      return (<ul>
+                {props.listReducer.map((val, index) =>
+                  {return <li key={index}
+                              className="none">
+                              { <Item name={capitalizeFirstLetter(val.name)}
+                                      id={val.id}/> }
+                          </li>
+                })}
+              </ul>
+      );
+  }
+
+  const loaderTimeout = () => {
+    setTimeout(()=>{return <div className="loader"/>;},500)
+  }
+
+  return (
+    <div>
+      <div className="rainbow-text">
+        Habitual
+      </div>
+      <div className="rainbow-text-small">
+        You've done so many things today!
+      </div>
+      <br/>
+      <div className="centered2">
+          <input type="text"
+                  onChange={(event)=>{name = event.target.value}}
+                  />
+          &nbsp;&nbsp;
+          <button onClick={ () => props.addItem(name) }
+                  type="button"
+                  className="btn btn-outline-dark btn-sm">
+            Add Item
+          </button>
+          &nbsp;
+          <button onClick={ () => uploadChecklist() }
+                  id= "submitter"
+                  type="button"
+                  className="btn btn-outline-primary btn-sm">
+            Submit Completed Day
+          </button>
+          &nbsp;
+          <button
+              onClick={ ()=> uploadDefaultList() }
+              type="button"
+              className="btn btn-outline-dark btn-sm">
+            Set as Default
+          </button>
+      </div>
+      <br/>
       <div>
-        <div className="rainbow-text">
-          Habitual
-        </div>
-        <div className="rainbow-text-small">
-          You've done so many things today!
-        </div>
-        <br/>
-        <div className="centered2">
-            <input type="text"
-                    onChange={(event)=>{name = event.target.value}}
-                    />
-            &nbsp;&nbsp;
-            <button onClick={ () => props.addItem(name) }
-                    type="button"
-                    className="btn btn-outline-dark btn-sm">
-              Add Item
-            </button>
-            &nbsp;
-            <button onClick={ () => uploadChecklist() }
-                    id= "submitter"
-                    type="button"
-                    className="btn btn-outline-primary btn-sm">
-              Submit Completed Day
-            </button>
-            &nbsp;
-            <button
-                onClick={ ()=> uploadDefaultList() }
-                type="button"
-                className="btn btn-outline-dark btn-sm">
-              Set as Default
-            </button>
-        </div>
-        <br/>
-        <div>
-          <div  className="margin">
-              <div className="bold2">&nbsp;&nbsp;
-                To Do:
-              </div>
-              <br/>
-              <div className="absoluteCentered">
-              {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
-              </div>
-              {userIdExists ? checklist():<div className="loader"/>}
-          </div>
+        <div  className="margin">
+            <div className="bold2">&nbsp;&nbsp;
+              To Do:
+            </div>
+            <br/>
+            <div className="absoluteCentered">
+            {props.listReducer == [] ? 'Login/Signup to use checklist and statistics!' : null}
+            </div>
+            {userIdExists ? checklist() : loaderTimeout()}
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 const mapStateToProps = state => {

@@ -117,15 +117,19 @@ const Statistics = props => {
         }
       }
 
-      return (
-        <div>
-          <div>
-          {day ? dayMapper(day) : <div className="loader"/>}
-          You've completed {totaler} out of {day.length} things!
-          </div>
-          <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
-        </div>
-      );
+  const loaderTimeout = () => {
+    setTimeout(()=>{return <div className="loader"/>;},500)
+  }
+
+  return (
+    <div>
+      <div>
+        {day ? dayMapper(day) : loaderTimeout()}
+        You've completed {totaler} out of {day.length} things!
+      </div>
+      <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
+    </div>
+  );
   }
 
   const filteredMapSelectedDays = () => {
