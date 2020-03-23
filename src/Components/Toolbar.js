@@ -11,6 +11,14 @@ const Toolbar = props => {
     localStorage.removeItem('email');
   }
 
+  const logoutButton = () => {
+    return <div>
+            <li className="rightLink" onClick={clearLocalStorage}>
+              <NavLink to="/logout">Logout</NavLink>
+            </li>
+           </div>
+  }
+
   return (
     <div>
       <ul className="toolbar">
@@ -36,11 +44,7 @@ const Toolbar = props => {
             <NavLink to="/login">Login-Sign Up</NavLink>
           </li>
         </div>
-        <div>
-          <li className="rightLink" onClick={clearLocalStorage}>
-            <NavLink to="/logout">Logout</NavLink>
-          </li>
-        </div>
+        {localStorage.getItem('token') ? logoutButton() : null}
       </ul>
     </div>
   )
