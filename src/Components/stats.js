@@ -140,7 +140,7 @@ const Statistics = props => {
   }
 
   const redirectToSignin = () => {
-    if(props.listReducer == null){
+    if(props.listReducer == null && !localStorage.getItem('token')){
       return <li
                 className="redirectLink">
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>

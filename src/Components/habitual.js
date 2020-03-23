@@ -113,7 +113,7 @@ const Habitual = props => {
   }
 
   const redirectToSignin = () => {
-    if(props.listReducer.length == 0){
+    if(props.listReducer.length == 0 && !localStorage.getItem('token')){
       return <li
                 className="redirectLink">
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
