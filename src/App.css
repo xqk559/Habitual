@@ -77,6 +77,12 @@ a {
   margin-left: 15px;
 }
 
+.footer {
+  bottom: 0;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
 .hidden {
   display: none;
   margin-left: 28%;
@@ -291,6 +297,7 @@ li a:hover {
   background-color: rgba(173, 101, 241, 0.466);
   border-bottom: 1px solid black;
   border-left: 1px solid black;
+  margin-bottom: 100px;
 }
 
 .username {

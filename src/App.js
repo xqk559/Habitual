@@ -19,13 +19,10 @@ const App = () => {
               {()=>
                 <div className="overflow">
                 <Toolbar />
-                <br/>
-                <br/>
-                <br/>
                 <div >
                   <Habitual/>
                 </div>
-                <br/>
+
                 <div className="centered">
                   <hr />
                   <AppFooter />
