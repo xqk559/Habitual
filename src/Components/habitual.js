@@ -108,7 +108,7 @@ const Habitual = props => {
   }
 
   const loaderTimeout = () => {
-    setTimeout(()=>{return <div className="loader"/>;},500)
+    setTimeout(()=>{return <div className="loader"/>;}, 500)
   }
 
   return (

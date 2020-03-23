@@ -86,34 +86,6 @@ a {
   border-right: 1px solid black;
 }
 
-.loginPage {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  color: purple;
-  font-weight: bold;
-  padding: 30px 30px;
-}
-
-.loginInput {
-  margin: 5px;
-  width: auto;
-}
-
-.loginButtons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.rightLink {
-  float: right;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-}
-
 li a {
   display: block;
   color: rgb(68, 63, 63);
@@ -145,30 +117,31 @@ li a {
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+  &:before {
+    width: 50%;
+    height: 50%;
+    background: #ECEFF1;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+  }
+  &:after {
+    background: #ECEFF1;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 }
-.loader:before {
-  width: 50%;
-  height: 50%;
-  background: #ECEFF1;
-  border-radius: 100% 0 0 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: '';
-}
-.loader:after {
-  background: #ECEFF1;
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
-  content: '';
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+
 @-webkit-keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -188,6 +161,33 @@ li a {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.loginButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+}
+
+.loginInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  width: 200px;
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: purple;
+  font-weight: bold;
+  padding: 30px 30px;
 }
 
 .margin {
@@ -239,6 +239,12 @@ li a {
 
 .reasonable-text {
   font-size: 10px;
+}
+
+.rightLink {
+  float: right;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .rightmargin {
