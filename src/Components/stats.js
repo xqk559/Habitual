@@ -110,11 +110,6 @@ const Statistics = props => {
           totaler = ++totaler
         }
       }
-
-  const loaderTimeout = () => {
-    setTimeout(()=>{return <div className="loader"/>;},500)
-  }
-
   return (
     <div key={Math.random().toString()}>
       <div>
@@ -126,10 +121,18 @@ const Statistics = props => {
   );
   }
 
+  const loaderTimeout = () => {
+    setTimeout(()=>{return <div className="loader"/>;},500)
+  }
+
   const filteredMapSelectedDays = () => {
+    if(displayedMatches[0] == undefined){
+      return "There is no saved data for these days, go to checklist to save data"
+    } else {
       return displayedMatches.map(s=>{
           return mappedDay(s)
       })
+    }
   }
 
   const redirectToSignin = () => {
@@ -155,7 +158,8 @@ const Statistics = props => {
         {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
         {displayMatchingDates()}
         {filteredMapSelectedDays()}
-        </div>
+        {console.log(displayedMatches[0])}
+      </div>
     </div>
   )
 }
