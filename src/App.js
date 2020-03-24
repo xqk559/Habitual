@@ -9,13 +9,20 @@ import Statistics from './Components/stats';
 import Calendar from './calendar';
 import {connect} from 'react-redux';
 import * as actionCreators from './Store/actions/index';
+import Homepage from './Components/homepage';
 
 const App = props => {
     return (
       <BrowserRouter forceRefresh={true}>
         <Switch>
           <Route
-            path="/(|checklist)/"
+            path="/"
+            exact
+            render=
+              {()=>
+                <Homepage/>}/>
+          <Route
+            path="/checklist/"
             exact
             render=
               {()=>
