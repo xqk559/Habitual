@@ -68,23 +68,25 @@ const Habitual = props => {
       }, [])
 
   const uploadChecklist = () => {
-      if(localStorage.getItem('userId'))
+    let fullPost = props.listReducer.map(day=>{
+      day.date = today;
+      return day;
+    });
+    if(localStorage.getItem('userId'))
       {axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
         .then((response)=>{if(response.data != null){
           axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
           .then((response)=> {if(response.data != null){axiosData = response.data}})
           .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
           .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-          .then(()=>console.log(lastAxiosDay[1][0].date), props.listReducer[props.listReducer.length-1].date)
+          .then(()=>console.log(lastAxiosDay[1][0]), props.listReducer[props.listReducer.length-1].date)
           .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
               ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
-        }})
-      let fullPost = props.listReducer.map(day=>{
-        day.date = today;
-        return day;
-      });
+          .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost))
+            }})
+    } else {
       axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
-      }
+    }
   }
 
   const uploadDefaultList = () => {
