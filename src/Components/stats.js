@@ -127,7 +127,12 @@ const Statistics = props => {
 
   const filteredMapSelectedDays = () => {
     if(displayedMatches[0] == undefined){
-      return "There is no saved data for these days, go to checklist to save data"
+      return (
+        <div className="centered">
+          <div>There is no saved data for these days.</div>
+          <div>Go to checklist to save data or click above button to refresh.</div>
+        </div>
+      )
     } else {
       return displayedMatches.map(s=>{
           return mappedDay(s)

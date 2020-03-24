@@ -10,6 +10,7 @@ const Auth = props => {
   let [title, setTitle] = useState("Sign Up");
   let [email, setEmail] = useState();
   let [password, setPassword] = useState();
+  let [passwordConfirmer, setPasswordConfirmer] = useState();
   let [error, setError] = useState(null);
   let [update, setUpdate] = useState();
 
@@ -31,21 +32,25 @@ const Auth = props => {
   }, [])
 
   const signUp = () => {
-    setError(null);
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
-    let axiosResponse;
-    const post = axios.post(url, authData)
-        .then(response=>axiosResponse=response.data)
-        .then(()=>localStorage.setItem('token', axiosResponse.idToken))
-        .then(()=>localStorage.setItem('userId', axiosResponse.localId))
-        .then(()=>localStorage.setItem('email', authData.email))
-        .catch(err=>setError(err.response.data.error))
-        .then(()=>{if(localStorage.getItem('token')){
-                    props.signUpRedux(localStorage.getItem('token'),
-                                      localStorage.getItem('userId'),
-                                      localStorage.getItem('email'));
-                    history.push("/checklist")
-            }})
+    if(password != passwordConfirmer){
+      alert("Passwords do not match")
+    } else {
+        setError(null);
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
+        let axiosResponse;
+        const post = axios.post(url, authData)
+            .then(response=>axiosResponse=response.data)
+            .then(()=>localStorage.setItem('token', axiosResponse.idToken))
+            .then(()=>localStorage.setItem('userId', axiosResponse.localId))
+            .then(()=>localStorage.setItem('email', authData.email))
+            .catch(err=>setError(err.response.data.error))
+            .then(()=>{if(localStorage.getItem('token')){
+                        props.signUpRedux(localStorage.getItem('token'),
+                                          localStorage.getItem('userId'),
+                                          localStorage.getItem('email'));
+                        history.push("/checklist")
+                }})
+            }
   }
 
   const login = () => {
@@ -99,7 +104,7 @@ const Auth = props => {
                   type="password"
                   className="loginInput"
                   placeholder="Confirm Password"
-                  onChange={event=>setPassword(event.target.value)}/>
+                  onChange={event=>setPasswordConfirmer(event.target.value)}/>
              </div>
     }
   }
