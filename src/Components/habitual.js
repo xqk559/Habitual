@@ -126,58 +126,68 @@ const Habitual = props => {
     }
   }
 
+  const renderSignedInPage = () => {
+    if(localStorage.getItem('token')){
+      return (
+        <div>
+          <div className="rainbow-text">
+            Habitual
+          </div>
+          <div className="rainbow-text-small">
+            You've done so many things today!
+          </div>
+          <br/>
+          <div className="centered2">
+            <input
+              type="text"
+              onChange={(event)=>{name = event.target.value}}/>
+            &nbsp;&nbsp;
+            <button
+              onClick={ () => props.addItem(name) }
+              type="button"
+              className="btn btn-outline-dark btn-sm"
+              title="Add a new habit to your current list">
+                Add New Habit
+            </button>
+            &nbsp;
+            <button
+              disabled = {canSaveDay}
+              onClick={ () => uploadChecklist() }
+              id= "submitter"
+              type="button"
+              className="btn btn-outline-primary btn-sm"
+              title="Save this list once completed so you can view statistics">
+                Save this Day
+            </button>
+            &nbsp;
+            <button
+              onClick={ ()=> uploadDefaultList() }
+              type="button"
+              className="btn btn-outline-dark btn-sm"
+              title="Set this list as your daily habit list every time you sign in">
+              Set Current List as Default
+            </button>
+          </div>
+          <br/>
+          <div>
+            <div  className="margin">
+              <div className="bold2">&nbsp;&nbsp;
+                To Do:
+              </div>
+              <br/>
+              {userIdExists ? checklist() : loaderTimeout()}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
   return (
     <div>
-      <div className="rainbow-text">
-        Habitual
-      </div>
-      <div className="rainbow-text-small">
-        You've done so many things today!
-      </div>
-      <br/>
-      <div className="centered2">
-          <input
-            type="text"
-            onChange={(event)=>{name = event.target.value}}/>
-          &nbsp;&nbsp;
-          <button
-            onClick={ () => props.addItem(name) }
-            type="button"
-            className="btn btn-outline-dark btn-sm"
-            title="Add a new habit to your current list">
-              Add New Habit
-          </button>
-          &nbsp;
-          <button
-            disabled = {canSaveDay}
-            onClick={ () => uploadChecklist() }
-            id= "submitter"
-            type="button"
-            className="btn btn-outline-primary btn-sm"
-            title="Save this list once completed so you can view statistics">
-              Save this Day
-          </button>
-          &nbsp;
-          <button
-            onClick={ ()=> uploadDefaultList() }
-            type="button"
-            className="btn btn-outline-dark btn-sm"
-            title="Set this list as your daily habit list every time you sign in">
-             Set Current List as Default
-          </button>
-      </div>
-      <br/>
-      <div>
-        <div  className="margin">
-            <div className="bold2">&nbsp;&nbsp;
-              To Do:
-            </div>
-            <br/>
-            <div className="absoluteCentered">
-              {redirectToSignin()}
-            </div>
-            {userIdExists ? checklist() : loaderTimeout()}
-        </div>
+      {renderSignedInPage()}
+      <div className="absoluteCentered">
+        {redirectToSignin()}
       </div>
     </div>
   );

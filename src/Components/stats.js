@@ -144,22 +144,30 @@ const Statistics = props => {
     }
   }
 
+  const renderSignedInPage = () => {
+    if(localStorage.getItem('token')){
+      return (
+        <div className="stats">
+          <div>It is currently {utcDate}</div>
+          <br/>
+          <button onClick={setLastDay}>Get Selected Day's Data</button>
+          <br/>
+          {historicalDates()}
+          {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
+          {displayMatchingDates()}
+          {filteredMapSelectedDays()}
+          {console.log(displayedMatches[0])}
+        </div>
+      )
+    }
+  }
+
   return (
     <div>
       <div className="centered">
         {redirectToSignin()}
       </div>
-      <div className="stats">
-        <div>It is currently {utcDate}</div>
-        <br/>
-        <button onClick={setLastDay}>Get Selected Day's Data</button>
-        <br/>
-        {historicalDates()}
-        {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
-        {displayMatchingDates()}
-        {filteredMapSelectedDays()}
-        {console.log(displayedMatches[0])}
-      </div>
+      {renderSignedInPage()}
     </div>
   )
 }
