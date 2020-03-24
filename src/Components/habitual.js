@@ -20,6 +20,7 @@ let cleared;
 const Habitual = props => {
   const [defaultList, setDefaultList] = useState();
   const [userIdExists, setUserIdExists] = useState(false);
+  const [canSaveDay, setCanSaveDay] = useState(false);
   useEffect(() => {
       const fetchData = async () => {
         await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
@@ -68,6 +69,7 @@ const Habitual = props => {
       }, [])
 
   const uploadChecklist = () => {
+    setCanSaveDay(true)
     let fullPost = props.listReducer.map(day=>{
       day.date = today;
       return day;
@@ -87,6 +89,7 @@ const Habitual = props => {
               axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
             } })
     }
+    alert("Today's data has been submitted! Refresh page if you want to change today's data")
   }
 
   const uploadDefaultList = () => {
@@ -133,31 +136,34 @@ const Habitual = props => {
       </div>
       <br/>
       <div className="centered2">
-          <input type="text"
-                  onChange={(event)=>{name = event.target.value}}
-                  />
+          <input
+            type="text"
+            onChange={(event)=>{name = event.target.value}}/>
           &nbsp;&nbsp;
-          <button onClick={ () => props.addItem(name) }
-                  type="button"
-                  className="btn btn-outline-dark btn-sm"
-                  title="Add a new habit to your current list">
-            Add New Habit
-          </button>
-          &nbsp;
-          <button onClick={ () => uploadChecklist() }
-                  id= "submitter"
-                  type="button"
-                  className="btn btn-outline-primary btn-sm"
-                  title="Save this list once completed so you can view statistics">
-            Upload Completed Day to Cloud
+          <button
+            onClick={ () => props.addItem(name) }
+            type="button"
+            className="btn btn-outline-dark btn-sm"
+            title="Add a new habit to your current list">
+              Add New Habit
           </button>
           &nbsp;
           <button
-              onClick={ ()=> uploadDefaultList() }
-              type="button"
-              className="btn btn-outline-dark btn-sm"
-              title="Set this list as your daily habit list every time you sign in">
-            Set Current List as Default
+            disabled = {canSaveDay}
+            onClick={ () => uploadChecklist() }
+            id= "submitter"
+            type="button"
+            className="btn btn-outline-primary btn-sm"
+            title="Save this list once completed so you can view statistics">
+              Save this Day
+          </button>
+          &nbsp;
+          <button
+            onClick={ ()=> uploadDefaultList() }
+            type="button"
+            className="btn btn-outline-dark btn-sm"
+            title="Set this list as your daily habit list every time you sign in">
+             Set Current List as Default
           </button>
       </div>
       <br/>
