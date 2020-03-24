@@ -78,8 +78,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const mutedStyle = this.state.muted ? { color: "grey" } : {}
-    const string = 'Reverse';
     return (
       <div className="container" onClick={this.hideColorPicker}>
         <div className="App">
@@ -113,7 +111,6 @@ class Calendar extends React.Component {
             )}
           </div>
         </div>
-        {/* {this.state.lastDaySelected ? console.log((this.state.lastDaySelected).toString().slice(0,15)) : null} */}
       </div>
     )
   }

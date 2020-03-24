@@ -9,7 +9,6 @@ import {NavLink} from 'react-router-dom';
 let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
-let firstHistoricalDay = false;
 let axiosResponse;
 
 const Statistics = props => {
@@ -30,7 +29,6 @@ const Statistics = props => {
                   {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
                       .then((response)=> axiosResponse = response.data)
                       .then(()=> localDay = Object.values(axiosResponse).pop())
-                      .then(()=> firstHistoricalDay = Object.values(axiosResponse)[0])
                   }
           }})
   }, [])
