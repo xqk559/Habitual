@@ -83,9 +83,9 @@ const Habitual = props => {
           .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
               ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
           .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost))
-            }})
-    } else {
-      axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
+            } else {
+              axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
+            } })
     }
   }
 
@@ -139,22 +139,25 @@ const Habitual = props => {
           &nbsp;&nbsp;
           <button onClick={ () => props.addItem(name) }
                   type="button"
-                  className="btn btn-outline-dark btn-sm">
-            Add Item
+                  className="btn btn-outline-dark btn-sm"
+                  title="Add a new habit to your current list">
+            Add New Habit
           </button>
           &nbsp;
           <button onClick={ () => uploadChecklist() }
                   id= "submitter"
                   type="button"
-                  className="btn btn-outline-primary btn-sm">
-            Submit Completed Day
+                  className="btn btn-outline-primary btn-sm"
+                  title="Save this list once completed so you can view statistics">
+            Upload Completed Day to Cloud
           </button>
           &nbsp;
           <button
               onClick={ ()=> uploadDefaultList() }
               type="button"
-              className="btn btn-outline-dark btn-sm">
-            Set as Default
+              className="btn btn-outline-dark btn-sm"
+              title="Set this list as your daily habit list every time you sign in">
+            Set Current List as Default
           </button>
       </div>
       <br/>
