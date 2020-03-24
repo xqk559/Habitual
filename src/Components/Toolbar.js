@@ -13,9 +13,9 @@ const Toolbar = props => {
 
   const logoutButton = () => {
     return <div>
-            <li className="rightLink" onClick={clearLocalStorage}>
-              <NavLink to="/logout">Logout</NavLink>
-            </li>
+              <li className="rightLink" onClick={clearLocalStorage}>
+                <NavLink to="/logout">Logout</NavLink>
+              </li>
            </div>
   }
 

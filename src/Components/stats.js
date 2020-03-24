@@ -55,8 +55,8 @@ const Statistics = props => {
               </div>
               {day ?
               day.map((value) =>
-                  {return (<div>
-                              <li key={value.id}
+                  {return (<div key={value.id}>
+                              <li
                                   className="none">
                                   <div>{value.name}: {capitalize(value.completed.toString())}</div>
                               </li>
@@ -81,9 +81,6 @@ const Statistics = props => {
       shortenedSelectedDays = selectedDaysArray.map(day=>{
           return day.toString().slice(0,15)
       })
-      //console.log(fullAxiosHistory)
-      //console.log(historicalDatesArray)
-      //console.log(shortenedSelectedDays)
   }
 
   let matches = [];
@@ -96,7 +93,6 @@ const Statistics = props => {
               matches.push(historical[i]);
           }
       }
-      //console.log(matches)
   }
 
   let displayedMatches = [];
@@ -107,7 +103,6 @@ const Statistics = props => {
               displayedMatches.push(fullAxiosHistory[i])
           }
       }
-      console.log(displayedMatches);
   }
 
   const mappedDay = (day) => {
@@ -123,7 +118,7 @@ const Statistics = props => {
   }
 
   return (
-    <div>
+    <div key={Math.random().toString()}>
       <div>
         {day ? dayMapper(day) : loaderTimeout()}
         You've completed {totaler} out of {day.length} things!

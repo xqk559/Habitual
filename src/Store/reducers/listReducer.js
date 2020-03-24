@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 
-let date = new Date().toString();
 let userId = null;
 if(localStorage.getItem('userId')){
     userId = localStorage.getItem('userId')
@@ -17,7 +16,6 @@ const addItem = (state, action) => {
             id: action.id,
             name: action.item,
             completed: false,
-            date: date.slice(0,15),
             userId: userId,
             date: todaysDate,
         }

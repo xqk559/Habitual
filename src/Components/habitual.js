@@ -28,7 +28,6 @@ const Habitual = props => {
               axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
                 .then((response)=> {defaults = (Object.values(response.data))})
                 .then(()=> defaultArray = defaults[0])
-                .then(()=>console.log(defaultArray))
                 .then(()=>{for(let i in defaultArray){
                     defaultArray[i].date = today
                     return defaultArray}})
@@ -63,8 +62,8 @@ const Habitual = props => {
       const token = localStorage.getItem('token');
       if(token){
       props.signUpRedux(localStorage.getItem('token'),
-                          localStorage.getItem('userId'),
-                          localStorage.getItem('email'))
+                        localStorage.getItem('userId'),
+                        localStorage.getItem('email'))
       }
       }, [])
 
@@ -76,6 +75,7 @@ const Habitual = props => {
           .then((response)=> {if(response.data != null){axiosData = response.data}})
           .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
           .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
+          .then(()=>console.log(lastAxiosDay[1][0].date), props.listReducer[props.listReducer.length-1].date)
           .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
               ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
         }})
