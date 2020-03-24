@@ -73,7 +73,7 @@ const Habitual = props => {
       return day;
     });
     if(localStorage.getItem('userId'))
-      {axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
+      {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
         .then((response)=>{if(response.data != null){
           axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
           .then((response)=> {if(response.data != null){axiosData = response.data}})

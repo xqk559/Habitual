@@ -100,16 +100,12 @@ const Auth = props => {
                   className="loginInput"
                   placeholder="Confirm Password"
                   onChange={event=>setPassword(event.target.value)}/>
-               <button
-                  className="transparent"
-                  style={{width: 70}}>
-               </button>
              </div>
     }
   }
 
   return (
-    <div>
+    <div className="centered">
       <h1 className="loginPage">{title}</h1>
       <div className="loginButtons">
         <input
@@ -117,14 +113,6 @@ const Auth = props => {
           className="loginInput"
           placeholder="Email"
           onChange={event=>setEmail(event.target.value)}/>
-        <button
-          onClick={title === "Sign Up"
-                    ? ()=>signUp()
-                    : ()=>login()}
-                  className="btn btn-outline-dark btn-sm"
-                  style={{width: 70}}>
-                    {title}
-        </button>
       </div>
       <div className="loginButtons">
         <input
@@ -132,21 +120,27 @@ const Auth = props => {
           className="loginInput"
           placeholder="Password"
           onChange={event=>setPassword(event.target.value)}/>
-        <button
-          className="transparent"
-          style={{width: 70}}>
-            Logout
-        </button>
       </div>
       <div className="loginButtons">
         {confirmPassword()}
       </div>
       <br/>
+      <button
+          onClick={title === "Sign Up"
+                    ? ()=>signUp()
+                    : ()=>login()}
+                  className="btn btn-outline-dark btn-sm"
+                  style={{width: 70}}>
+                    {title}
+      </button>
       <div className="loginPage">
+      <br/>
       <button
         onClick={()=>switchSignUpLogin()}
         className="btn btn-outline-primary btn-sm">
-          Switch Login/Signup
+          {title === "Sign Up"
+                    ? "Already have an account? Login here"
+                    : "Need to sign up? Sign up here"}
       </button>
       </div>
       {errorChecker()}
