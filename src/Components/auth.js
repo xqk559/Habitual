@@ -99,7 +99,7 @@ const Auth = props => {
 
   const confirmPassword = () => {
     if(title == "Sign Up"){
-      return <div className="loginButtons">
+      return <div>
                <input
                   type="password"
                   className="loginInput"
