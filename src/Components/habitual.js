@@ -130,10 +130,10 @@ const Habitual = props => {
     if(localStorage.getItem('token')){
       return (
         <div>
-          <div className="rainbow-text">
+          <div className="headerText">
             Habitual
           </div>
-          <div className="rainbow-text-small">
+          <div className="headerTextSmall">
             You've done so many things today!
           </div>
           <br/>
