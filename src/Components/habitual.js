@@ -89,7 +89,7 @@ const Habitual = props => {
               axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
             } })
     }
-    alert("Today's data has been submitted! Refresh page if you want to change today's data")
+    alert("Today's data has been submitted! Refresh page if you want to change today's data.")
   }
 
   const uploadDefaultList = () => {

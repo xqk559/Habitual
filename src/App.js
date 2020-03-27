@@ -12,67 +12,67 @@ import * as actionCreators from './Store/actions/index';
 import Homepage from './Components/homepage';
 
 const App = props => {
-    return (
-      <BrowserRouter forceRefresh={true}>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render=
-              {()=>
-                <Homepage/>}/>
-          <Route
-            path="/checklist/"
-            exact
-            render=
-              {()=>
-                <div className="overflow">
-                <Toolbar/>
-                <div >
-                  <Habitual/>
-                </div>
-                <div className="centered">
-                  <hr />
-                  <AppFooter/>
-                </div>
-                </div>
-                }/>
-          <Route
-            path="/login/"
-            exact
-            render=
-            {()=> <div>
+  return (
+    <BrowserRouter forceRefresh={true}>
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render=
+            {()=>
+              <Homepage/>}/>
+        <Route
+          path="/checklist/"
+          exact
+          render=
+            {()=>
+              <div className="overflow">
+              <Toolbar/>
+              <div >
+                <Habitual/>
+              </div>
+              <div className="centered">
+                <hr />
+                <AppFooter/>
+              </div>
+              </div>
+              }/>
+        <Route
+          path="/login/"
+          exact
+          render=
+          {()=> <div>
+                  <Toolbar/>
+                  <Auth />
+                  <div className="centered">
+                    <AppFooter/>
+                  </div>
+                </div>}/>
+        <Route path="/statistics/"
+                exact
+                render=
+                {()=>
+                  <div className="overflow">
                     <Toolbar/>
-                    <Auth />
+                    <Statistics/>
+                    <div className="calendar">
+                      <Calendar/>
+                    </div>
                     <div className="centered">
                       <AppFooter/>
                     </div>
-                  </div>}/>
-          <Route path="/statistics/"
-                 exact
-                 render=
-                  {()=>
-                    <div className="overflow">
-                      <Toolbar/>
-                      <Statistics/>
-                      <div className="calendar">
-                        <Calendar/>
-                      </div>
-                      <div className="centered">
-                        <AppFooter/>
-                      </div>
-                    </div>
-                  }/>
-          <Route
-            path="/logout/"
-            exact
-            render=
-            {()=> props.logoutRedux()}>
-              <Redirect to="/" exact/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
+                  </div>
+                }/>
+        <Route
+          path="/logout/"
+          exact
+          render=
+          {()=> props.logoutRedux()}>
+            <Redirect to="/" exact/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 const mapDispatchToProps = dispatch => {
