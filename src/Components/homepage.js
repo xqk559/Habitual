@@ -13,7 +13,7 @@ const Homepage = props => {
   }
 
   return (
-    <div style={{margin: 125}}>
+    <div className="marginHomepage">
       <div className="rainbow-text">
         Habitual
       </div>
@@ -31,8 +31,7 @@ const Homepage = props => {
       </div>
       <div
         style={{margin: 75}}
-        className="centered"
-          >
+        className="centered">
         {redirectToSignin()}
       </div>
       <div className="centered">

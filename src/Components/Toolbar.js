@@ -20,7 +20,7 @@ const Toolbar = props => {
   }
 
   return (
-    <div classNAme="noWrap">
+    <div>
       <ul className="toolbar">
         <li className="link">
           <NavLink to="/">Home</NavLink>
