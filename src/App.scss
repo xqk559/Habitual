@@ -226,9 +226,8 @@ li a {
 }
 
 .overflow {
-  min-height: auto;
   overflow: scroll;
-  min-width: auto;
+  height: 700px;
 }
 
 .btn-outline-primary {
@@ -306,7 +305,6 @@ li a {
 }
 
 .scroll {
-  height: 700px;
   overflow: scroll;
 }
 
@@ -343,7 +341,7 @@ li a {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: scroll;
+  overflow: auto;
   background-color: rgba(173, 101, 241, 0.466);
   border-bottom: 1px solid black;
   border-left: 1px solid black;

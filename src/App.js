@@ -13,6 +13,7 @@ import Homepage from './Components/homepage';
 
 const App = props => {
   return (
+    <div>
     <BrowserRouter forceRefresh={true}>
       <Switch>
         <Route
@@ -27,8 +28,8 @@ const App = props => {
           render=
             {()=>
               <div className="overflow">
-              <Toolbar/>
-              <div >
+                <Toolbar/>
+              <div>
                 <Habitual/>
               </div>
               <div className="centered">
@@ -72,6 +73,7 @@ const App = props => {
         </Route>
       </Switch>
     </BrowserRouter>
+    </div>
   );
 }
 
