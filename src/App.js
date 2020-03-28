@@ -55,7 +55,9 @@ const App = props => {
                 {()=>
                   <div className="overflow">
                     <Toolbar/>
-                    <Statistics/>
+                    <div>
+                      <Statistics/>
+                    </div>
                     <div className="calendar">
                       <Calendar/>
                     </div>
