@@ -10,6 +10,7 @@ let dt = new Date();
 let utcDate = dt.toUTCString();
 let localDay = false;
 let axiosResponse;
+let allHistoricalUserData;
 
 const Statistics = props => {
 
@@ -17,99 +18,107 @@ const Statistics = props => {
   let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
 
   useEffect(()=>{
-      if(axiosResponse != null){
-          setFullAxiosHistory(Object.values(axiosResponse))
+    if(localStorage.getItem('userId')){
+      axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+        .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
+        .then(()=>console.log(allHistoricalUserData))
       }
+  }, [props])
+
+  useEffect(()=>{
+    if(axiosResponse != null){
+      setFullAxiosHistory(Object.values(axiosResponse))
+    }
   }, [axiosResponse])
 
   useEffect(()=>{
-      axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-          .then((response)=>{if(response.data != null){
-              if(localStorage.getItem('userId'))
-                  {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-                      .then((response)=> axiosResponse = response.data)
-                      .then(()=> localDay = Object.values(axiosResponse).pop())
-                  }
-          }})
+    axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+      .then((response)=>{if(response.data != null){
+        if(localStorage.getItem('userId'))
+          {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+            .then((response)=> axiosResponse = response.data)
+            .then(()=> localDay = Object.values(axiosResponse).pop())
+          }
+      }})
   }, [])
 
   useEffect(()=>{
-      const token = localStorage.getItem('token');
-      if(token){
-      props.signUpRedux(localStorage.getItem('token'),
-                          localStorage.getItem('userId'),
-                          localStorage.getItem('email'))
-      }
+    const token = localStorage.getItem('token');
+    if(token){
+    props.signUpRedux(localStorage.getItem('token'),
+                        localStorage.getItem('userId'),
+                        localStorage.getItem('email'))
+    }
   }, [])
 
   const dayMapper = (day) => {
-      const capitalize = (s) => {
-          return s.charAt(0).toUpperCase() + s.slice(1)
-        };
-      return (
-          <ul>
-              <div className="statListDate">
-                  {day? day[0].date : null}
-              </div>
-              {day ?
-              day.map((value) =>
-                  {return (<div key={value.id}>
-                              <li
-                                  className="none">
-                                  <div>{value.name}: {capitalize(value.completed.toString())}</div>
-                              </li>
-                          </div>
-                          )})
-              :null}
-          </ul>
-      );
+    const capitalize = (s) => {
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    };
+    return (
+      <ul>
+        <div className="statListDate">
+          {day? day[0].date : null}
+        </div>
+        {day ?
+        day.map((value) =>
+          {return (<div key={value.id}>
+                    <li
+                      className="none">
+                      <div>{value.name}: {capitalize(value.completed.toString())}</div>
+                    </li>
+                  </div>
+                  )})
+        :null}
+      </ul>
+    );
   }
 
   let shortenedSelectedDays;
   let historicalDatesArray = [];
 
   const historicalDates = () => {
-      if(fullAxiosHistory[0] != null){
-          for(let i = 0; i < fullAxiosHistory.length; i++){
-              historicalDatesArray.push(fullAxiosHistory[i][0].date) ;
-          }
-      }
-      let selectedDaysString = localStorage.getItem('selectedDays')
-      let selectedDaysArray = deserializeDates(selectedDaysString)
-      shortenedSelectedDays = selectedDaysArray.map(day=>{
-          return day.toString().slice(0,15)
-      })
+    if(fullAxiosHistory[0] != null){
+        for(let i = 0; i < fullAxiosHistory.length; i++){
+            historicalDatesArray.push(fullAxiosHistory[i][0].date) ;
+        }
+    }
+    let selectedDaysString = localStorage.getItem('selectedDays')
+    let selectedDaysArray = deserializeDates(selectedDaysString)
+    shortenedSelectedDays = selectedDaysArray.map(day=>{
+        return day.toString().slice(0,15)
+    })
   }
 
   let matches = [];
 
   const findMatchingDates = (selected, historical) => {
-      selected.sort();
-      historical.sort();
-      for(let i = 0; i < historical.length; i += 1){
-          if(selected.indexOf(historical[i]) > -1) {
-              matches.push(historical[i]);
-          }
-      }
+    selected.sort();
+    historical.sort();
+    for(let i = 0; i < historical.length; i += 1){
+        if(selected.indexOf(historical[i]) > -1) {
+            matches.push(historical[i]);
+        }
+    }
   }
 
   let displayedMatches = [];
 
   const displayMatchingDates = () => {
-      for(let i = 0; i < fullAxiosHistory.length; i++){
-          if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
-              displayedMatches.push(fullAxiosHistory[i])
-          }
-      }
+    for(let i = 0; i < fullAxiosHistory.length; i++){
+        if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
+            displayedMatches.push(fullAxiosHistory[i])
+        }
+    }
   }
 
   const mappedDay = (day) => {
-      let totaler = 0;
-      for(let i = 0; i < day.length; i++){
-        if(day[i].completed){
-          totaler = ++totaler
-        }
+    let totaler = 0;
+    for(let i = 0; i < day.length; i++){
+      if(day[i].completed){
+        totaler = ++totaler
       }
+    }
   return (
     <div key={Math.random().toString()}>
       <div>

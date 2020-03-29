@@ -16,21 +16,12 @@ let defaultArray = null;
 let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 let cleared;
-let allHistoricalUserData;
 
 const Habitual = props => {
 
   const [defaultList, setDefaultList] = useState();
   const [userIdExists, setUserIdExists] = useState(false);
   const [canSaveDay, setCanSaveDay] = useState(false);
-
-  useEffect(()=>{
-    if(localStorage.getItem('userId') && defaultArray == null){
-      axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-        .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
-    }
-    console.log(allHistoricalUserData)
-  }, [props])
 
   useEffect(() => {
       const fetchData = async () => {
