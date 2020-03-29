@@ -16,11 +16,22 @@ let defaultArray = null;
 let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
 let cleared;
+let allHistoricalUserData;
 
 const Habitual = props => {
+
   const [defaultList, setDefaultList] = useState();
   const [userIdExists, setUserIdExists] = useState(false);
   const [canSaveDay, setCanSaveDay] = useState(false);
+
+  useEffect(()=>{
+    if(localStorage.getItem('userId') && defaultArray == null){
+      axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+        .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
+    }
+    console.log(allHistoricalUserData)
+  }, [props])
+
   useEffect(() => {
       const fetchData = async () => {
         await axios.get('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json')
@@ -81,7 +92,7 @@ const Habitual = props => {
           .then((response)=> {if(response.data != null){axiosData = response.data}})
           .then(()=> axiosDays = Object.keys(axiosData).map((key)=>{return [key, axiosData[key]]}))
           .then(()=> lastAxiosDay = axiosDays[axiosDays.length-1])
-          .then(()=>console.log(lastAxiosDay[1][0]), props.listReducer[props.listReducer.length-1].date)
+          .then(()=>props.listReducer[props.listReducer.length-1].date)
           .then(()=>lastAxiosDay[1][0].date === props.listReducer[props.listReducer.length-1].date
               ? axios.delete('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'/'+ lastAxiosDay[0] +'.json') : console.log())
           .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost))

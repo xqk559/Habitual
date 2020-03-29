@@ -161,7 +161,6 @@ const Statistics = props => {
           {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
           {displayMatchingDates()}
           {filteredMapSelectedDays()}
-          {console.log(displayedMatches[0])}
         </div>
       )
     }
