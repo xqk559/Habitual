@@ -10,6 +10,7 @@ import Calendar from './calendar';
 import {connect} from 'react-redux';
 import * as actionCreators from './Store/actions/index';
 import Homepage from './Components/homepage';
+import BarChart from './Components/barchart';
 
 const App = props => {
   return (
@@ -61,8 +62,8 @@ const App = props => {
                     <div className="calendar">
                       <Calendar/>
                     </div>
-                    <div className="centered">
-                      <AppFooter/>
+                    <div className="barChart">
+                      <BarChart/>
                     </div>
                   </div>
                 }/>
