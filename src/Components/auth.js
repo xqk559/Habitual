@@ -12,7 +12,6 @@ const Auth = props => {
   let [password, setPassword] = useState();
   let [passwordConfirmer, setPasswordConfirmer] = useState();
   let [error, setError] = useState(null);
-  let [update, setUpdate] = useState();
 
   let history = useHistory();
 
@@ -22,23 +21,24 @@ const Auth = props => {
       returnSecureToken: true
   };
 
+  const signUpRedux = props.signUpRedux
   useEffect(()=>{
       const token = localStorage.getItem('token');
       if(token){
-      props.signUpRedux(localStorage.getItem('token'),
+      signUpRedux(localStorage.getItem('token'),
                         localStorage.getItem('userId'),
                         localStorage.getItem('email'))
       }
-  }, [])
+  }, [signUpRedux])
 
   const signUp = () => {
-    if(password != passwordConfirmer){
+    if(password !== passwordConfirmer){
       alert("Passwords do not match")
     } else {
         setError(null);
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
         let axiosResponse;
-        const post = axios.post(url, authData)
+        axios.post(url, authData)
             .then(response=>axiosResponse=response.data)
             .then(()=>localStorage.setItem('token', axiosResponse.idToken))
             .then(()=>localStorage.setItem('userId', axiosResponse.localId))
@@ -57,7 +57,7 @@ const Auth = props => {
     setError(null);
     let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk';
     let axiosResponse;
-    const post = axios.post(url, authData)
+    axios.post(url, authData)
       .then(response=>axiosResponse=response.data)
       .then(()=>localStorage.setItem('token', axiosResponse.idToken))
       .then(()=>localStorage.setItem('userId', axiosResponse.localId))
@@ -69,14 +69,6 @@ const Auth = props => {
                           localStorage.getItem('email'));
         history.push("/checklist")
       }})
-  }
-
-  const logout = () => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('email');
-      setUpdate('updated');
-      props.logoutRedux();
   }
 
   const switchSignUpLogin = () => {
@@ -98,56 +90,61 @@ const Auth = props => {
   }
 
   const confirmPassword = () => {
-    if(title == "Sign Up"){
+    if(title === "Sign Up"){
       return <div>
                <input
                   type="password"
                   className="loginInput"
                   placeholder="Confirm Password"
-                  onChange={event=>setPasswordConfirmer(event.target.value)}/>
+                  onChange={event=>setPasswordConfirmer(event.target.value)}
+                  autoComplete="off"/>
              </div>
     }
   }
 
   return (
-    <div className="centered">
-      <h1 className="loginPage">{title}</h1>
-      <div className="loginButtons">
-        <input
-          type="text"
-          className="loginInput"
-          placeholder="Email"
-          onChange={event=>setEmail(event.target.value)}/>
-      </div>
-      <div className="loginButtons">
-        <input
-          type="password"
-          className="loginInput"
-          placeholder="Password"
-          onChange={event=>setPassword(event.target.value)}/>
-      </div>
-      <div className="loginButtons">
-        {confirmPassword()}
-      </div>
-      <br/>
-      <button
-          onClick={title === "Sign Up"
-                    ? ()=>signUp()
-                    : ()=>login()}
-                  className="btn btn-outline-dark btn-sm"
-                  style={{width: 70}}>
-                    {title}
-      </button>
-      <div className="loginPage">
-      <br/>
-      <button
-        onClick={()=>switchSignUpLogin()}
-        className="btn btn-outline-primary btn-sm">
-          {title === "Sign Up"
-                    ? "Already have an account? Login here"
-                    : "Need to sign up? Sign up here"}
-      </button>
-      </div>
+    <div>
+        <div className="centered">
+          <h1 className="loginPage">{title}</h1>
+          <div className="loginButtons">
+            <input
+              type="text"
+              className="loginInput"
+              placeholder="Email"
+              onChange={event=>setEmail(event.target.value)}
+              autoComplete="off"/>
+          </div>
+          <div className="loginButtons">
+            <input
+              type="password"
+              className="loginInput"
+              placeholder="Password"
+              onChange={event=>setPassword(event.target.value)}
+              autoComplete="off"/>
+          </div>
+          <div className="loginButtons">
+            {confirmPassword()}
+          </div>
+          <br/>
+          <button
+              onClick={title === "Sign Up"
+                        ? ()=>signUp()
+                        : ()=>login()}
+                      className="btn btn-outline-dark btn-sm"
+                      style={{width: 70}}>
+                        {title}
+          </button>
+          <div className="loginPage">
+          <br/>
+          <button
+            onClick={()=>switchSignUpLogin()}
+            className="btn btn-outline-primary btn-sm">
+              {title === "Sign Up"
+                        ? "Already have an account? Login here"
+                        : "Need to sign up? Sign up here"}
+          </button>
+          </div>
+        </div>
       {errorChecker()}
     </div>
   );

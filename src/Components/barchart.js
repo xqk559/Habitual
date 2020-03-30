@@ -1,27 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import * as d3 from 'd3'
 import {connect} from 'react-redux';
 
 const BarChart = props => {
 
-  const [pairs, setPairs] = useState()
-  const [keys, setKeys] = useState()
-
-  useEffect(()=>{
-    if(props.barChartReducer[0]){
-      setPairs(props.barChartReducer[0])
-      setKeys(Object.keys(props.barChartReducer[0]))
-      console.log(props.barChartReducer[0])
-      drawBarChart(Object.values(props.barChartReducer[0]))
-      console.log(Object.keys(props.barChartReducer[0]))
-    }
-  }, [props])
-
-  let data = [ 2, 4, 2, 6, 8 ]
-
   const drawBarChart = (data) => {
     let i = -1;
-    const canvasHeight = 300
     const canvasWidth = 300
     const scale = 10
     const svgCanvas = d3.select('p')
@@ -45,9 +29,15 @@ const BarChart = props => {
       .attr('y', (datapoint, iteration) => (iteration * 45) + 38)
       .attr('x', (datapoint) => 0)
     }
+
+  if(props.barChartReducer[0]){
+    drawBarChart(Object.values(props.barChartReducer[0]))
+    console.log(Object.keys(props.barChartReducer[0]))
+  }
+
   return (
     <div>
-      <h className="headerTextSmall">Total Completed All-Time</h>
+      <div className="headerTextSmall">Total Completed All-Time</div>
       <div><p></p></div>
     </div>
   )

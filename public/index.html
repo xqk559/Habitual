@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+
 <html>
   <link rel="icon" href="%PUBLIC_URL%/habitualFavicon3.png?v=2" />
   <body>
     <head>
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-      <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 
      <script>
         // Initialize Firebase
@@ -20,9 +19,6 @@
             appId: "habitual-f64a5",
             measurementId: "G-measurement-id",
           };
-        firebase.initializeApp(firebaseConfig);
-
-        var rootRef = firebase.database().ref();
 
       </script>
       <meta charset="utf-8" >
@@ -34,8 +30,6 @@
       <!-- include only the Firebase features as you need -->
       <script defer src="/__/firebase/7.8.0/firebase-auth.js"></script>
       <script defer src="/__/firebase/7.8.0/firebase-database.js"></script>
-      <script defer src="/__/firebase/7.8.0/firebase-messaging.js"></script>
-      <script defer src="/__/firebase/7.8.0/firebase-storage.js"></script>
       <!-- initialize the SDK after all desired features are loaded -->
       <script defer src="/__/firebase/init.js"></script>
 
@@ -73,16 +67,7 @@
         // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
         //
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+      })
     </script>
     <body>
       <!-- Previously loaded Firebase SDKs -->

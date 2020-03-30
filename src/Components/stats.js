@@ -8,11 +8,9 @@ import {NavLink} from 'react-router-dom';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
-let localDay = false;
-let axiosResponse;
 let allHistoricalUserData;
-let arrayOfHistoricalItemNames = [];
-let arrayOfCompletedItemLengths = [];
+let historicalItemNames = [];
+let completedItemLengths = [];
 let completedPairs = {};
 
 const Statistics = props => {
@@ -25,59 +23,52 @@ const Statistics = props => {
     return a.filter((item)=> {
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
-}
+  }
 
+  const completedItemPairs = props.completedItemPairs;
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
         .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
-        .then(()=>
-          {for (let i of allHistoricalUserData){
-            for (let j of i) {
-              if (j.completed){
-                arrayOfHistoricalItemNames.push(j.name)
+        .then(()=>{
+          for (let i of allHistoricalUserData){
+              for (let j of i) {
+                if (j.completed){
+                  historicalItemNames.push(j.name)
+                }
               }
             }
+          let uniqueNames = uniqueCheck(historicalItemNames);
+          for(let uniqueName of uniqueNames){
+            completedPairs[uniqueName] = historicalItemNames.filter(name => name === uniqueName).length
+            completedItemLengths.push(completedPairs[uniqueName])
           }
-          let uniqueNames = uniqueCheck(arrayOfHistoricalItemNames);
-          const uniqueNamesLengths = () => {
-            let uniqueName;
-            for(uniqueName of uniqueNames){
-              arrayOfCompletedItemLengths.push(completedPairs[uniqueName] = arrayOfHistoricalItemNames.filter((name)=>{return name == uniqueName}).length)
           }
-          return arrayOfCompletedItemLengths;
-        }
-        uniqueNamesLengths()
-        })
-        .then(()=>props.completedItemPairs(completedPairs))
+        )
+        .then(()=>completedItemPairs(completedPairs))
       }
-  }, [])
-
-  useEffect(()=>{
-    if(axiosResponse != null){
-      setFullAxiosHistory(Object.values(axiosResponse))
-    }
-  }, [axiosResponse])
+  }, [completedItemPairs])
 
   useEffect(()=>{
     axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
       .then((response)=>{if(response.data != null){
-        if(localStorage.getItem('userId'))
-          {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-            .then((response)=> axiosResponse = response.data)
-            .then(()=> localDay = Object.values(axiosResponse).pop())
+        if(localStorage.getItem('userId')){
+          axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+            .then((response)=> setFullAxiosHistory(Object.values(response.data)))
           }
-      }})
+        }
+      })
   }, [])
 
+  const signUpRedux = props.signUpRedux
   useEffect(()=>{
     const token = localStorage.getItem('token');
     if(token){
-    props.signUpRedux(localStorage.getItem('token'),
-                        localStorage.getItem('userId'),
-                        localStorage.getItem('email'))
+    signUpRedux(localStorage.getItem('token'),
+                      localStorage.getItem('userId'),
+                      localStorage.getItem('email'))
     }
-  }, [])
+  }, [signUpRedux])
 
   const dayMapper = (day) => {
     const capitalize = (s) => {
@@ -163,7 +154,7 @@ const Statistics = props => {
   }
 
   const filteredMapSelectedDays = () => {
-    if(displayedMatches[0] == undefined){
+    if(displayedMatches.length === undefined){
       return (
         <div className="centered">
           <div>There is no saved data for these days.</div>
@@ -186,7 +177,7 @@ const Statistics = props => {
     }
   }
 
-  const renderSignedInPage = () => {
+  const signedInPage = () => {
     if(localStorage.getItem('token')){
       return (
         <div className="stats">
@@ -208,7 +199,7 @@ const Statistics = props => {
       <div className="centered">
         {redirectToSignin()}
       </div>
-      {renderSignedInPage()}
+      {signedInPage()}
     </div>
   )
 }

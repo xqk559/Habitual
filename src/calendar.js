@@ -57,7 +57,7 @@ class Calendar extends React.Component {
 
     localStorage.setItem("selectedDays", serializeDates(selectedDays))
     this.setState({ selectedDays })
-    this.setState(this.state.lastDaySelected = day)
+    this.setState({lastDaySelected: day})
   }
 
   toggleMute() {

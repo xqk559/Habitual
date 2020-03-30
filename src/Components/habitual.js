@@ -13,9 +13,7 @@ let axiosDays;
 let lastAxiosDay;
 let defaults;
 let defaultArray = null;
-let defaultExecuted = false;
 let today = new Date().toString().slice(0,15);
-let cleared;
 
 const Habitual = props => {
 
@@ -35,12 +33,11 @@ const Habitual = props => {
                     defaultArray[i].date = today
                     return defaultArray}})
                 .then(()=> setDefaultList(defaultArray))
-                .then(defaultExecuted = true)
             }
           }})
       };
       fetchData();
-    }, [cleared]);
+    }, []);
 
     let location = useLocation()
 
@@ -48,29 +45,31 @@ const Habitual = props => {
       setUserIdExists(true)
     }, [userIdExists, props, location])
 
+    const addDefaultToState = props.addDefaultToState
     useEffect(()=> {
       if(defaultList != null){
-          props.addDefaultToState(defaultList);
+          addDefaultToState(defaultList);
     }
-    }, [defaultList, localStorage])
+    }, [defaultList, addDefaultToState])
 
     useEffect(()=>{
       if(!localStorage.getItem('userId')){
           props.clearAll()
-          cleared = 69;
       }
-    }, [localStorage])
+    }, [props])
 
+    const signUpRedux = props.signUpRedux
     useEffect(()=>{
       const token = localStorage.getItem('token');
       if(token){
-      props.signUpRedux(localStorage.getItem('token'),
+      signUpRedux(localStorage.getItem('token'),
                         localStorage.getItem('userId'),
                         localStorage.getItem('email'))
       }
-      }, [])
+      }, [signUpRedux])
 
   const uploadChecklist = () => {
+    if (props.listReducer !== []){
     setCanSaveDay(true)
     let fullPost = props.listReducer.map(day=>{
       day.date = today;
@@ -92,6 +91,7 @@ const Habitual = props => {
             } })
     }
     alert("Today's data has been submitted! Refresh page if you want to change today's data.")
+    }
   }
 
   const uploadDefaultList = () => {
@@ -100,14 +100,11 @@ const Habitual = props => {
   }
 
   const checklist = () => {
-      const capitalizeFirstLetter = string => {
-          return string.charAt(0).toUpperCase() + string.slice(1);
-      }
       return (<ul>
                 {props.listReducer.map((val, index) =>
                   {return <li key={index}
                               className="none">
-                              { <Item name={capitalizeFirstLetter(val.name)}
+                              { <Item name={val.name}
                                       id={val.id}/> }
                           </li>
                 })}
@@ -120,7 +117,7 @@ const Habitual = props => {
   }
 
   const redirectToSignin = () => {
-    if(props.listReducer.length == 0 && !localStorage.getItem('token')){
+    if(props.listReducer.length === 0 && !localStorage.getItem('token')){
       return <li
                 className="redirectLink">
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
@@ -152,15 +149,6 @@ const Habitual = props => {
                 Add New Habit
             </button>
             &nbsp;
-            <button
-              disabled = {canSaveDay}
-              onClick={ () => uploadChecklist() }
-              id= "submitter"
-              type="button"
-              className="btn btn-outline-primary btn-sm"
-              title="Save this list once completed so you can view statistics">
-                Save this Day
-            </button>
             &nbsp;
             <button
               onClick={ ()=> uploadDefaultList() }
@@ -172,6 +160,17 @@ const Habitual = props => {
           </div>
           <br/>
           <div>
+            <div className="centered" style={{marginBottom: 50}}>
+            <button
+                disabled = {canSaveDay}
+                onClick={ () => uploadChecklist() }
+                id= "submitter"
+                type="button"
+                className="btn btn-outline-primary btn-sm"
+                title="Save this list once completed so you can view statistics (Overwrites other data for today)">
+                  Update Today's Checklist
+              </button>
+              </div>
             <div  className="margin">
               <div className="bold2">&nbsp;&nbsp;
                 To Do:
