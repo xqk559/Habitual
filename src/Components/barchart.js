@@ -1,9 +1,19 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as d3 from 'd3'
 import {connect} from 'react-redux';
 
 const BarChart = props => {
-  const data = [ 2, 4, 2, 6, 8 ]
+
+  const [pairs, setPairs] = useState()
+
+  useEffect(()=>{
+    if(props.barChartReducer[0]){
+      setPairs(props.barChartReducer[0])
+      drawBarChart(Object.values(props.barChartReducer[0]))
+    }
+  }, [props])
+
+  let data = [ 2, 4, 2, 6, 8 ]
 
   const drawBarChart = (data) => {
       const canvasHeight = 300
@@ -30,8 +40,6 @@ const BarChart = props => {
         .attr('x', (datapoint, iteration) => iteration * 45)
         .attr('y', (datapoint) => canvasHeight - datapoint * scale)
       }
-  console.log(props.barChartReducer[0])
-  drawBarChart(data)
   return <div><p></p></div>
 }
 
