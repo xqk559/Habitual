@@ -27,7 +27,7 @@ const BarChart = props => {
     const svgCanvas = d3.select('p')
       .append('svg')
       .attr('width', canvasWidth)
-      .attr('height', (data.length*50))
+      .attr('height', (data.length*55))
       .style('border', '1px solid black')
     svgCanvas.selectAll('rect')
       .data(data).enter()
@@ -45,7 +45,12 @@ const BarChart = props => {
       .attr('y', (datapoint, iteration) => (iteration * 45) + 38)
       .attr('x', (datapoint) => 0)
     }
-  return <div><p></p></div>
+  return (
+    <div>
+      <h className="headerTextSmall">Total Completed All-Time</h>
+      <div><p></p></div>
+    </div>
+  )
 }
 
 const mapStateToProps = state => {
