@@ -11,6 +11,7 @@ let utcDate = dt.toUTCString();
 let localDay = false;
 let axiosResponse;
 let allHistoricalUserData;
+let arrayOfHistoricalItemNames = [];
 
 const Statistics = props => {
 
@@ -22,6 +23,16 @@ const Statistics = props => {
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
         .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
         .then(()=>console.log(allHistoricalUserData))
+        .then(()=>
+          {for (let i of allHistoricalUserData){
+            for (let j of i) {
+              if (j.completed){
+                arrayOfHistoricalItemNames.push(j.name)
+              }
+            }
+          }
+          console.log(arrayOfHistoricalItemNames)
+        })
       }
   }, [props])
 
