@@ -48,8 +48,6 @@ const Statistics = props => {
           return arrayOfCompletedItemLengths;
         }
         uniqueNamesLengths()
-        //props.completedItemPairs(completedPairs)
-        //console.log(completedPairs)
         })
         .then(()=>props.completedItemPairs(completedPairs))
       }
