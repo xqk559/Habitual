@@ -12,3 +12,7 @@ export {
     login,
     logout,
 } from './loginActions';
+
+export {
+    completedItemPairs,
+} from './barChartActions';

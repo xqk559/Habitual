@@ -31,7 +31,6 @@ const Statistics = props => {
     if(localStorage.getItem('userId')){
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
         .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
-        .then(()=>console.log(allHistoricalUserData))
         .then(()=>
           {for (let i of allHistoricalUserData){
             for (let j of i) {
@@ -40,7 +39,6 @@ const Statistics = props => {
               }
             }
           }
-          console.log(arrayOfHistoricalItemNames.filter((name)=>{return name == "Programmed"}).length)
           let uniqueNames = uniqueCheck(arrayOfHistoricalItemNames);
           const uniqueNamesLengths = () => {
             let uniqueName;
@@ -50,8 +48,11 @@ const Statistics = props => {
           return arrayOfCompletedItemLengths;
         }
         uniqueNamesLengths()
-        console.log(completedPairs)
+        //props.completedItemPairs(completedPairs)
+        //console.log(completedPairs)
         })
+        .then(()=>console.log(completedPairs))
+        .then(()=>props.completedItemPairs(completedPairs))
       }
   }, [])
 
@@ -223,6 +224,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    completedItemPairs: (completePairs)=> dispatch(actionCreators.completedItemPairs(completePairs)),
     signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
   };
 };

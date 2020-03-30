@@ -10,3 +10,5 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export const CLEAR_ALL = 'CLEAR_ALL';
+
+export const COMPLETED_ITEM_PAIRS = 'COMPLETED_ITEM_PAIRS';

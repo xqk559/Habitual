@@ -8,10 +8,12 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import listReducer from './Store/reducers/listReducer.js';
 import loginReducer from './Store/reducers/loginReducer';
+import barChartReducer from './Store/reducers/barChartReducer';
 import {BrowserRouter} from 'react-router-dom';
 
 const rootReducer = combineReducers({listReducer: listReducer,
-                                     loginReducer: loginReducer});
+                                     loginReducer: loginReducer,
+                                     barChartReducer: barChartReducer});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
