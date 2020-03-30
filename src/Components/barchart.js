@@ -28,7 +28,7 @@ const BarChart = props => {
       .append('svg')
       .attr('width', canvasWidth)
       .attr('height', (data.length*55))
-      .style('border', '1px solid black')
+      //.style('border', '1px solid black')
     svgCanvas.selectAll('rect')
       .data(data).enter()
       .append('rect')
