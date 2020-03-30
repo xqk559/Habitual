@@ -33,4 +33,7 @@ class BarChart extends Component {
         }
 render() { return <div ref='canvas'></div> }
 }
+
+
+
 export default BarChart;

@@ -18,6 +18,13 @@ const Statistics = props => {
   let [lastDay, setLastDay] = useState();
   let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
 
+  const uniqueCheck = (a) => {
+    let seen = {};
+    return a.filter((item)=> {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}
+
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
@@ -32,6 +39,7 @@ const Statistics = props => {
             }
           }
           console.log(arrayOfHistoricalItemNames.filter((name)=>{return name == "Programmed"}).length)
+          console.log(uniqueCheck(arrayOfHistoricalItemNames))
         })
       }
   }, [])
