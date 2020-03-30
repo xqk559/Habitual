@@ -51,7 +51,6 @@ const Statistics = props => {
         //props.completedItemPairs(completedPairs)
         //console.log(completedPairs)
         })
-        .then(()=>console.log(completedPairs))
         .then(()=>props.completedItemPairs(completedPairs))
       }
   }, [])
