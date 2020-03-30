@@ -21,13 +21,13 @@ const BarChart = props => {
 
   const drawBarChart = (data) => {
     let i = -1;
-    const canvasHeight = 500
+    const canvasHeight = 300
     const canvasWidth = 300
     const scale = 10
     const svgCanvas = d3.select('p')
       .append('svg')
       .attr('width', canvasWidth)
-      .attr('height', canvasHeight)
+      .attr('height', (data.length*50))
       .style('border', '1px solid black')
     svgCanvas.selectAll('rect')
       .data(data).enter()
