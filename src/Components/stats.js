@@ -12,6 +12,8 @@ let localDay = false;
 let axiosResponse;
 let allHistoricalUserData;
 let arrayOfHistoricalItemNames = [];
+let arrayOfCompletedItemLengths = [];
+let completedPairs = {};
 
 const Statistics = props => {
 
@@ -39,7 +41,16 @@ const Statistics = props => {
             }
           }
           console.log(arrayOfHistoricalItemNames.filter((name)=>{return name == "Programmed"}).length)
-          console.log(uniqueCheck(arrayOfHistoricalItemNames))
+          let uniqueNames = uniqueCheck(arrayOfHistoricalItemNames);
+          const uniqueNamesLengths = () => {
+            let uniqueName;
+            for(uniqueName of uniqueNames){
+              arrayOfCompletedItemLengths.push(completedPairs[uniqueName] = arrayOfHistoricalItemNames.filter((name)=>{return name == uniqueName}).length)
+          }
+          return arrayOfCompletedItemLengths;
+        }
+        uniqueNamesLengths()
+        console.log(completedPairs)
         })
       }
   }, [])
