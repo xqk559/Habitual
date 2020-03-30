@@ -31,10 +31,10 @@ const Statistics = props => {
               }
             }
           }
-          console.log(arrayOfHistoricalItemNames)
+          console.log(arrayOfHistoricalItemNames.filter((name)=>{return name == "Programmed"}).length)
         })
       }
-  }, [props])
+  }, [])
 
   useEffect(()=>{
     if(axiosResponse != null){
