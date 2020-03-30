@@ -16,9 +16,9 @@ const BarChart = props => {
   let data = [ 2, 4, 2, 6, 8 ]
 
   const drawBarChart = (data) => {
-      const canvasHeight = 300
+      const canvasHeight = 500
       const canvasWidth = 300
-      const scale = 20
+      const scale = 10
       const svgCanvas = d3.select('p')
         .append('svg')
         .attr('width', canvasWidth)
@@ -27,18 +27,18 @@ const BarChart = props => {
       svgCanvas.selectAll('rect')
         .data(data).enter()
         .append('rect')
-        .attr('width', 40)
-        .attr('height', (datapoint) => datapoint * scale)
+        .attr('width', (datapoint) => datapoint * scale)
+        .attr('height', 20)
         .attr('fill', 'purple')
-        .attr('x', (datapoint, iteration) => iteration * 45)
-        .attr('y', (datapoint) => canvasHeight - datapoint * scale)
+        .attr('y', (datapoint, iteration) => (iteration * 45) + 40)
+        .attr('x', (datapoint) => 0)
       svgCanvas.selectAll("text")
         .data(data)
         .enter()
         .append("text")
         .text((d) => d)
-        .attr('x', (datapoint, iteration) => iteration * 45)
-        .attr('y', (datapoint) => canvasHeight - datapoint * scale)
+        .attr('y', (datapoint, iteration) => (iteration * 45) + 38)
+        .attr('x', (datapoint) => 0)
       }
   return <div><p></p></div>
 }
