@@ -65,15 +65,12 @@ const Statistics = props => {
     const token = localStorage.getItem('token');
     if(token){
     signUpRedux(localStorage.getItem('token'),
-                      localStorage.getItem('userId'),
-                      localStorage.getItem('email'))
+                localStorage.getItem('userId'),
+                localStorage.getItem('email'))
     }
   }, [signUpRedux])
 
   const dayMapper = (day) => {
-    const capitalize = (s) => {
-      return s.charAt(0).toUpperCase() + s.slice(1)
-    };
     return (
       <ul>
         <div className="statListDate">
@@ -84,7 +81,7 @@ const Statistics = props => {
           {return (<div key={value.id}>
                     <li
                       className="none">
-                      <div>{value.name}: {capitalize(value.completed.toString())}</div>
+                      <div>{value.name}: {value.completed.toString()}</div>
                     </li>
                   </div>
                   )})
@@ -139,12 +136,18 @@ const Statistics = props => {
       }
     }
   return (
-    <div key={Math.random().toString()}>
+    <div
+      key={Math.random().toString()}
+      className="centered5">
       <div>
         {day ? dayMapper(day) : loaderTimeout()}
+      </div>
+      <div className="centered4">
         You've completed {totaler} out of {day.length} things!
       </div>
-      <div>That's {((totaler/day.length)*100).toFixed(0)}% of things!</div>
+      <div className="centered4">
+        That's {((totaler/day.length)*100).toFixed(0)}% of things!
+      </div>
     </div>
   );
   }

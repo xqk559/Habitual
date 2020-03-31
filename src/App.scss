@@ -67,6 +67,16 @@ a {
   text-align: center;
 }
 
+.centered4 {
+  text-align: center;
+  margin-left: 30px;
+}
+
+.centered5 {
+  text-align: center;
+  margin-right: 30px;
+}
+
 .dot {
   height: 15px;
   width: 15px;
@@ -333,8 +343,6 @@ li a {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
   color: purple;
   font-weight: bold;
   float: left;
@@ -344,14 +352,13 @@ li a {
   height: auto;
   margin-left: 400px;
   margin-right: 400px;
-  min-width: 400px;
+  min-width: 350px;
   width: 400px;
 }
 
 .statListDate {
+  text-align: center;
   padding-bottom: 30px;
-  padding-right: 30px;
-  padding-left: 27px;
   font-weight: 900;
 }
 
