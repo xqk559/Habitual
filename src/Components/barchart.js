@@ -32,7 +32,6 @@ const BarChart = props => {
 
   if(props.barChartReducer[0]){
     drawBarChart(Object.values(props.barChartReducer[0]))
-    console.log(Object.keys(props.barChartReducer[0]))
   }
 
   return (

@@ -6,6 +6,7 @@ import * as actionCreators from '../Store/actions/index';
 import {deserializeDates} from '../storage';
 import {NavLink} from 'react-router-dom';
 import BarChart2 from './barchart2';
+import { select } from 'd3';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -13,8 +14,14 @@ let allHistoricalUserData;
 let historicalItemNames = [];
 let completedItemLengths = [];
 let completedPairs = {};
+let selectedItemNames = [];
+let selectedItemLengths = [];
+let selectedCompletedPairs = {};
+let counter = 0;
 
 const Statistics = props => {
+
+  let displayedMatches = [];
 
   let [lastDay, setLastDay] = useState();
   let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
@@ -24,6 +31,25 @@ const Statistics = props => {
     return a.filter((item)=> {
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
+  }
+
+  const FUCKINGDAYSHIT = () => {
+    if(props.selectedItemReducer.length === 0){
+      for (let i of displayedMatches){
+        for (let j of i) {
+          if (j.completed){
+            selectedItemNames.push(j.name)
+          }
+        }
+      }
+      let uniqueNames2 = uniqueCheck(selectedItemNames);
+      for(let uniqueName2 of uniqueNames2){
+        selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
+        selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
+      }
+      console.log(selectedCompletedPairs)
+      props.selectedItemPairs(selectedCompletedPairs)
+    }
   }
 
   const completedItemPairs = props.completedItemPairs;
@@ -47,7 +73,7 @@ const Statistics = props => {
           }
         )
         .then(()=>completedItemPairs(completedPairs))
-      }
+    }
   }, [completedItemPairs])
 
   useEffect(()=>{
@@ -119,12 +145,28 @@ const Statistics = props => {
     }
   }
 
-  let displayedMatches = [];
-
   const displayMatchingDates = () => {
     for(let i = 0; i < fullAxiosHistory.length; i++){
         if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
             displayedMatches.push(fullAxiosHistory[i])
+            if(props.selectedItemReducer.length === 0 && counter == 0){
+              ++counter
+              console.log(displayedMatches)
+              console.log(props.selectedItemReducer)
+              for (let i of displayedMatches){
+                for (let j of i) {
+                  if (j.completed){
+                    selectedItemNames.push(j.name)
+                  }
+                }
+              }
+              let uniqueNames2 = uniqueCheck(selectedItemNames);
+              for(let uniqueName2 of uniqueNames2){
+                selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
+                selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
+              }
+              props.selectedItemPairs(selectedCompletedPairs)
+            }
         }
     }
   }
@@ -167,7 +209,6 @@ const Statistics = props => {
       )
     } else {
       return displayedMatches.map(s=>{
-        console.log(displayedMatches)
         return mappedDay(s)
       })
     }
@@ -215,6 +256,7 @@ const Statistics = props => {
 const mapStateToProps = state => {
     return {
       loginReducer: state.loginReducer,
+      selectedItemReducer: state.selectedItemReducer,
     };
   };
 
