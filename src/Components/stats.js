@@ -33,25 +33,6 @@ const Statistics = props => {
     });
   }
 
-  const FUCKINGDAYSHIT = () => {
-    if(props.selectedItemReducer.length === 0){
-      for (let i of displayedMatches){
-        for (let j of i) {
-          if (j.completed){
-            selectedItemNames.push(j.name)
-          }
-        }
-      }
-      let uniqueNames2 = uniqueCheck(selectedItemNames);
-      for(let uniqueName2 of uniqueNames2){
-        selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
-        selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
-      }
-      console.log(selectedCompletedPairs)
-      props.selectedItemPairs(selectedCompletedPairs)
-    }
-  }
-
   const completedItemPairs = props.completedItemPairs;
   useEffect(()=>{
     if(localStorage.getItem('userId')){
@@ -147,27 +128,27 @@ const Statistics = props => {
 
   const displayMatchingDates = () => {
     for(let i = 0; i < fullAxiosHistory.length; i++){
-        if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
-            displayedMatches.push(fullAxiosHistory[i])
-            if(props.selectedItemReducer.length === 0 && counter == 0){
-              ++counter
-              console.log(displayedMatches)
-              console.log(props.selectedItemReducer)
-              for (let i of displayedMatches){
-                for (let j of i) {
-                  if (j.completed){
-                    selectedItemNames.push(j.name)
-                  }
-                }
+      if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
+        displayedMatches.push(fullAxiosHistory[i])
+        if(props.selectedItemReducer.length === 0 && counter == 0){
+          //++counter
+          console.log(displayedMatches)
+          console.log(props.selectedItemReducer)
+          for (let i of displayedMatches){
+            for (let j of i) {
+              if (j.completed){
+                selectedItemNames.push(j.name)
               }
-              let uniqueNames2 = uniqueCheck(selectedItemNames);
-              for(let uniqueName2 of uniqueNames2){
-                selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
-                selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
-              }
-              props.selectedItemPairs(selectedCompletedPairs)
             }
+          }
+          let uniqueNames2 = uniqueCheck(selectedItemNames);
+          for(let uniqueName2 of uniqueNames2){
+            selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
+            selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
+          }
+          props.selectedItemPairs(selectedCompletedPairs)
         }
+      }
     }
   }
 
