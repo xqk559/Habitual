@@ -25,12 +25,14 @@ const BarChart2 = props => {
       .data(data)
       .enter()
       .append("text")
-      .text((d) => {i++; return Object.keys(props.barChartReducer[0])[i]+": "+d})
+      .text((d) => {i++; return Object.keys(props.selectedItemReducer[0])[i]+": "+d})
       .attr('y', (datapoint, iteration) => (iteration * 45) + 38)
       .attr('x', (datapoint) => 0)
     }
 
-    drawBarChart([2,4,6,8])
+    if(props.selectedItemReducer[0]){
+      drawBarChart(Object.values(props.selectedItemReducer[0]))
+    }
 
   return (
     <div>
@@ -42,7 +44,7 @@ const BarChart2 = props => {
 
 const mapStateToProps = state => {
   return {
-    barChartReducer: state.barChartReducer,
+    selectedItemReducer: state.selectedItemReducer,
   };
 };
 
