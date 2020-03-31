@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../Store/actions/index';
 import {deserializeDates} from '../storage';
 import {NavLink} from 'react-router-dom';
+import BarChart2 from './barchart2';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -192,6 +193,9 @@ const Statistics = props => {
           {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
           {displayMatchingDates()}
           {filteredMapSelectedDays()}
+          <div>
+           <BarChart2/>
+          </div>
         </div>
       )
     }
