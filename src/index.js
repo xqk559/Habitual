@@ -9,11 +9,13 @@ import thunk from 'redux-thunk';
 import listReducer from './Store/reducers/listReducer.js';
 import loginReducer from './Store/reducers/loginReducer';
 import barChartReducer from './Store/reducers/barChartReducer';
+import selectedItemReducer from './Store/reducers/selectedItemReducer';
 import {BrowserRouter} from 'react-router-dom';
 
 const rootReducer = combineReducers({listReducer: listReducer,
                                      loginReducer: loginReducer,
-                                     barChartReducer: barChartReducer});
+                                     barChartReducer: barChartReducer,
+                                     selectedItemReducer: selectedItemReducer,});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

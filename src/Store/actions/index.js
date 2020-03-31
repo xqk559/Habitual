@@ -16,3 +16,7 @@ export {
 export {
     completedItemPairs,
 } from './barChartActions';
+
+export {
+    selectedItemPairs,
+} from './selectedItemActions';

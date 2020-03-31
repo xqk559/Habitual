@@ -167,7 +167,8 @@ const Statistics = props => {
       )
     } else {
       return displayedMatches.map(s=>{
-          return mappedDay(s)
+        console.log(displayedMatches)
+        return mappedDay(s)
       })
     }
   }
@@ -189,13 +190,13 @@ const Statistics = props => {
           <br/>
           <button onClick={setLastDay}>Get Selected Day's Data</button>
           <br/>
+          <div>
+           <BarChart2/>
+          </div>
           {historicalDates()}
           {findMatchingDates(shortenedSelectedDays, historicalDatesArray)}
           {displayMatchingDates()}
           {filteredMapSelectedDays()}
-          <div>
-           <BarChart2/>
-          </div>
         </div>
       )
     }
@@ -220,6 +221,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     completedItemPairs: (completePairs)=> dispatch(actionCreators.completedItemPairs(completePairs)),
+    selectedItemPairs: (selectedPairs)=> dispatch(actionCreators.selectedItemPairs(selectedPairs)),
     signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
   };
 };
