@@ -53,6 +53,7 @@ const Statistics = props => {
             }
           })
         .then(()=>completedItemPairs(completedPairs))
+        //.then(()=>props.selectedItemPairs([1,2,3,4]))
     }
   }, [completedItemPairs])
 
@@ -175,7 +176,7 @@ const Statistics = props => {
       selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
       selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
     }
-    //props.selectedItemPairs(selectedCompletedPairs)
+    props.selectedItemPairs(selectedCompletedPairs)
     if(displayedMatches.length === undefined || 0){
       return (
         <div className="centered">
@@ -191,12 +192,14 @@ const Statistics = props => {
   }
 
 
+
+
   const redirectToSignin = () => {
     if(props.listReducer == null && !localStorage.getItem('token')){
       return <li
                 className="redirectLink">
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
-            </li>
+             </li>
     }
   }
 
@@ -233,7 +236,7 @@ const Statistics = props => {
 const mapStateToProps = state => {
     return {
       loginReducer: state.loginReducer,
-      selectedItemReducer: state.selectedItemReducer,
+      //selectedItemReducer: state.selectedItemReducer,
     };
   };
 
