@@ -50,9 +50,8 @@ const Statistics = props => {
           for(let uniqueName of uniqueNames){
             completedPairs[uniqueName] = historicalItemNames.filter(name => name === uniqueName).length
             completedItemLengths.push(completedPairs[uniqueName])
-          }
-          }
-        )
+            }
+          })
         .then(()=>completedItemPairs(completedPairs))
     }
   }, [completedItemPairs])
@@ -130,24 +129,6 @@ const Statistics = props => {
     for(let i = 0; i < fullAxiosHistory.length; i++){
       if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
         displayedMatches.push(fullAxiosHistory[i])
-        if(props.selectedItemReducer.length === 0 && counter == 0){
-          //++counter
-          console.log(displayedMatches)
-          console.log(props.selectedItemReducer)
-          for (let i of displayedMatches){
-            for (let j of i) {
-              if (j.completed){
-                selectedItemNames.push(j.name)
-              }
-            }
-          }
-          let uniqueNames2 = uniqueCheck(selectedItemNames);
-          for(let uniqueName2 of uniqueNames2){
-            selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
-            selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
-          }
-          props.selectedItemPairs(selectedCompletedPairs)
-        }
       }
     }
   }
@@ -181,7 +162,21 @@ const Statistics = props => {
   }
 
   const filteredMapSelectedDays = () => {
-    if(displayedMatches.length === undefined){
+    console.log(displayedMatches)
+    for (let i of displayedMatches){
+      for (let j of i) {
+        if (j.completed){
+          selectedItemNames.push(j.name)
+        }
+      }
+    }
+    let uniqueNames2 = uniqueCheck(selectedItemNames);
+    for(let uniqueName2 of uniqueNames2){
+      selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
+      selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
+    }
+    //props.selectedItemPairs(selectedCompletedPairs)
+    if(displayedMatches.length === undefined || 0){
       return (
         <div className="centered">
           <div>There is no saved data for these days.</div>
@@ -194,6 +189,7 @@ const Statistics = props => {
       })
     }
   }
+
 
   const redirectToSignin = () => {
     if(props.listReducer == null && !localStorage.getItem('token')){

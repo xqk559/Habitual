@@ -8,7 +8,7 @@ const BarChart2 = props => {
     let i = -1;
     const canvasWidth = 300
     const scale = 10
-    const svgCanvas = d3.select('j')
+    const svgCanvas = d3.select('.chart2')
       .append('svg')
       .attr('width', canvasWidth)
       .attr('height', (data.length*55))
@@ -37,7 +37,7 @@ const BarChart2 = props => {
   return (
     <div>
       <div className="headerTextSmall">Total Completed All-Time</div>
-      <div><j></j></div>
+      <div><div className="chart2"></div></div>
     </div>
   )
 }
