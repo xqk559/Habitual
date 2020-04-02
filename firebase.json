@@ -3,6 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
+    "trailingSlash": false,
     "site": "habitual-b0d7",
     "public": "public",
     "ignore": [
@@ -10,15 +11,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [
+    "redirects": [],
+    "rewrites": [
       {
-        "source" : "/sw.js",
-        "headers" : [
-          {
-            "key" : "Cache-Control",
-            "value" : "no-store"
-          }
-        ]
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
   }
