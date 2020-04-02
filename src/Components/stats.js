@@ -6,7 +6,6 @@ import * as actionCreators from '../Store/actions/index';
 import {deserializeDates} from '../storage';
 import {NavLink} from 'react-router-dom';
 import BarChart2 from './barchart2';
-import { select } from 'd3';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
@@ -17,13 +16,11 @@ let completedPairs = {};
 let selectedItemNames = [];
 let selectedItemLengths = [];
 let selectedCompletedPairs = {};
-let counter = 0;
 
 const Statistics = props => {
 
   let displayedMatches = [];
 
-  let [lastDay, setLastDay] = useState();
   let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
 
   const uniqueCheck = (a) => {
@@ -163,7 +160,6 @@ const Statistics = props => {
   }
 
   const filteredMapSelectedDays = () => {
-    console.log(displayedMatches)
     for (let i of displayedMatches){
       for (let j of i) {
         if (j.completed){
@@ -209,7 +205,9 @@ const Statistics = props => {
         <div className="stats">
           <div>It is currently {utcDate}</div>
           <br/>
-          <button onClick={setLastDay}>Get Selected Day's Data</button>
+          <div>
+            To select different days, refresh the page
+          </div>
           <br/>
           <div>
            <BarChart2/>
