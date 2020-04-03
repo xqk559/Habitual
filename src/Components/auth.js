@@ -104,49 +104,53 @@ const Auth = props => {
 
   return (
     <div>
-        <div className="centered">
-          <h1 className="loginPage">{title}</h1>
-          <div className="loginButtons">
-            <input
-              type="text"
-              className="loginInput"
-              placeholder="Email"
-              onChange={event=>setEmail(event.target.value)}
-              autoComplete="off"/>
-          </div>
-          <div className="loginButtons">
-            <input
-              type="password"
-              className="loginInput"
-              placeholder="Password"
-              onChange={event=>setPassword(event.target.value)}
-              autoComplete="off"/>
-          </div>
-          <div className="loginButtons">
-            {confirmPassword()}
-          </div>
-          <br/>
-          <button
-              onClick={title === "Sign Up"
-                        ? ()=>signUp()
-                        : ()=>login()}
-                      className="btn btn-outline-dark btn-sm"
-                      style={{width: 70}}>
-                        {title}
-          </button>
-          <div className="loginPage">
-          <br/>
-          <button
-            onClick={()=>switchSignUpLogin()}
-            className="btn btn-outline-primary btn-sm">
-              {title === "Sign Up"
-                        ? "Already have an account? Login here"
-                        : "Need to sign up? Sign up here"}
-          </button>
-          </div>
+      <div className="centered">
+        <h1 className="loginPage">{title}</h1>
+        <form onsubmit="return false">
+        <div className="loginButtons">
+          <input
+            type="text"
+            className="loginInput"
+            placeholder="Email"
+            onChange={event=>setEmail(event.target.value)}
+            autoComplete="off"/>
         </div>
-      {errorChecker()}
-    </div>
+        <div className="loginButtons">
+          <input
+            type="password"
+            className="loginInput"
+            placeholder="Password"
+            onChange={event=>setPassword(event.target.value)}
+            autoComplete="off"/>
+        </div>
+        <div className="loginButtons">
+          {confirmPassword()}
+        </div>
+        <br/>
+        <button
+          type="button"
+          onClick={title === "Sign Up"
+                    ? ()=>signUp()
+                    : ()=>login()}
+                  className="btn btn-outline-dark btn-sm"
+                  style={{width: 70}}>
+                    {title}
+        </button>
+        </form>
+        <div className="loginPage">
+        <br/>
+        <button
+          type="button"
+          onClick={()=>switchSignUpLogin()}
+          className="btn btn-outline-primary btn-sm">
+            {title === "Sign Up"
+                      ? "Already have an account? Login here"
+                      : "Need to sign up? Sign up here"}
+        </button>
+        </div>
+      </div>
+    {errorChecker()}
+  </div>
   );
 }
 

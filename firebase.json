@@ -3,20 +3,11 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "trailingSlash": false,
-    "site": "habitual-b0d7",
     "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "redirects": [],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
