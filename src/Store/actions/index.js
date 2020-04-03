@@ -1,22 +1,22 @@
 export {
-    addItem,
-    removeItem,
-    checkboxClicked,
-    getAxiosList,
-    addDefaultToState,
-    clearAll,
+  addItem,
+  removeItem,
+  checkboxClicked,
+  getAxiosList,
+  addDefaultToState,
+  clearAll,
 } from './listActions';
 
 export {
-    signUp,
-    login,
-    logout,
+  signUp,
+  login,
+  logout,
 } from './loginActions';
 
 export {
-    completedItemPairs,
+  completedItemPairs,
 } from './barChartActions';
 
 export {
-    selectedItemPairs,
+  selectedItemPairs,
 } from './selectedItemActions';

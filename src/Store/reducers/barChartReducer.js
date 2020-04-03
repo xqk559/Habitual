@@ -11,8 +11,8 @@ const completedItemPairs = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
-      case actionTypes.COMPLETED_ITEM_PAIRS: return completedItemPairs(state, action);
-      default: return state;
+    case actionTypes.COMPLETED_ITEM_PAIRS: return completedItemPairs(state, action);
+    default: return state;
   }
 }
 

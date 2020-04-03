@@ -11,8 +11,8 @@ const selectedItemPairs = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
-      case actionTypes.SELECTED_ITEM_PAIRS: return selectedItemPairs(state, action);
-      default: return state;
+    case actionTypes.SELECTED_ITEM_PAIRS: return selectedItemPairs(state, action);
+    default: return state;
   }
 }
 
