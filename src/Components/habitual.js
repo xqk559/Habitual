@@ -30,11 +30,13 @@ const Habitual = props => {
                 .then((response)=> {defaults = (Object.values(response.data))})
                 .then(()=> defaultArray = defaults[0])
                 .then(()=>{for(let i in defaultArray){
-                    defaultArray[i].date = today
-                    return defaultArray}})
+                  defaultArray[i].date = today
+                  return defaultArray}})
                 .then(()=> setDefaultList(defaultArray))
+                  }
             }
-          }})
+          }
+          )
       };
       fetchData();
     }, []);
@@ -48,13 +50,13 @@ const Habitual = props => {
     const addDefaultToState = props.addDefaultToState
     useEffect(()=> {
       if(defaultList != null){
-          addDefaultToState(defaultList);
+        addDefaultToState(defaultList);
     }
     }, [defaultList, addDefaultToState])
 
     useEffect(()=>{
       if(!localStorage.getItem('userId')){
-          props.clearAll()
+        props.clearAll()
       }
     }, [props])
 
@@ -63,17 +65,17 @@ const Habitual = props => {
       const token = localStorage.getItem('token');
       if(token){
       signUpRedux(localStorage.getItem('token'),
-                        localStorage.getItem('userId'),
-                        localStorage.getItem('email'))
+                  localStorage.getItem('userId'),
+                  localStorage.getItem('email'))
       }
       }, [signUpRedux])
 
   const uploadChecklist = () => {
     if (props.listReducer !== []){
-    setCanSaveDay(true)
-    let fullPost = props.listReducer.map(day=>{
-      day.date = today;
-      return day;
+      setCanSaveDay(true)
+      let fullPost = props.listReducer.map(day=>{
+        day.date = today;
+        return day;
     });
     if(localStorage.getItem('userId'))
       {axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
@@ -88,28 +90,30 @@ const Habitual = props => {
           .then(()=>axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost))
             } else {
               axios.post('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json', fullPost);
-            } })
+            }
+        }
+        )
     }
     alert("Today's data has been submitted! Refresh page if you want to change today's data.")
     }
   }
 
   const uploadDefaultList = () => {
-      axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
-      axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
+    axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
+    axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
   }
 
   const checklist = () => {
-      return (<ul>
-                {props.listReducer.map((val, index) =>
-                  {return <li key={index}
-                              className="none">
-                              { <Item name={val.name}
-                                      id={val.id}/> }
-                          </li>
-                })}
-              </ul>
-      );
+    return (<ul>
+              {props.listReducer.map((val, index) =>
+                {return <li key={index}
+                            className="none">
+                            {<Item name={val.name}
+                                   id={val.id}/>}
+                        </li>
+              })}
+            </ul>
+    );
   }
 
   const loaderTimeout = () => {
@@ -195,19 +199,19 @@ const Habitual = props => {
 }
 
 const mapStateToProps = state => {
-    return {
-        listReducer: state.listReducer,
-        loginReducer: state.loginReducer,
-    };
+  return {
+    listReducer: state.listReducer,
+    loginReducer: state.loginReducer,
   };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        addItem: (name) => dispatch(actionCreators.addItem(name)),
-        signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
-        addDefaultToState: (defaults) => dispatch(actionCreators.addDefaultToState(defaults)),
-        clearAll: () => dispatch(actionCreators.clearAll()),
-    };
+  return {
+    addItem: (name) => dispatch(actionCreators.addItem(name)),
+    signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
+    addDefaultToState: (defaults) => dispatch(actionCreators.addDefaultToState(defaults)),
+    clearAll: () => dispatch(actionCreators.clearAll()),
   };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Habitual) ;
