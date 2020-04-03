@@ -106,7 +106,7 @@ const Auth = props => {
     <div>
       <div className="centered">
         <h1 className="loginPage">{title}</h1>
-        <form onsubmit="return false">
+        <form onSubmit="return false">
         <div className="loginButtons">
           <input
             type="text"
