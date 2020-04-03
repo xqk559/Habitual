@@ -3,13 +3,13 @@ import {NavLink} from 'react-router-dom';
 import '../App.scss';
 import AppFooter from '../AppFooter';
 
-const Homepage = props => {
+const Homepage = () => {
 
   const redirectToSignin = () => {
-      return <li
-                className="redirectLink">
-                <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
-            </li>
+    return <li
+              className="redirectLink">
+              <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
+          </li>
   }
 
   return (

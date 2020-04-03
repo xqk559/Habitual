@@ -37,12 +37,12 @@ const Statistics = props => {
         .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
         .then(()=>{
           for (let i of allHistoricalUserData){
-              for (let j of i) {
-                if (j.completed){
-                  historicalItemNames.push(j.name)
-                }
+            for (let j of i) {
+              if (j.completed){
+                historicalItemNames.push(j.name)
               }
             }
+          }
           let uniqueNames = uniqueCheck(historicalItemNames);
           for(let uniqueName of uniqueNames){
             completedPairs[uniqueName] = historicalItemNames.filter(name => name === uniqueName).length
@@ -50,7 +50,6 @@ const Statistics = props => {
             }
           })
         .then(()=>completedItemPairs(completedPairs))
-        //.then(()=>props.selectedItemPairs([1,2,3,4]))
     }
   }, [completedItemPairs])
 
@@ -82,7 +81,7 @@ const Statistics = props => {
           {day? day[0].date : null}
         </div>
         {day ?
-        day.map((value) =>
+         day.map((value) =>
           {return (<div key={value.id}>
                     <li
                       className="none">
@@ -90,7 +89,7 @@ const Statistics = props => {
                     </li>
                   </div>
                   )})
-        :null}
+         :null}
       </ul>
     );
   }
@@ -107,7 +106,7 @@ const Statistics = props => {
     let selectedDaysString = localStorage.getItem('selectedDays')
     let selectedDaysArray = deserializeDates(selectedDaysString)
     shortenedSelectedDays = selectedDaysArray.map(day=>{
-        return day.toString().slice(0,15)
+      return day.toString().slice(0,15)
     })
   }
 
@@ -118,7 +117,7 @@ const Statistics = props => {
     historical.sort();
     for(let i = 0; i < historical.length; i += 1){
         if(selected.indexOf(historical[i]) > -1) {
-            matches.push(historical[i]);
+           matches.push(historical[i]);
         }
     }
   }
@@ -234,7 +233,6 @@ const Statistics = props => {
 const mapStateToProps = state => {
     return {
       loginReducer: state.loginReducer,
-      //selectedItemReducer: state.selectedItemReducer,
     };
   };
 
