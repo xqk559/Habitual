@@ -26,8 +26,8 @@ const Auth = props => {
       const token = localStorage.getItem('token');
       if(token){
       signUpRedux(localStorage.getItem('token'),
-                        localStorage.getItem('userId'),
-                        localStorage.getItem('email'))
+                  localStorage.getItem('userId'),
+                  localStorage.getItem('email'))
       }
   }, [signUpRedux])
 
@@ -49,7 +49,9 @@ const Auth = props => {
                                           localStorage.getItem('userId'),
                                           localStorage.getItem('email'));
                         history.push("/checklist")
-                }})
+                        }
+                      }
+                 )
             }
   }
 
@@ -91,14 +93,14 @@ const Auth = props => {
 
   const confirmPassword = () => {
     if(title === "Sign Up"){
-      return <div>
+      return  <div>
                <input
                   type="password"
                   className="loginInput"
                   placeholder="Confirm Password"
                   onChange={event=>setPasswordConfirmer(event.target.value)}
                   autoComplete="off"/>
-             </div>
+              </div>
     }
   }
 
@@ -107,35 +109,35 @@ const Auth = props => {
       <div className="centered">
         <h1 className="loginPage">{title}</h1>
         <form onSubmit="return false">
-        <div className="loginButtons">
-          <input
-            type="text"
-            className="loginInput"
-            placeholder="Email"
-            onChange={event=>setEmail(event.target.value)}
-            autoComplete="off"/>
-        </div>
-        <div className="loginButtons">
-          <input
-            type="password"
-            className="loginInput"
-            placeholder="Password"
-            onChange={event=>setPassword(event.target.value)}
-            autoComplete="off"/>
-        </div>
-        <div className="loginButtons">
-          {confirmPassword()}
-        </div>
-        <br/>
-        <button
-          type="button"
-          onClick={title === "Sign Up"
+          <div className="loginButtons">
+            <input
+              type="text"
+              className="loginInput"
+              placeholder="Email"
+              onChange={event=>setEmail(event.target.value)}
+              autoComplete="off"/>
+          </div>
+          <div className="loginButtons">
+            <input
+              type="password"
+              className="loginInput"
+              placeholder="Password"
+              onChange={event=>setPassword(event.target.value)}
+              autoComplete="off"/>
+          </div>
+          <div className="loginButtons">
+            {confirmPassword()}
+          </div>
+          <br/>
+          <button
+            type="button"
+            onClick={title === "Sign Up"
                     ? ()=>signUp()
                     : ()=>login()}
-                  className="btn btn-outline-dark btn-sm"
-                  style={{width: 70}}>
-                    {title}
-        </button>
+                    className="btn btn-outline-dark btn-sm"
+                    style={{width: 70}}>
+                      {title}
+          </button>
         </form>
         <div className="loginPage">
         <br/>
