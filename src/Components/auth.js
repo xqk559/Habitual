@@ -105,7 +105,7 @@ const Auth = props => {
   }
 
   return (
-    <div>
+    <div className="flex">
       <div className="centered">
         <h1 className="loginPage">{title}</h1>
         <form>

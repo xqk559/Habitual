@@ -78,6 +78,11 @@ a {
   margin-left: 15px;
 }
 
+.flex {
+  flex: 1;
+  height: 100%;
+}
+
 .footer {
   bottom: 0;
   margin-bottom: 10px;
@@ -203,17 +208,22 @@ li a {
 }
 
 .margin {
+  flex: 1;
+  flex-grow: 1;
   margin-left: 20%;
 }
 
 .marginBottom {
+  min-height: 100px;
+  flex: 1;
+  flex-grow: 1;
   text-align: center;
   margin-left: 30px;
-  padding-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .marginBottom2 {
-  padding-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .marginHomepage {
