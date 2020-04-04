@@ -104,7 +104,7 @@ const Habitual = props => {
   }
 
   const checklist = () => {
-    return (<ul>
+    return (<ul className="marginBottom2">
               {props.listReducer.map((val, index) =>
                 {return <li key={index}
                             className="none">

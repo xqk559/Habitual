@@ -147,7 +147,7 @@ const Statistics = props => {
       <div className="centered4">
         You've completed {totaler} out of {day.length} things!
       </div>
-      <div className="centered4">
+      <div className="marginBottom">
         That's {((totaler/day.length)*100).toFixed(0)}% of things!
       </div>
     </div>
@@ -185,9 +185,6 @@ const Statistics = props => {
       })
     }
   }
-
-
-
 
   const redirectToSignin = () => {
     if(props.listReducer == null && !localStorage.getItem('token')){

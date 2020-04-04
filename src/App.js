@@ -43,7 +43,7 @@ const App = props => {
           path="/login/"
           exact
           render=
-          {()=> <div>
+          {()=> <div className="overflow">
                   <Toolbar/>
                   <Auth />
                   <div className="centered">
