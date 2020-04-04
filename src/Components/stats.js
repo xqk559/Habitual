@@ -148,7 +148,7 @@ const Statistics = props => {
         <div className="centered4">
           You've completed {totaler} out of {day.length} things!
         </div>
-        <div>
+        <div className="centered4">
           That's {((totaler/day.length)*100).toFixed(0)}% of things!
         </div>
       </div>
