@@ -35,7 +35,7 @@ const BarChart2 = props => {
 
   return (
     <div>
-      <div className="headerTextSmall">Total Completed All-Time</div>
+      <div className="headerTextSmall">Total Completed For Selected Days</div>
       <div>
         <div className="chart2"></div>
       </div>
