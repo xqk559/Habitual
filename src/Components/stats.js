@@ -138,7 +138,7 @@ const Statistics = props => {
       }
     }
   return (
-    <div className="flex">
+    <div className="marginBottom">
       <div
         key={Math.random().toString()}
         className="centered5">
@@ -148,7 +148,7 @@ const Statistics = props => {
         <div className="centered4">
           You've completed {totaler} out of {day.length} things!
         </div>
-        <div className="marginBottom">
+        <div>
           That's {((totaler/day.length)*100).toFixed(0)}% of things!
         </div>
       </div>

@@ -155,6 +155,7 @@ const Habitual = props => {
             &nbsp;
             &nbsp;
             <button
+              style={{margin: 10}}
               onClick={ ()=> uploadDefaultList() }
               type="button"
               className="btn btn-outline-dark btn-sm"
