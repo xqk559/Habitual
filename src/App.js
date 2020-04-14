@@ -33,7 +33,7 @@ const App = props => {
               <div>
                 <Habitual/>
               </div>
-              <div className="centered">
+              <div className="centeredFooter">
                 <hr />
                 <AppFooter/>
               </div>

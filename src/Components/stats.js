@@ -9,7 +9,7 @@ import BarChart2 from './barchart2';
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
-let allHistoricalUserData;
+let allHistoricalUserData = [];
 let historicalItemNames = [];
 let completedItemLengths = [];
 let completedPairs = {};
@@ -34,7 +34,9 @@ const Statistics = props => {
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-        .then((response)=> {allHistoricalUserData = (Object.values(response.data))})
+        .then((response)=> {if(response.data !== null && response.data !== undefined ){
+          allHistoricalUserData = (Object.values(response.data))}
+        })
         .then(()=>{
           for (let i of allHistoricalUserData){
             for (let j of i) {

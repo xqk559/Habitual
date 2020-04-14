@@ -19,8 +19,10 @@ const Toolbar = props => {
            </div>
   }
 
-  return (
-    <div>
+  const showToolbar = () => {
+    if(localStorage.getItem('token')){
+      return (
+        <div>
       <ul className="toolbar">
         <li className="link">
           <NavLink to="/">Home</NavLink>
@@ -47,7 +49,13 @@ const Toolbar = props => {
         {localStorage.getItem('token') ? logoutButton() : null}
       </ul>
     </div>
-  )
+      )
+    } else {
+      return null
+    }
+  }
+
+  return showToolbar()
 }
 
 const mapStateToProps = state => {

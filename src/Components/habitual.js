@@ -33,8 +33,8 @@ const Habitual = props => {
                   defaultArray[i].date = today
                   return defaultArray}})
                 .then(()=> setDefaultList(defaultArray))
-                  }
             }
+          }
           }
           )
       };

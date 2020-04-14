@@ -8,7 +8,7 @@ const Homepage = () => {
   const redirectToSignin = () => {
     return <li
               className="redirectLink">
-              <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
+              <NavLink to="/login">Login/Signup to use checklist and statistics!</NavLink>
           </li>
   }
 
@@ -33,9 +33,6 @@ const Homepage = () => {
         style={{margin: 75}}
         className="centered">
         {redirectToSignin()}
-      </div>
-      <div className="centered">
-        <AppFooter/>
       </div>
     </div>
   )
