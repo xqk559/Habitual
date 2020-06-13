@@ -5,7 +5,7 @@ import Habitual from './habitual';
 
 configure({adapter: new Adapter()});
 
-describe('habitual.js',()=>{
+describe('habitual.js', () => {
   it('should render <div className="loader"/> after 500ms of loading', ()=>{
     const wrapper = shallow(<Habitual/>)
     expect(wrapper.find(loaderTimeout))
