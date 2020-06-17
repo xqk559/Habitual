@@ -7,7 +7,7 @@ configure({adapter: new Adapter()});
 
 describe('habitual.js', () => {
   it('should render <div className="loader"/> after 500ms of loading', ()=>{
-    const wrapper = <Habitual/>;
-    expect(wrapper.find(Habitual)).toContain('fuck');
+    const wrapper = shallow(<Habitual/>);
+    expect(wrapper).toContain('');
   });
 });

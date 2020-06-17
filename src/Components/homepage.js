@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import '../App.scss';
-import AppFooter from '../AppFooter';
 
 const Homepage = () => {
 

@@ -11,6 +11,7 @@ import loginReducer from './Store/reducers/loginReducer';
 import barChartReducer from './Store/reducers/barChartReducer';
 import selectedItemReducer from './Store/reducers/selectedItemReducer';
 import {BrowserRouter} from 'react-router-dom';
+import HabitualContextProvider from './context';
 
 const rootReducer = combineReducers({listReducer: listReducer,
                                      loginReducer: loginReducer,
@@ -20,15 +21,17 @@ const rootReducer = combineReducers({listReducer: listReducer,
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+  applyMiddleware(thunk)
 ));
 
 const app = (
+  <HabitualContextProvider>
     <Provider store = {store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
     </Provider>
+  </HabitualContextProvider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

@@ -41,24 +41,24 @@ export const Habitual = props => {
       fetchData();
     }, []);
 
-    let location = useLocation()
+    let location = useLocation();
 
     useEffect(()=>{
       setUserIdExists(true)
-    }, [userIdExists, props, location])
+    }, [userIdExists, props, location]);
 
     const addDefaultToState = props.addDefaultToState
     useEffect(()=> {
       if(defaultList != null){
         addDefaultToState(defaultList);
     }
-    }, [defaultList, addDefaultToState])
+    }, [defaultList, addDefaultToState]);
 
     useEffect(()=>{
       if(!localStorage.getItem('userId')){
         props.clearAll()
       }
-    }, [props])
+    }, [props]);
 
     const signUpRedux = props.signUpRedux
     useEffect(()=>{
@@ -68,7 +68,7 @@ export const Habitual = props => {
                   localStorage.getItem('userId'),
                   localStorage.getItem('email'))
       }
-      }, [signUpRedux])
+      }, [signUpRedux]);
 
   const uploadChecklist = () => {
     if (props.listReducer !== []){
@@ -96,12 +96,12 @@ export const Habitual = props => {
     }
     alert("Today's data has been submitted! Refresh page if you want to change today's data.")
     }
-  }
+  };
 
   const uploadDefaultList = () => {
     axios.delete('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json');
     axios.post('https://habitual-f64a5.firebaseio.com/defaults'+localStorage.getItem('userId')+'.json', props.listReducer);
-  }
+  };
 
   const checklist = () => {
     return (<ul className="marginBottom2">
@@ -114,11 +114,11 @@ export const Habitual = props => {
               })}
             </ul>
     );
-  }
+  };
 
   const loaderTimeout = () => {
     setTimeout(()=>{return <div className="loader"/>;}, 500)
-  }
+  };
 
   const redirectToSignin = () => {
     if(props.listReducer.length === 0 && !localStorage.getItem('token')){
@@ -127,9 +127,9 @@ export const Habitual = props => {
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
             </li>
     }
-  }
+  };
 
-  const renderSignedInPage = () => {
+  const signedInPage = () => {
     if(localStorage.getItem('token')){
       return (
         <div>
@@ -187,17 +187,17 @@ export const Habitual = props => {
         </div>
       )
     }
-  }
+  };
 
   return (
     <div>
-      {renderSignedInPage()}
+      {signedInPage()}
       <div className="absoluteCentered">
         {redirectToSignin()}
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
@@ -215,4 +215,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Habitual) ;
+export default connect(mapStateToProps, mapDispatchToProps)(Habitual);
