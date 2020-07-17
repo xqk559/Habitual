@@ -29,6 +29,12 @@ const BarChart = props => {
       .attr('x', (datapoint) => 0)
     }
 
+  let loader = <p></p>;
+
+  if(!props.barChartReducer[0]){
+    loader = <div class="loader">Loading...</div>
+  }
+
   if(props.barChartReducer[0]){
     drawBarChart(Object.values(props.barChartReducer[0]))
   }
@@ -36,9 +42,11 @@ const BarChart = props => {
   return (
     <div>
       <div className="headerTextSmall">Total Completed All-Time</div>
+      <div className="headerTextSmaller">Out of x active days, y days have data</div>
       <div>
-        <p></p>
+        {loader}
       </div>
+      <p></p>
     </div>
   )
 }
