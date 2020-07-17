@@ -6,7 +6,7 @@ import {Habitual} from './habitual';
 configure({adapter: new Adapter()});
 
 describe('habitual.js', () => {
-  it('should render <div className="loader"/> after 500ms of loading', ()=>{
+  it('should contain anything', ()=>{
     const wrapper = shallow(<Habitual/>);
     expect(wrapper).toContain('');
   });

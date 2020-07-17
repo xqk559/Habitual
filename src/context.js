@@ -7,7 +7,7 @@ export const HabitualContext = React.createContext({
 
 const HabitualContextProvider = props => {
   return (
-    <HabitualContext.Provider value = {"example"}>
+    <HabitualContext.Provider value = {"Context Example"}>
       {props.children}
     </HabitualContext.Provider>
   )

@@ -56,8 +56,8 @@ const App = props => {
                     </div>
                   </div>}/>
           <Route path="/statistics/"
-                  exact
-                  render=
+                 exact
+                 render=
                   {()=>
                     <div className="overflow">
                       <Toolbar/>
