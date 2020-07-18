@@ -1,8 +1,20 @@
-import React from 'react'
+import axios from 'axios';
+import React, {useEffect, useState} from 'react'
 import * as d3 from 'd3'
 import {connect} from 'react-redux';
 
+let today = new Date();
+let dd = String(today.getDate());
+let mm = String(today.getMonth() + 1); //January is 0!
+let yyyy = today.getFullYear();
+today = new Date(yyyy, mm, dd);
+const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+
+let totalDaysDisplay;
+
 const BarChart = props => {
+  const [totalDays, setTotalDays] = useState(null);
+  const [completedDays, setCompletedDays] = useState(null);
 
   const drawBarChart = (data) => {
     let i = -1;
@@ -31,22 +43,75 @@ const BarChart = props => {
 
   let loader = <p></p>;
 
-  if(!props.barChartReducer[0]){
-    loader = <div class="loader">Loading...</div>
+  if(!props.barChartReducer[0] && totalDays == null && completedDays == null){
+    loader = <div className="loader">Loading...</div>
   }
 
-  if(props.barChartReducer[0]){
+  useEffect(()=>{
+    if(localStorage.getItem('userId')){
+      axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
+        .then((response)=> {if(response.data !== null && response.data !== undefined ){
+          let year = Array.from(Object.values(response.data)[0][0].date).splice(11).join("");
+          let monthName = Array.from(Object.values(response.data)[0][0].date).splice(4,3).join("");
+          let month;
+          if(monthName === "Jan"){
+            month = 0
+          } else if(monthName === "Feb"){
+            month = 1
+          }
+          else if(monthName === "Mar"){
+            month = 2
+          }
+          else if(monthName === "Apr"){
+            month = 3
+          }
+          else if(monthName === "May"){
+            month = 4
+          }
+          else if(monthName === "Jun"){
+            month = 5
+          }
+          else if(monthName === "Jul"){
+            month = 6
+          }
+          else if(monthName === "Aug"){
+            month = 7
+          }
+          else if(monthName === "Sep"){
+            month = 8
+          }
+          else if(monthName === "Oct"){
+            month = 9
+          }
+          else if(monthName === "Nov"){
+            month = 10
+          }
+          else if(monthName === "Dec"){
+            month = 11
+          }
+          let day = Array.from(Object.values(response.data)[0][0].date).splice(8,2).join("");
+          let startDay = new Date(year, month, day)
+          setTotalDays(Math.round(Math.abs((startDay - today) / oneDay)));
+          setCompletedDays(Object.values(response.data).length);
+        }})
+        .then(()=>{
+          totalDaysDisplay = <div className="headerTextSmaller">Out of {totalDays} active days, {completedDays} days have data</div>;
+        }
+      )
+  }}, [])
+
+  if(props.barChartReducer[0] && totalDays != null && completedDays != null){
     drawBarChart(Object.values(props.barChartReducer[0]))
+    totalDaysDisplay = <div className="headerTextSmaller">Out of {totalDays} active days, {completedDays} days have data</div>;
   }
 
   return (
     <div>
       <div className="headerTextSmall">Total Completed All-Time</div>
-      <div className="headerTextSmaller">Out of x active days, y days have data</div>
+      <div>{totalDaysDisplay}</div>
       <div>
         {loader}
       </div>
-      <p></p>
     </div>
   )
 }

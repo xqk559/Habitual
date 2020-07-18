@@ -31,6 +31,7 @@ const Statistics = props => {
   }
 
   const completedItemPairs = props.completedItemPairs;
+
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
@@ -140,7 +141,8 @@ const Statistics = props => {
       }
     }
   return (
-    <div className="marginBottom">
+    <div className="marginBottom"
+         key={Math.random().toString()}>
       <div
         key={Math.random().toString()}
         className="centered5">
