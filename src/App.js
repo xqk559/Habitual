@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './App.scss';
-import AppFooter from './AppFooter.js';
 import Toolbar from './Components/Toolbar';
 import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import Habitual from './Components/habitual';
@@ -11,12 +10,12 @@ import {connect} from 'react-redux';
 import * as actionCreators from './Store/actions/index';
 import Homepage from './Components/homepage';
 import BarChart from './Components/barchart';
-import {HabitualContext} from './context';
+// import {HabitualContext} from './context';
 
 const App = props => {
 
-  const habitualContext = useContext(HabitualContext);
-  console.log(habitualContext)
+  // const habitualContext = useContext(HabitualContext);
+  // console.log(habitualContext)
 
   return (
     <div>
@@ -35,25 +34,18 @@ const App = props => {
               {()=>
                 <div className="overflow">
                   <Toolbar/>
-                <div>
-                  <Habitual/>
+                  <div>
+                    <Habitual/>
+                  </div>
                 </div>
-                <div className="centeredFooter">
-                  <hr />
-                  <AppFooter/>
-                </div>
-                </div>
-                }/>
+              }/>
           <Route
             path="/login/"
             exact
             render=
-            {()=> <div className="overflow">
+            {()=> <div>
                     <Toolbar/>
                     <Auth />
-                    <div className="centered">
-                      <AppFooter/>
-                    </div>
                   </div>}/>
           <Route path="/statistics/"
                  exact

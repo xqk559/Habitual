@@ -104,6 +104,23 @@ const Auth = props => {
     }
   }
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+        if(title === "Sign Up"){
+          signUp()
+        } else {
+          login()
+        }
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  });
+
   return (
     <div className="flex">
       <div className="centered">
@@ -130,6 +147,7 @@ const Auth = props => {
           </div>
           <br/>
           <button
+            id="signupButton"
             type="button"
             onClick={title === "Sign Up"
                     ? ()=>signUp()

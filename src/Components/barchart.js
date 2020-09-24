@@ -98,7 +98,7 @@ const BarChart = props => {
           totalDaysDisplay = <div className="headerTextSmaller">Out of {totalDays} active days, {completedDays} days have data</div>;
         }
       )
-  }}, [])
+  }}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   if(props.barChartReducer[0] && totalDays != null && completedDays != null){
     drawBarChart(Object.values(props.barChartReducer[0]))

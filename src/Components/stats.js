@@ -38,6 +38,8 @@ const Statistics = props => {
         .then((response)=> {if(response.data !== null && response.data !== undefined ){
           allHistoricalUserData = (Object.values(response.data))}
         })
+
+
         .then(()=>{
           for (let i of allHistoricalUserData){
             for (let j of i) {
@@ -61,13 +63,14 @@ const Statistics = props => {
       .then((response)=>{if(response.data != null){
         if(localStorage.getItem('userId')){
           axios.get('https://habitual-f64a5.firebaseio.com/history'+localStorage.getItem('userId')+'.json')
-            .then((response)=> setFullAxiosHistory(Object.values(response.data)))
+            .then((response) => setFullAxiosHistory(Object.values(response.data)))
           }
         }
       })
   }, [])
 
-  const signUpRedux = props.signUpRedux
+
+  const signUpRedux = props.signUpRedux;
   useEffect(()=>{
     const token = localStorage.getItem('token');
     if(token){
@@ -76,6 +79,7 @@ const Statistics = props => {
                 localStorage.getItem('email'))
     }
   }, [signUpRedux])
+
 
   const dayMapper = (day) => {
     return (
@@ -127,7 +131,7 @@ const Statistics = props => {
 
   const displayMatchingDates = () => {
     for(let i = 0; i < fullAxiosHistory.length; i++){
-      if( matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
+      if(matches.indexOf(fullAxiosHistory[i][0].date) > -1 ){
         displayedMatches.push(fullAxiosHistory[i])
       }
     }
@@ -160,9 +164,11 @@ const Statistics = props => {
   );
   }
 
+
   const loaderTimeout = () => {
     setTimeout(()=>{return <div className="loader"/>;},500)
   }
+
 
   const filteredMapSelectedDays = () => {
     for (let i of displayedMatches){
@@ -177,7 +183,11 @@ const Statistics = props => {
       selectedCompletedPairs[uniqueName2] = selectedItemNames.filter(name => name === uniqueName2).length
       selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
     }
+
+
     props.selectedItemPairs(selectedCompletedPairs)
+
+
     if(displayedMatches.length === undefined || 0){
       return (
         <div className="centered">
@@ -192,14 +202,17 @@ const Statistics = props => {
     }
   }
 
+
   const redirectToSignin = () => {
     if(props.listReducer == null && !localStorage.getItem('token')){
       return <li
-                className="redirectLink">
+                className="redirectLink"
+              >
                 <NavLink to="/login">'Login/Signup to use checklist and statistics!'</NavLink>
              </li>
     }
   }
+
 
   const signedInPage = () => {
     if(localStorage.getItem('token')){
