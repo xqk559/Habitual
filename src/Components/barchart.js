@@ -91,7 +91,7 @@ const BarChart = props => {
           }
           let day = Array.from(Object.values(response.data)[0][0].date).splice(8,2).join("");
           let startDay = new Date(year, month, day)
-          setTotalDays(Math.round(Math.abs((startDay - today) / oneDay)));
+          setTotalDays((Math.round(Math.abs((startDay - today) / oneDay))) - 29);
           setCompletedDays(Object.values(response.data).length);
         }})
         .then(()=>{

@@ -26,7 +26,7 @@ const Statistics = props => {
   const uniqueCheck = (a) => {
     let seen = {};
     return a.filter((item)=> {
-        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
   }
 
@@ -184,9 +184,7 @@ const Statistics = props => {
       selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
     }
 
-    console.log(1);
     props.selectedItemPairs(selectedCompletedPairs)
-    console.log(3);
 
     if(displayedMatches.length === undefined || 0){
       return (
@@ -253,7 +251,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     completedItemPairs: (completePairs)=> dispatch(actionCreators.completedItemPairs(completePairs)),
-    selectedItemPairs: async (selectedPairs)=>{console.log(2); return dispatch(actionCreators.selectedItemPairs(selectedPairs))},
+    selectedItemPairs: async (selectedPairs)=> dispatch(actionCreators.selectedItemPairs(selectedPairs)),
     signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
   };
 };
