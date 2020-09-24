@@ -184,9 +184,9 @@ const Statistics = props => {
       selectedItemLengths.push(selectedCompletedPairs[uniqueName2])
     }
 
-
+    console.log(1);
     props.selectedItemPairs(selectedCompletedPairs)
-
+    console.log(3);
 
     if(displayedMatches.length === undefined || 0){
       return (
@@ -202,7 +202,6 @@ const Statistics = props => {
     }
   }
 
-
   const redirectToSignin = () => {
     if(props.listReducer == null && !localStorage.getItem('token')){
       return <li
@@ -212,7 +211,6 @@ const Statistics = props => {
              </li>
     }
   }
-
 
   const signedInPage = () => {
     if(localStorage.getItem('token')){
@@ -255,7 +253,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     completedItemPairs: (completePairs)=> dispatch(actionCreators.completedItemPairs(completePairs)),
-    selectedItemPairs: (selectedPairs)=> dispatch(actionCreators.selectedItemPairs(selectedPairs)),
+    selectedItemPairs: async (selectedPairs)=>{console.log(2); return dispatch(actionCreators.selectedItemPairs(selectedPairs))},
     signUpRedux: (token, userId, email)=> dispatch(actionCreators.signUp(token, userId, email)),
   };
 };
