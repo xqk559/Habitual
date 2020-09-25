@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
+import "./App.scss";
 
 const AppFooter = () => {
   return (
@@ -9,6 +9,6 @@ const AppFooter = () => {
       </div>
     </div>
   );
-}
+};
 
 export default AppFooter;

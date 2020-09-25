@@ -5,18 +5,10 @@ export {
   getAxiosList,
   addDefaultToState,
   clearAll,
-} from './listActions';
+} from "./listActions";
 
-export {
-  signUp,
-  login,
-  logout,
-} from './loginActions';
+export { signUp, login, logout } from "./loginActions";
 
-export {
-  completedItemPairs,
-} from './barChartActions';
+export { completedItemPairs } from "./barChartActions";
 
-export {
-  selectedItemPairs,
-} from './selectedItemActions';
+export { selectedItemPairs } from "./selectedItemActions";
