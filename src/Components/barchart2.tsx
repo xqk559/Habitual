@@ -2,8 +2,8 @@ import React from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
 
-const BarChart2 = (props) => {
-  const drawBarChart = (data) => {
+const BarChart2 = (props: any) => {
+  const drawBarChart = (data: any) => {
     let i = -1;
     const canvasWidth = 300;
     const scale = 10;
@@ -17,7 +17,7 @@ const BarChart2 = (props) => {
       .data(data)
       .enter()
       .append("rect")
-      .attr("width", (datapoint) => datapoint * scale)
+      .attr("width", (datapoint: any) => datapoint * scale)
       .attr("height", 20)
       .attr("fill", "purple")
       .attr("y", (datapoint, iteration) => iteration * 45 + 40)
@@ -49,7 +49,7 @@ const BarChart2 = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     selectedItemReducer: state.selectedItemReducer,
   };

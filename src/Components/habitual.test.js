@@ -5,7 +5,7 @@ import { Habitual } from "./habitual";
 
 configure({ adapter: new Adapter() });
 
-describe("habitual.js", () => {
+describe("habitual.tsx", () => {
   it("should contain anything", () => {
     const wrapper = shallow(<Habitual />);
     expect(wrapper).toContain("");

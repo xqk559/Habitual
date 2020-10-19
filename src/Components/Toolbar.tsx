@@ -3,7 +3,7 @@ import "../App.scss";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-const Toolbar = (props) => {
+const Toolbar = (props: any) => {
   const clearLocalStorage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
@@ -57,7 +57,7 @@ const Toolbar = (props) => {
   return showToolbar();
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     loginReducer: state.loginReducer,
   };

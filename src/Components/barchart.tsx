@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
@@ -24,13 +24,23 @@ const MONTHS = [
   "Dec",
 ];
 
+export interface History {
+  [_: string]: {
+    completed: true;
+    date: string;
+    id: string;
+    name: string;
+    userId: string;
+  }[];
+};
+
 let totalDaysDisplay: any;
 
-const BarChart = (props) => {
-  const [totalDays, setTotalDays] = useState(null);
-  const [completedDays, setCompletedDays] = useState(null);
+const BarChart = (props: any) => {
+  const [totalDays, setTotalDays] = useState<number | null>(null);
+  const [completedDays, setCompletedDays] = useState<number | null>(null);
 
-  const drawBarChart = (data) => {
+  const drawBarChart = (data: any) => {
     let i = -1;
     const canvasWidth = 300;
     const scale = 10;
@@ -44,7 +54,7 @@ const BarChart = (props) => {
       .data(data)
       .enter()
       .append("rect")
-      .attr("width", (datapoint) => datapoint * scale)
+      .attr("width", (datapoint: any) => datapoint * scale)
       .attr("height", 20)
       .attr("fill", "purple")
       .attr("y", (datapoint, iteration) => iteration * 45 + 40)
@@ -76,7 +86,7 @@ const BarChart = (props) => {
             localStorage.getItem("userId") +
             ".json"
         )
-        .then((response) => {
+        .then((response: AxiosResponse<History>) => {
           if (response.data !== null && response.data !== undefined) {
             const date = Array.from(Object.values(response.data)[0][0].date);
             console.log(date);
@@ -121,7 +131,7 @@ const BarChart = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     barChartReducer: state.barChartReducer,
   };

@@ -6,15 +6,15 @@ import * as actionCreators from "../Store/actions/index";
 import { useHistory } from "react-router-dom";
 
 interface Props {
-  signUpRedux: (token: string, user_id: string, email: string) => void;
+  signUpRedux: (token: string | null, user_id: string | null, email: string | null) => void;
 }
 
 const Auth = (props: Props) => {
   let [title, setTitle] = useState("Sign Up");
-  let [email, setEmail] = useState();
-  let [password, setPassword] = useState();
+  let [email, setEmail] = useState<string>("");
+  let [password, setPassword] = useState<string>();
   let [passwordConfirmer, setPasswordConfirmer] = useState("");
-  let [error, setError] = useState(null);
+  let [error, setError] = useState<Error | null>(null);
 
   let history = useHistory();
 
@@ -43,7 +43,7 @@ const Auth = (props: Props) => {
       setError(null);
       let url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk";
-      let axiosResponse;
+      let axiosResponse: any;
       axios
         .post(url, authData)
         .then((response) => (axiosResponse = response.data))
@@ -73,7 +73,7 @@ const Auth = (props: Props) => {
     setError(null);
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBaJnlnubPwKJ9WkUJI6szWkCF_b0OomDk";
-    let axiosResponse;
+    let axiosResponse: any;
     axios
       .post(url, authData)
       .then((response) => (axiosResponse = response.data))
@@ -102,7 +102,7 @@ const Auth = (props: Props) => {
   };
 
   const errorChecker = () => {
-    if (error) {
+    if (error != null) {
       return <div className="centered">Error: {error.message}</div>;
     }
   };
@@ -124,7 +124,7 @@ const Auth = (props: Props) => {
   };
 
   useEffect(() => {
-    const listener = (event) => {
+    const listener = (event: any) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
         if (title === "Sign Up") {
@@ -193,17 +193,17 @@ const Auth = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     loginReducer: state.loginReducer,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    signUpRedux: (token, userId, email) =>
+    signUpRedux: (token: any, userId: any, email: any) =>
       dispatch(actionCreators.signUp(token, userId, email)),
-    logoutRedux: (token, userId) =>
+    logoutRedux: (token: any, userId: any) =>
       dispatch(actionCreators.logout()),
   };
 };

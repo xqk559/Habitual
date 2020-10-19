@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "../Store/actions/index";
 import "../App.scss";
 
-const Item = (props) => {
+const Item = (props: any) => {
   return (
     <div className="item">
       <div className="col-md-12">
@@ -26,16 +26,16 @@ const Item = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     listReducer: state.listReducer,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    checkboxClicked: (id) => dispatch(actionCreators.checkboxClicked(id)),
-    removeItem: (id) => dispatch(actionCreators.removeItem(id)),
+    checkboxClicked: (id: number) => dispatch(actionCreators.checkboxClicked(id)),
+    removeItem: (id: number) => dispatch(actionCreators.removeItem(id)),
   };
 };
 

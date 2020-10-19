@@ -6,21 +6,23 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import "../App.scss";
 import { NavLink } from "react-router-dom";
+// import { History } from "./barchart";
 
-let name;
-let axiosData;
-let axiosDays;
-let lastAxiosDay;
-let defaults;
-let defaultArray = null;
 let today = new Date().toString().slice(0, 15);
+let name: string;
 
-export const Habitual = (props) => {
+// interface Props {
+
+// }
+
+export const Habitual = (props: any) => {
   const [defaultList, setDefaultList] = useState();
   const [userIdExists, setUserIdExists] = useState(false);
   const [canSaveDay, setCanSaveDay] = useState(false);
 
   useEffect(() => {
+    let defaults: any;
+    let defaultArray: any = null;
     const fetchData = async () => {
       await axios
         .get(
@@ -89,7 +91,7 @@ export const Habitual = (props) => {
   const uploadChecklist = () => {
     if (props.listReducer !== []) {
       setCanSaveDay(true);
-      let fullPost = props.listReducer.map((day) => {
+      let fullPost = props.listReducer.map((day: any) => {
         day.date = today;
         return day;
       });
@@ -102,55 +104,30 @@ export const Habitual = (props) => {
           )
           .then((response) => {
             if (response.data != null) {
-              axios
-                .get(
+              const axiosData = response.data;
+              const axiosDays = Object.keys(axiosData).map((key) => {
+                return [key, axiosData[key]];
+              });
+              const lastAxiosDay = axiosDays[axiosDays.length - 1];
+              if (
+                lastAxiosDay[1][0].date ===
+                props.listReducer[props.listReducer.length - 1].date
+              ) {
+                axios.delete(
                   "https://habitual-f64a5.firebaseio.com/history" +
                     localStorage.getItem("userId") +
+                    "/" +
+                    lastAxiosDay[0] +
                     ".json"
-                )
-                .then((response) => {
-                  if (response.data != null) {
-                    axiosData = response.data;
-                  }
-                })
-                .then(
-                  () =>
-                    (axiosDays = Object.keys(axiosData).map((key) => {
-                      return [key, axiosData[key]];
-                    }))
-                )
-                .then(() => (lastAxiosDay = axiosDays[axiosDays.length - 1]))
-                .then(
-                  () => props.listReducer[props.listReducer.length - 1].date
-                )
-                .then(() =>
-                  lastAxiosDay[1][0].date ===
-                  props.listReducer[props.listReducer.length - 1].date
-                    ? axios.delete(
-                        "https://habitual-f64a5.firebaseio.com/history" +
-                          localStorage.getItem("userId") +
-                          "/" +
-                          lastAxiosDay[0] +
-                          ".json"
-                      )
-                    : console.log()
-                )
-                .then(() =>
-                  axios.post(
-                    "https://habitual-f64a5.firebaseio.com/history" +
-                      localStorage.getItem("userId") +
-                      ".json",
-                    fullPost
-                  )
                 );
-            } else {
-              axios.post(
-                "https://habitual-f64a5.firebaseio.com/history" +
-                  localStorage.getItem("userId") +
-                  ".json",
-                fullPost
-              );
+              }
             }
+            axios.post(
+              "https://habitual-f64a5.firebaseio.com/history" +
+                localStorage.getItem("userId") +
+                ".json",
+              fullPost
+            );
           });
       }
       alert(
@@ -176,7 +153,7 @@ export const Habitual = (props) => {
   const checklist = () => {
     return (
       <ul className="marginBottom2">
-        {props.listReducer.map((val, index) => {
+        {props.listReducer.map((val: any, index: any) => {
           return (
             <li key={index} className="none">
               {<Item name={val.name} id={val.id} />}
@@ -274,19 +251,19 @@ export const Habitual = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     listReducer: state.listReducer,
     loginReducer: state.loginReducer,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    addItem: (name) => dispatch(actionCreators.addItem(name)),
-    signUpRedux: (token, userId, email) =>
+    addItem: (name: any) => dispatch(actionCreators.addItem(name)),
+    signUpRedux: (token: any, userId: any, email: any) =>
       dispatch(actionCreators.signUp(token, userId, email)),
-    addDefaultToState: (defaults) =>
+    addDefaultToState: (defaults: any) =>
       dispatch(actionCreators.addDefaultToState(defaults)),
     clearAll: () => dispatch(actionCreators.clearAll()),
   };

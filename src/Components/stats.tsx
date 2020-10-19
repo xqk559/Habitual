@@ -9,22 +9,22 @@ import BarChart2 from "./barchart2";
 
 let dt = new Date();
 let utcDate = dt.toUTCString();
-let allHistoricalUserData = [];
-let historicalItemNames = [];
+let allHistoricalUserData: any[] = [];
+let historicalItemNames: any[] = [];
 let completedItemLengths = [];
-let completedPairs = {};
-let selectedItemNames = [];
-let selectedItemLengths = [];
-let selectedCompletedPairs = {};
+let completedPairs: any = {};
+let selectedItemNames: any[] = [];
+let selectedItemLengths: any[] = [];
+let selectedCompletedPairs: any = {};
 
-const Statistics = (props) => {
-  let displayedMatches = [];
+const Statistics = (props: any) => {
+  let displayedMatches: any[] = [];
 
-  let [fullAxiosHistory, setFullAxiosHistory] = useState([]);
+  let [fullAxiosHistory, setFullAxiosHistory] = useState<any[]>([]);
 
-  const uniqueCheck = (a) => {
-    let seen = {};
-    return a.filter((item) => {
+  const uniqueCheck = (a: any) => {
+    let seen: any = {};
+    return a.filter((item: any) => {
       return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
   };
@@ -101,12 +101,12 @@ const Statistics = (props) => {
     }
   }, [signUpRedux]);
 
-  const dayMapper = (day) => {
+  const dayMapper = (day: any) => {
     return (
       <ul>
         <div className="statListDate">{day ? day[0].date : null}</div>
         {day
-          ? day.map((value) => {
+          ? day.map((value: any) => {
               return (
                 <div key={value.id}>
                   <li className="none">
@@ -122,8 +122,8 @@ const Statistics = (props) => {
     );
   };
 
-  let shortenedSelectedDays;
-  let historicalDatesArray = [];
+  let shortenedSelectedDays: any;
+  let historicalDatesArray: any[] = [];
 
   const historicalDates = () => {
     if (fullAxiosHistory[0] != null) {
@@ -133,14 +133,14 @@ const Statistics = (props) => {
     }
     let selectedDaysString = localStorage.getItem("selectedDays");
     let selectedDaysArray = deserializeDates(selectedDaysString);
-    shortenedSelectedDays = selectedDaysArray.map((day) => {
+    shortenedSelectedDays = selectedDaysArray.map((day: any) => {
       return day.toString().slice(0, 15);
     });
   };
 
-  let matches = [];
+  let matches: any[] = [];
 
-  const findMatchingDates = (selected, historical) => {
+  const findMatchingDates = (selected: any, historical: any) => {
     selected.sort();
     historical.sort();
     for (let i = 0; i < historical.length; i += 1) {
@@ -158,7 +158,7 @@ const Statistics = (props) => {
     }
   };
 
-  const mappedDay = (day) => {
+  const mappedDay = (day: any) => {
     let totaler = 0;
     for (let i = 0; i < day.length; i++) {
       if (day[i].completed) {
@@ -263,19 +263,19 @@ const Statistics = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     loginReducer: state.loginReducer,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    completedItemPairs: (completePairs) =>
+    completedItemPairs: (completePairs: any) =>
       dispatch(actionCreators.completedItemPairs(completePairs)),
-    selectedItemPairs: async (selectedPairs) =>
+    selectedItemPairs: async (selectedPairs: any) =>
       dispatch(actionCreators.selectedItemPairs(selectedPairs)),
-    signUpRedux: (token, userId, email) =>
+    signUpRedux: (token: any, userId: any, email: any) =>
       dispatch(actionCreators.signUp(token, userId, email)),
   };
 };
