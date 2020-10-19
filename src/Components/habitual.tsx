@@ -5,16 +5,19 @@ import Item from "./item";
 import axios from "axios";
 import "../App.scss";
 import { NavLink } from "react-router-dom";
-// import { History } from "./barchart";
 
 let today = new Date().toString().slice(0, 15);
 let name: string;
 
-// interface Props {
+interface Props {
+  addDefaultToState: any,
+  clearAll: any,
+  signUpRedux: any,
+  listReducer: any,
+  addItem: any
+}
 
-// }
-
-export const Habitual = (props: any) => {
+export const Habitual = (props: Props) => {
   const [defaults, setDefaults] = useState([]);
   const [canSaveDay, setCanSaveDay] = useState(false);
 

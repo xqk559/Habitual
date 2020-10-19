@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
 
+interface Props {
+  barChartReducer: any
+}
+
 let today = new Date();
 let dd = today.getDate();
 let mm = today.getMonth() + 1; //January is 0!
 let yyyy = today.getFullYear();
 today = new Date(yyyy, mm, dd);
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-const MONTHS = [
+const months = [
   "Jan",
   "Feb",
   "Mar",
@@ -36,7 +40,7 @@ export interface History {
 
 let totalDaysDisplay: any;
 
-const BarChart = (props: any) => {
+const BarChart = (props: Props) => {
   const [totalDays, setTotalDays] = useState<number | null>(null);
   const [completedDays, setCompletedDays] = useState<number | null>(null);
 
@@ -89,10 +93,9 @@ const BarChart = (props: any) => {
         .then((response: AxiosResponse<History>) => {
           if (response.data !== null && response.data !== undefined) {
             const date = Array.from(Object.values(response.data)[0][0].date);
-            console.log(date);
             let year = date.splice(11).join("");
             let monthName = date.splice(4, 3).join("");
-            let month = MONTHS.indexOf(monthName);
+            let month = months.indexOf(monthName);
             let day = date.splice(8, 2).join("");
             let startDay = new Date(Number(year), Number(month), Number(day));
             setTotalDays(

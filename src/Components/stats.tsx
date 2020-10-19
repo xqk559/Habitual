@@ -7,17 +7,14 @@ import { deserializeDates } from "../storage";
 import { NavLink } from "react-router-dom";
 import BarChart2 from "./barchart2";
 
-let dt = new Date();
-let utcDate = dt.toUTCString();
-let allHistoricalUserData: any[] = [];
-let historicalItemNames: any[] = [];
-let completedItemLengths = [];
-let completedPairs: any = {};
-let selectedItemNames: any[] = [];
-let selectedItemLengths: any[] = [];
-let selectedCompletedPairs: any = {};
+interface Props {
+  completedItemPairs: any,
+  signUpRedux: any,
+  selectedItemPairs: any,
+  listReducer: any
+}
 
-const Statistics = (props: any) => {
+const Statistics = (props: Props) => {
   let displayedMatches: any[] = [];
 
   let [fullAxiosHistory, setFullAxiosHistory] = useState<any[]>([]);
@@ -32,6 +29,11 @@ const Statistics = (props: any) => {
   const completedItemPairs = props.completedItemPairs;
 
   useEffect(() => {
+    let allHistoricalUserData: any[] = [];
+    let historicalItemNames: any[] = [];
+    let completedItemLengths = [];
+    let completedPairs: any = {};
+
     if (localStorage.getItem("userId")) {
       axios
         .get(
@@ -190,6 +192,11 @@ const Statistics = (props: any) => {
   };
 
   const filteredMapSelectedDays = () => {
+    let selectedItemNames: any[] = [];
+    let selectedItemLengths: any[] = [];
+    let selectedCompletedPairs: any = {};
+
+
     for (let i of displayedMatches) {
       for (let j of i) {
         if (j.completed) {
@@ -236,6 +243,8 @@ const Statistics = (props: any) => {
   };
 
   const signedInPage = () => {
+    let dt = new Date();
+    let utcDate = dt.toUTCString();
     if (localStorage.getItem("token")) {
       return (
         <div className="stats">

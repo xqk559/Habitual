@@ -2,7 +2,11 @@ import React from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
 
-const BarChart2 = (props: any) => {
+interface Props {
+  selectedItemReducer: any,
+}
+
+const BarChart2 = (props: Props) => {
   const drawBarChart = (data: any) => {
     let i = -1;
     const canvasWidth = 300;

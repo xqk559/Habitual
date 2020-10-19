@@ -3,7 +3,14 @@ import { connect } from "react-redux";
 import * as actionCreators from "../Store/actions/index";
 import "../App.scss";
 
-const Item = (props: any) => {
+interface Props {
+  checkboxClicked: any,
+  removeItem: any,
+  name: any,
+  id: number
+}
+
+const Item = (props: Props) => {
   return (
     <div className="item">
       <div className="col-md-12">

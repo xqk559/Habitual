@@ -3,7 +3,11 @@ import "../App.scss";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-const Toolbar = (props: any) => {
+interface Props {
+  loginReducer: any
+}
+
+const Toolbar = (props: Props) => {
   const clearLocalStorage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
