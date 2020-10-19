@@ -1,4 +1,4 @@
-import { graphql, buildSchema } from 'graphql';
+import { graphql, buildSchema } from "graphql";
 
 var schema = buildSchema(`
   type Query {
@@ -6,8 +6,8 @@ var schema = buildSchema(`
   }
 `);
 
-var root = { hello: () => 'Hello world!' };
+var root = { hello: () => "Hello world!" };
 
-graphql(schema, '{ hello }', root).then((response) => {
+graphql(schema, "{ hello }", root).then((response) => {
   console.log(response);
 });

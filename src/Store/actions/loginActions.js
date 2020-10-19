@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from "./actionTypes";
 
 export const signUp = (token, userId, email) => {
   return {
@@ -6,8 +6,8 @@ export const signUp = (token, userId, email) => {
     token: token,
     userId: userId,
     email: email,
-  }
-}
+  };
+};
 
 export const login = (token, userId, email) => {
   return {
@@ -15,11 +15,11 @@ export const login = (token, userId, email) => {
     token: token,
     userId: userId,
     email: email,
-  }
-}
+  };
+};
 
 export const logout = () => {
   return {
     type: actionTypes.SIGN_UP,
-  }
-}
+  };
+};
