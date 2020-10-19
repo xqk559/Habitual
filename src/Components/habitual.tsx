@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actionCreators from "../Store/actions/index";
 import Item from "./item";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import "../App.scss";
 import { NavLink } from "react-router-dom";
 // import { History } from "./barchart";
@@ -16,59 +15,36 @@ let name: string;
 // }
 
 export const Habitual = (props: any) => {
-  const [defaultList, setDefaultList] = useState();
-  const [userIdExists, setUserIdExists] = useState(false);
+  const [defaults, setDefaults] = useState([]);
   const [canSaveDay, setCanSaveDay] = useState(false);
 
   useEffect(() => {
-    let defaults: any;
-    let defaultArray: any = null;
     const fetchData = async () => {
-      await axios
-        .get(
-          "https://habitual-f64a5.firebaseio.com/defaults" +
-            localStorage.getItem("userId") +
-            ".json"
-        )
-        .then((response) => {
-          if (response.data != null) {
-            if (localStorage.getItem("userId") && defaultArray == null) {
-              axios
-                .get(
-                  "https://habitual-f64a5.firebaseio.com/defaults" +
-                    localStorage.getItem("userId") +
-                    ".json"
-                )
-                .then((response) => {
-                  defaults = Object.values(response.data);
-                })
-                .then(() => (defaultArray = defaults[0]))
-                .then(() => {
-                  for (let i in defaultArray) {
-                    defaultArray[i].date = today;
-                    return defaultArray;
-                  }
-                })
-                .then(() => setDefaultList(defaultArray));
+      if (localStorage.getItem("userId")) {
+        await axios
+          .get(
+            "https://habitual-f64a5.firebaseio.com/defaults" +
+              localStorage.getItem("userId") +
+              ".json"
+          )
+          .then((response) => {
+            if (response.data != null) {
+              let responseDefaults: any = Object.values(response.data)[0];
+              responseDefaults[0].date = today;
+              setDefaults(responseDefaults);
             }
-          }
-        });
+          });
+      }
     };
     fetchData();
   }, []);
 
-  let location = useLocation();
-
-  useEffect(() => {
-    setUserIdExists(true);
-  }, [userIdExists, props, location]);
-
   const addDefaultToState = props.addDefaultToState;
   useEffect(() => {
-    if (defaultList != null) {
-      addDefaultToState(defaultList);
+    if (defaults != null) {
+      addDefaultToState(defaults);
     }
-  }, [defaultList, addDefaultToState]);
+  }, [defaults, addDefaultToState]);
 
   useEffect(() => {
     if (!localStorage.getItem("userId")) {
@@ -164,12 +140,6 @@ export const Habitual = (props: any) => {
     );
   };
 
-  const loaderTimeout = () => {
-    setTimeout(() => {
-      return <div className="loader" />;
-    }, 500);
-  };
-
   const redirectToSignin = () => {
     if (props.listReducer.length === 0 && !localStorage.getItem("token")) {
       return (
@@ -235,7 +205,7 @@ export const Habitual = (props: any) => {
             <div className="margin">
               <div className="bold2">&nbsp;&nbsp; To Do:</div>
               <br />
-              {userIdExists ? checklist() : loaderTimeout()}
+              {checklist()}
             </div>
           </div>
         </div>
