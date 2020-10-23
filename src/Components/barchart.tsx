@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
 
-interface Props {
+interface IBarchartProps {
   barChartReducer: any
 }
 
@@ -28,7 +28,7 @@ const months = [
   "Dec",
 ];
 
-export interface History {
+export interface IHistoryItems {
   [_: string]: {
     completed: true;
     date: string;
@@ -40,7 +40,7 @@ export interface History {
 
 let totalDaysDisplay: any;
 
-const BarChart = (props: Props) => {
+const BarChart = (props: IBarchartProps) => {
   const [totalDays, setTotalDays] = useState<number | null>(null);
   const [completedDays, setCompletedDays] = useState<number | null>(null);
 
@@ -90,7 +90,7 @@ const BarChart = (props: Props) => {
             localStorage.getItem("userId") +
             ".json"
         )
-        .then((response: AxiosResponse<History>) => {
+        .then((response: AxiosResponse<IHistoryItems>) => {
           if (response.data !== null && response.data !== undefined) {
             const date = Array.from(Object.values(response.data)[0][0].date);
             let year = date.splice(11).join("");

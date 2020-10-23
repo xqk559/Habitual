@@ -3,11 +3,11 @@ import "../App.scss";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-interface Props {
+interface IToolbarProps {
   loginReducer: any
 }
 
-const Toolbar = (props: Props) => {
+const Toolbar = (props: IToolbarProps) => {
   const clearLocalStorage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");

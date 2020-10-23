@@ -7,14 +7,14 @@ import { deserializeDates } from "../storage";
 import { NavLink } from "react-router-dom";
 import BarChart2 from "./barchart2";
 
-interface Props {
+interface IStatsProps {
   completedItemPairs: any,
   signUpRedux: any,
   selectedItemPairs: any,
   listReducer: any
 }
 
-const Statistics = (props: Props) => {
+const Statistics = (props: IStatsProps) => {
   let displayedMatches: any[] = [];
 
   let [fullAxiosHistory, setFullAxiosHistory] = useState<any[]>([]);

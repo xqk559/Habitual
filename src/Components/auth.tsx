@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import * as actionCreators from "../Store/actions/index";
 import { useHistory } from "react-router-dom";
 
-interface Props {
+interface IAuthProps {
   signUpRedux: (token: string | null, user_id: string | null, email: string | null) => void;
 }
 
-const Auth = (props: Props) => {
+const Auth = (props: IAuthProps) => {
   let [title, setTitle] = useState("Sign Up");
   let [email, setEmail] = useState<string>("");
   let [password, setPassword] = useState<string>();

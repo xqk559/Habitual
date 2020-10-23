@@ -1,15 +1,15 @@
+import * as actionCreators from "../Store/actions/index";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../Store/actions/index";
 import Item from "./item";
-import axios from "axios";
 import "../App.scss";
 import { NavLink } from "react-router-dom";
 
 let today = new Date().toString().slice(0, 15);
 let name: string;
 
-interface Props {
+interface IHabitualProps {
   addDefaultToState: any,
   clearAll: any,
   signUpRedux: any,
@@ -17,7 +17,7 @@ interface Props {
   addItem: any
 }
 
-export const Habitual = (props: Props) => {
+export const Habitual = (props: IHabitualProps) => {
   const [defaults, setDefaults] = useState([]);
   const [canSaveDay, setCanSaveDay] = useState(false);
 
