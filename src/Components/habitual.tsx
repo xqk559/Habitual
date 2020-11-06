@@ -134,7 +134,7 @@ export const Habitual = (props: IHabitualProps) => {
       <ul className="marginBottom2">
         {props.listReducer.map((val: any, index: any) => {
           return (
-            <li key={index} className="none">
+              <li key={index} className="none">
               {<Item name={val.name} id={val.id} />}
             </li>
           );
